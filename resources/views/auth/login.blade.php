@@ -19,7 +19,7 @@
 
             <div>
                 <x-jet-label for="identity_no" value="{{ __('Identity No') }}" />
-                <x-jet-input id="identity_no" class="block w-full mt-1" type="text" name="identity_no" :value="old('identity_no')" required autofocus/>
+                <x-jet-input id="identity_no" class="block w-full mt-1" type="text" name="identity_no" :value="old('identity_no')" required autofocus autocomplete="off"/>
             </div>
 
             <div class="mt-4">
@@ -28,10 +28,10 @@
             </div>
 
             <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
+                {{-- <label for="remember_me" class="flex items-center">
                     <x-jet-checkbox id="remember_me" name="remember" />
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+                </label> --}}
             </div>
 
             <div class="flex items-center justify-end mt-4">
