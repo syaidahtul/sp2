@@ -1,0 +1,12 @@
+.mandatory::after {
+    content: ' *';
+    color: red;
+    font-weight: bolder;
+    display:inline;
+ }
+
+a.mandatory,
+select.mandatory,
+input.mandatory {
+   border-left: 3px solid red;
+}

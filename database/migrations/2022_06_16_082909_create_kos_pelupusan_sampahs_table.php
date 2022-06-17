@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateKosPelupusanSampahsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('kos_pelupusan_sampahs', function (Blueprint $table) {
+            $table->id();
+            $table->string('kod_pbt');
+            $table->unsignedBigInteger('tapak_pelupusan_sampah_id');
+            $table->date('tarikh_kos');
+            $table->decimal('amount', 9, 5);
+            $table->timestamps();
+            $table->foreign('kod_pbt')->references('kod')->on('pbts');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('kos_pelupusan_sampahs');
+    }
+}
