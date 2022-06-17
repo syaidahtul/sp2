@@ -21,7 +21,7 @@
 <body>
     <div class="flex flex-col items-center min-h-screen font-sans antialiased text-gray-900 bg-gray-100">
 
-        <nav class="w-full bg-gray-800">
+        {{-- <nav class="w-full bg-gray-800">
             <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-20">
                     <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="flex items-center justify-center flex-grow w-full bg-teal-400">
             {{ $slot }}

@@ -1,3 +1,3 @@
 <a href="/">
-    <img src="{{ asset('images/logo.svg') }}" {{ $attributes }}>
+    <img src="{{ asset('images/logo_smj.png') }}" {{ $attributes }}>
 </a>

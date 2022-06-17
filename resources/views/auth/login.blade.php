@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        
+        <x-slot name="logo" class="mx-auto font-bold">
+            KEMENTERIAN KERAJAAN TEMPATAN DAN PERUMAHAN
+            <x-jet-authentication-card-logo class="w-16 mx-auto mt-4"/>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -16,8 +18,8 @@
             @csrf
 
             <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-label for="identity_no" value="{{ __('Identity No') }}" />
+                <x-jet-input id="identity_no" class="block w-full mt-1" type="text" name="identity_no" :value="old('identity_no')" required autofocus/>
             </div>
 
             <div class="mt-4">
