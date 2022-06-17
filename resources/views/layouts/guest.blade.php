@@ -26,14 +26,13 @@
                 <div class="relative flex items-center justify-between h-20">
                     <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                         <div class="flex items-center flex-shrink-0">
-                            {{-- <img class="w-auto h-12" src="{{ asset('images/logo.svg') }}" alt="SP2S-v1.0.0"> --}}
+                            <img class="w-auto h-12" src="{{ asset('images/logo.svg') }}" alt="SP2S-v1.0.0">
                             <h1 class="hidden font-bold text-white lg:px-5 lg:block">{{ __('SISTEM PENGURUSAN SISA PEPEJAL')}}</h1>
                         </div>
                     </div>
 
                     <div class="flex items-end justify-end flex-2">
-                        <img class="hidden w-auto h-16 lg:block" src="{{ asset('images/LogoKKTP1.gif') }}" alt="SP2S-v1.0.0">
-                        <img class="hidden w-auto h-16 lg:block" src="{{ asset('images/jpkn.png') }}" alt="SP2S-v1.0.0">
+                        <img class="hidden w-auto h-16 lg:block" src="{{ asset('images/logo_smj.png') }}" alt="SP2S-v1.0.0">
                     </div>
                 </div>
             </div>
