@@ -22,7 +22,7 @@ class Pbt extends Model
 
     public function users()
     {
-        return $this->hasManyThrough(User::class, UserPbts::class, 'kod_pbt', 'id', 'kod', 'user_id');
+        return $this->hasMany(User::class, 'current_pbt', 'kod');
     }
 
     public function scopeNotKKTP($query)

@@ -87,13 +87,13 @@
                         {{ $header }}
                     </div>
                     <div class="items-center p-4 text-sm text-gray-400 text-end lg:px-8">
-                        PBT: {{ Auth::user()->currentOffice->nama_pbt }}
+                        PBT: {{ Auth::user()->currentPbt->nama_pbt }}
                     </div>
                 </header>
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="text-sm">
                 {{ $slot }}
             </main>
         </div>

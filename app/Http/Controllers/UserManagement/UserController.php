@@ -38,10 +38,6 @@ class UserController extends Controller
             })
             ->when($pbt, function ($query) use ($pbt) {
                 return $query->where('current_pbt', $pbt);
-                // return $query->join('user_pbts', function ($join) use ($pbt) {
-                //     $join->on('user_pbts.user_id', '=', 'users.id')
-                //     ->where('user_pbts.kod_pbt', '=', $pbt);
-                // });
             })
             ->when($role, function ($query, $role) {
                 return $query->join('model_has_roles', function ($join) use ($role) {

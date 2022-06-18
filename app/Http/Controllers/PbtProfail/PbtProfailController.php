@@ -12,8 +12,6 @@ class PbtProfailController extends Controller
     public function index()
     {
         $pbt = Pbt::with('users')->where('kod', Auth::user()->current_pbt)->first();
-        
-        info($pbt);
         return view('profailpbt.index', compact('pbt'));
     }
 

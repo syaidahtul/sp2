@@ -16,7 +16,7 @@ class CreateJenterasTable extends Migration
         Schema::create('jenteras', function (Blueprint $table) {
             $table->string('kod_pbt');
             $table->string('kod_jenis_jentera');
-            $table->string('nama', 250);
+            $table->string('no_pendaftaran', 250);
             $table->string('status', 20);
             $table->text('catatan')->nullable();
             $table->entityHistory();

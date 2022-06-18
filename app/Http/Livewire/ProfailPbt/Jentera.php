@@ -16,7 +16,7 @@ class Jentera extends Component
     public $pbt;
     public $jenisjenteras;
     
-    public Jentera $editing;
+    public ModelsJentera $editing;
     
     public $documents;
 

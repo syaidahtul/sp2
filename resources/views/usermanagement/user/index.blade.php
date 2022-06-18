@@ -100,7 +100,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap"> {{ $item->name }} </td>
                                 <td class="px-6 py-4"> {{ $item->email }} </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->currentOffice->nama_pbt }}
+                                    {{ $item->currentPbt->nama_pbt }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $item->getRoleNames()->first() }}

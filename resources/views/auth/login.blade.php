@@ -2,7 +2,6 @@
     <x-jet-authentication-card>
         
         <x-slot name="logo" class="mx-auto font-bold">
-            KEMENTERIAN KERAJAAN TEMPATAN DAN PERUMAHAN
             <x-jet-authentication-card-logo class="w-16 mx-auto mt-4"/>
         </x-slot>
 
@@ -42,7 +41,7 @@
                 @endif
 
                 <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
+                    {{ __('Log Masuk') }}
                 </x-jet-button>
             </div>
         </form>

@@ -117,26 +117,26 @@
                 <div class="grid grid-flow-col grid-cols-4 gap-6 py-3">
             
                     <div class="col-span-6 sm:col-span-4 md:col-span-2">
-                        <x-jet-label for="namaLokasi" value="{{ __('Nama Lokasi') }}" />
-                        <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="editing.nama_lokasi"/>
-                        <x-jet-input-error for="namaLokasi" class="mt-2" />
+                        <x-jet-label for="editing.nama_lokasi" value="{{ __('Nama Lokasi') }}" />
+                        <x-jet-input id="editing.nama_lokasi" type="text" class="block w-full mt-1 text-sm" wire:model.defer="editing.nama_lokasi"/>
+                        <x-jet-input-error for="editing.nama_lokasi" class="mt-2" />
                     </div>
                     
                     <div class="col-span-6 sm:col-span-4 md:col-span-2">
-                        <x-jet-label for="jenisOperasi" value="{{ __('Jenis Operasi') }}" />
-                        <select wire:model="editing.kod_jenis_operasi" name="jenisOperasi" id="jenisOperasi" 
+                        <x-jet-label for="editing.kod_jenis_operasi" value="{{ __('Jenis Operasi') }}" />
+                        <select wire:model.defer="editing.kod_jenis_operasi" name="editing.kod_jenis_operasi" id="editing.kod_jenis_operasi" 
                             class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                             <option value="">{{ __('Sila Pilih') }}</option>
                             @foreach ($jenisOperasis as $item)
                                 <option value="{{ $item->kod }}"> {{ $item->keterangan }}</option>
                             @endforeach
                         </select>
-                        <x-jet-input-error for="jenisOperasi" class="mt-2" />
+                        <x-jet-input-error for="editing.kod_jenis_operasi" class="mt-2" />
                     </div>
                     
                     <div class="col-span-6 sm:col-span-4 md:col-span-2">
                         <x-jet-label for="editJenisKawasan" value="{{ __('Jenis Kawasan') }}" />
-                        <select wire:model="editing.kod_jenis_kawasan" id="editJenisKawasan" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+                        <select wire:model.defer="editing.kod_jenis_kawasan" id="editJenisKawasan" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                             <option value="">{{ __('Sila Pilih') }}</option>
                             @foreach ($jenisKawasans as $item)
                                 <option value="{{ $item->kod }}"> {{ $item->keterangan }}</option>

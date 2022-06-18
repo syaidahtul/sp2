@@ -3,7 +3,7 @@
     <div class="grid grid-flow-col grid-cols-6 gap-6 py-3 grid-row-3">
             
         <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
-            <x-jet-label for="namaLokasi" value="{{ __('Nama Jentera') }}" />
+            <x-jet-label for="namaLokasi" value="{{ __('No Pendaftaran') }}" />
             <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="namaLokasi"/>
             <x-jet-input-error for="namaLokasi" class="mt-2" />
         </div>
@@ -82,8 +82,8 @@
             
                 <div class="grid grid-flow-col grid-cols-4 gap-6 py-3">
                     <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
-                        <x-jet-label for="namaLokasi" value="{{ __('Nama Jentera') }}" />
-                        <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="namaLokasi"/>
+                        <x-jet-label for="namaLokasi" value="{{ __('No Pendaftaran') }}" />
+                        <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="editing.no_pendaftaran"/>
                         <x-jet-input-error for="namaLokasi" class="mt-2" />
                     </div>
                     

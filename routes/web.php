@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Setup\PbtController;
 use App\Http\Controllers\Setup\DaerahController;
-use App\Http\Controllers\Setup\JenisOperasisController;
 use App\Http\Controllers\Setup\JenisKawasansController;
 use App\Http\Controllers\Setup\JenisJenterasController;
+use App\Http\Controllers\Setup\JenisOperasisController;
 use App\Http\Controllers\UserManagement\UserController;
 use App\Http\Livewire\Dashboards\ExecutiveDashboard;
 
@@ -32,8 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/jenis_operasis', [JenisOperasisController::class, 'index'])->name('jenis_operasis.index');
         Route::get('/jenis_operasis/baru', [JenisOperasisController::class, 'create'])->name('jenis_operasis.create');
-        Route::post('/jenis_operasis/simpan', [JenisOperasiController::class, 'store'])->name('jenis_operasis.store');
-        Route::get('/jenis_operasis/papar/{jenis_operasis}', [JenisOperasiController::class, 'view'])->name('jenis_operasis.view');
+        Route::post('/jenis_operasis/simpan', [JenisOperasisController::class, 'store'])->name('jenis_operasis.store');
+        Route::get('/jenis_operasis/papar/{jenis_operasis}', [JenisOperasisController::class, 'view'])->name('jenis_operasis.view');
 
         Route::get('/jenis_kawasan', [JenisKawasansController::class, 'index'])->name('jenis_kawasan.index');
         Route::get('/jenis_kawasan/baru', [JenisKawasansController::class, 'create'])->name('jenis_kawasan.create');
@@ -80,7 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::group(['prefix' => 'operasi', 'as' => 'operasi.'], function () {
 
-        Route::get('/rumput', [OperasiController::class, 'index'])->name('index');
+        Route::get('/', [OperasiController::class, 'index'])->name('index');
 
     });
 

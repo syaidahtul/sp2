@@ -59,13 +59,8 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function currentOffice()
+    public function currentPbt()
     {
         return $this->hasOne(Pbt::class, 'kod', 'current_pbt');
-    }
-
-    public function pbts()
-    {
-        return $this->belongsToMany(Pbt::class, 'user_pbts', 'kod_pbt');
     }
 }
