@@ -6,7 +6,7 @@ use App\Models\Kontraktor as ModelsKontraktor;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class Kontraktor extends Component
+class TabKontraktor extends Component
 {
     public $pbt;
 
@@ -18,6 +18,6 @@ class Kontraktor extends Component
     public function render()
     {
         $kontraktors = ModelsKontraktor::byPbt(Auth::user()->current_pbt)->get();
-        return view('livewire.profail-pbt.kontraktor', ['kontraktors' => $kontraktors]);
+        return view('livewire.profail-pbt.tab-kontraktor', ['kontraktors' => $kontraktors]);
     }
 }

@@ -55,7 +55,7 @@ class ExecutiveDashboard extends Component
 
                 return $pieChartModel->addSlice($type, $value, $this->colors[$type]);
             }, LivewireCharts::pieChartModel()
-                //->setTitle('Expenses by Type')
+                ->setTitle('Kos Pengurusan Tapak Pelupusan Sampah mengikut PBT')
                 ->setAnimated($this->firstRun)
                 ->setType('donut')
                 ->withOnSliceClickEvent('onSliceClick')

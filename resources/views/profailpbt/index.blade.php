@@ -63,23 +63,23 @@
                     <div class="w-full p-4 border border-black rounded-lg rounded-t-none">
                         
                         <div x-show="openTab === 1">
-                            <livewire:profail-pbt.profail :pbt="$pbt"/>
+                            <livewire:profail-pbt.tab-profail :pbt="$pbt"/>
                         </div>
 
                         <div x-show="openTab === 2">
-                            <livewire:profail-pbt.lokasi :pbt="$pbt"/>
+                            <livewire:profail-pbt.tab-lokasi :pbt="$pbt"/>
                         </div>
                         
                         <div x-show="openTab === 3">
-                            <livewire:profail-pbt.tapak-pelupusan-sampah :pbt="$pbt"/>
+                            <livewire:profail-pbt.tab-tapak-pelupusan-sampah :pbt="$pbt"/>
                         </div>
                         
                         <div x-show="openTab === 4">
-                            <livewire:profail-pbt.jentera :pbt="$pbt"/>
+                            <livewire:profail-pbt.tab-jentera :pbt="$pbt"/>
                         </div>
 
                         <div x-show="openTab === 5">
-                            <livewire:profail-pbt.kontraktor :pbt="$pbt"/>
+                            <livewire:profail-pbt.tab-kontraktor :pbt="$pbt"/>
                         </div>
 
                         <div x-show="openTab === 'pengguna'">

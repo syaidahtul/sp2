@@ -6,13 +6,14 @@ use App\Models\JenisKawasans as ModelJenisKawasans;
 use App\Models\JenisOperasi as ModelsJenisOperasi;
 use App\Models\Lokasi as ModelsLokasi;
 use App\Models\Pbt;
+use App\Traits\WithCachedRows;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Lokasi extends Component
+class TabLokasi extends Component
 {
-    use WithPagination;
+    use WithPagination, WithCachedRows;
 
     public Pbt $pbt;
     public $namaLokasi;
@@ -47,17 +48,19 @@ class Lokasi extends Component
         sleep(1);
         
         $lokasis = ModelsLokasi::lokasiPbt($this->pbt->kod)
+            ->with('jenisOperasi')
             ->when($this->namaLokasi, function($query) {
-                $query->where('nama_lokasi', 'LIKE', '%'.$this->namaLokasi.'%');
+                    $query->where('nama_lokasi', 'LIKE', '%'.$this->namaLokasi.'%');
                 })
             ->when($this->jenisOperasi, function($query) {
-                $query->where('kod_jenis_operasi', $this->jenisOperasi);
+                    $query->where('kod_jenis_operasi', $this->jenisOperasi);
                 })
             ->when($this->jenisKawasan, function($query) {
-                $query->where('kod_jenis_kawasan', $this->jenisKawasan);
+                    $query->where('kod_jenis_kawasan', $this->jenisKawasan);
                 })
             ->paginate(10);
-        return view('livewire.profail-pbt.lokasi', [ 'lokasis' => $lokasis ] );
+
+        return view('livewire.profail-pbt.tab-lokasi', [ 'lokasis' => $lokasis ] );
     }
 
     public function makeBlankLokasi()
@@ -65,9 +68,17 @@ class Lokasi extends Component
         return ModelsLokasi::make(['kod_pbt' => Auth::user()->current_pbt ]);
     }
 
+    public function resetFilters()
+    {
+    
+    }
+
     public function edit(ModelsLokasi $lokasi)
     {
         $this->editing = $lokasi;
+
+        $this->useCachedRows();
+
         $this->showEditModal = true;
     }
 
@@ -79,6 +90,7 @@ class Lokasi extends Component
 
     public function create()
     {
+        $this->useCachedRows();
         $this->editing = $this->makeBlankLokasi();
         $this->showEditModal = true;
     }
@@ -91,4 +103,5 @@ class Lokasi extends Component
 
         $this->showEditModal = false;
     }
+
 }

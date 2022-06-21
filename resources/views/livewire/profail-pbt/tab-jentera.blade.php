@@ -3,30 +3,28 @@
     <div class="grid grid-flow-col grid-cols-6 gap-6 py-3 grid-row-3">
             
         <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
-            <x-jet-label for="namaLokasi" value="{{ __('No Pendaftaran') }}" />
-            <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="namaLokasi"/>
-            <x-jet-input-error for="namaLokasi" class="mt-2" />
+            <x-jet-label for="filters.no_pendaftaran" value="{{ __('No Pendaftaran') }}" />
+            <x-jet-input id="filters.no_pendaftaran" type="text" class="block w-full mt-1 text-sm" wire:model="filters.no_pendaftaran"/>
+            <x-jet-input-error for="filters.no_pendaftaran" class="mt-2" />
         </div>
         
         <div class="col-span-6 sm:col-span-4 md:col-span-2">
-            <x-jet-label for="jenisJentera" value="{{ __('Jenis Jentera') }}" />
-            <select wire:model="jenisJentera" name="jenisJentera" id="jenisJentera" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+            <x-jet-label for="status" value="{{ __('Status Jentera') }}" />
+            <select wire:model="status" name="status" id="status" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                 <option value="">{{ __('Sila Pilih') }}</option>
-                @foreach ($jenisjenteras as $item)
-                    <option value="{{ $item->id }}"> {{ $item->keterangan }}</option>
+                @foreach (App\Models\Jentera::STATUSES as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
                 @endforeach
             </select>
-            <x-jet-input-error for="jenisJentera" class="mt-2" />
+            <x-jet-input-error for="status" class="mt-2" />
         </div>
         
         <div class="col-span-6 sm:col-span-4 md:col-span-1">
-            <x-jet-label for="jenisKawasan" value="{{ __('Status') }}" />
-            <select wire:model="jenisKawasan" name="jenisKawasan" id="jenisKawasan" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+            <x-jet-label for="jenis_jentera" value="{{ __('Jenis Jentera') }}" />
+            <select wire:model="jenis_jentera" name="jenis_jentera" id="jenis_jentera" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                 <option value="">{{ __('Sila Pilih') }}</option>
-                <option value="aktif">Aktif</option>
-                <option value="tidak_aktif">Tidak Aktif</option>
             </select>
-            <x-jet-input-error for="jenisKawasan" class="mt-2" />
+            <x-jet-input-error for="jenis_jentera" class="mt-2" />
         </div>
         
         <div class="col-span-1 sm:col-span-4 md:col-span-1" style="text-align-last: end;align-self: end;">
@@ -82,34 +80,40 @@
             
                 <div class="grid grid-flow-col grid-cols-4 gap-6 py-3">
                     <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
-                        <x-jet-label for="namaLokasi" value="{{ __('No Pendaftaran') }}" />
-                        <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="editing.no_pendaftaran"/>
-                        <x-jet-input-error for="namaLokasi" class="mt-2" />
+                        <x-jet-label for="no_pendaftaran" value="{{ __('No Pendaftaran') }}" />
+                        <x-jet-input id="no_pendaftaran" type="text" class="block w-full mt-1 text-sm" wire:model.defer="editing.no_pendaftaran"/>
+                        <x-jet-input-error for="no_pendaftaran" class="mt-2" />
                     </div>
                     
                     <div class="col-span-6 sm:col-span-4 md:col-span-2">
-                        <x-jet-label for="jenisJentera" value="{{ __('Jenis Jentera') }}" />
-                        <select wire:model="jenisJentera" name="jenisJentera" id="jenisJentera" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+                        <x-jet-label for="editing.kod_jenis_jentera" value="{{ __('Jenis Jentera') }}" />
+                        <select wire:model.defer="editing.kod_jenis_jentera" id="editing.kod_jenis_jentera" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                             <option value="">{{ __('Sila Pilih') }}</option>
-                            @foreach ($jenisjenteras as $item)
-                                <option value="{{ $item->id }}"> {{ $item->keterangan }}</option>
+                            @foreach (App\Models\Jentera::STATUSES as $value => $label)
+                                <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
-                        <x-jet-input-error for="jenisJentera" class="mt-2" />
+                        <x-jet-input-error for="editing.kod_jenis_jentera" class="mt-2" />
                     </div>
                     
                     <div class="col-span-6 sm:col-span-4 md:col-span-1">
-                        <x-jet-label for="jenisKawasan" value="{{ __('Status') }}" />
-                        <select wire:model="jenisKawasan" name="jenisKawasan" id="jenisKawasan" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+                        <x-jet-label for="editing.status" value="{{ __('Status') }}" />
+                        <select wire:model.defer="editing.status" name="editing.status" id="editing.status" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                             <option value="">{{ __('Sila Pilih') }}</option>
                             <option value="aktif">Aktif</option>
                             <option value="tidak_aktif">Tidak Aktif</option>
                         </select>
-                        <x-jet-input-error for="jenisKawasan" class="mt-2" />
+                        <x-jet-input-error for="editing.status" class="mt-2" />
                     </div>
 
                     <div class="col-sm-10">
-                        <input type="file" wire:model="documents" id="documents" class="form-control @error('documents') is-invalid @enderror">
+                        <x-jet-label for="editing.catatan" value="{{ __('Catatan') }}" />
+                        <x-jet-input id="editing.catatan" type="text" class="block w-full mt-1 text-sm" wire:model.defer="editing.catatan"/>
+                        <x-jet-input-error for="editing.catatan" class="mt-2" />
+                    </div>
+
+                    <div class="col-sm-10">
+                        <input type="file" wire:model.defer="documents" id="documents" class="form-control @error('documents') is-invalid @enderror">
                         <div wire:loading wire:target="documents">
                             <span class="my-2 small">Uploading ... </span>
                         </div>

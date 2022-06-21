@@ -5,7 +5,7 @@ namespace App\Http\Livewire\ProfailPbt;
 use App\Models\Pbt;
 use Livewire\Component;
 
-class Profail extends Component
+class TabProfail extends Component
 {
     public Pbt $pbt;
 
@@ -24,7 +24,7 @@ class Profail extends Component
 
     public function render()
     {
-        return view('livewire.profail-pbt.profail');
+        return view('livewire.profail-pbt.tab-profail');
     }
 
     public function updatePbtProfail()

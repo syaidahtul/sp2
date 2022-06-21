@@ -61,14 +61,14 @@
                             {{ $lokasi->nama_lokasi }}
                         </x-table.cell>
                         <x-table.cell> 
-                            {{ $lokasi->kod_jenis_operasi }} 
+                            {{ optional($lokasi->jenisOperasi)->keterangan }} 
                         </x-table.cell>
                         <x-table.cell> 
-                            {{ $lokasi->kod_jenis_kawasan }} 
+                            {{ optional($lokasi->jenisKawasan)->keterangan }} 
                         </x-table.cell>
                         <x-table.cell class="text-end"> 
                             <button type="button"  wire:click="edit({{ $lokasi->id }})" 
-                                class="inline-flex items-center px-4 py-2 font-semibold tracking-widest text-gray-600 uppercase transition bg-yellow-300 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
+                                class="inline-flex items-center px-2 py-2 font-semibold tracking-widest text-yellow-300 uppercase transition bg-transparent border border-transparent rounded-md hover:border-yellow-600 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
                                     viewBox="0 0 20 20" fill="currentColor">
                                     <path
@@ -76,7 +76,7 @@
                                 </svg>
                             </button>
                             <button type="button"  wire:click="delete({{ $lokasi->id }})" 
-                                class="inline-flex items-center px-4 py-2 font-semibold tracking-widest text-gray-600 uppercase transition bg-red-300 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
+                                class="inline-flex items-center px-2 py-2 font-semibold tracking-widest text-red-600 uppercase transition border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
                                     viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"

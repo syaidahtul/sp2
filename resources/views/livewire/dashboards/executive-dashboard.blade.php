@@ -31,7 +31,7 @@
                                     {{ $pbt->kod }}
                                 </x-table.cell>
                                 <x-table.cell> 
-                                    {{ $pbt->nama_pbt }} 
+                                    <a href="{{ route('profailpbt.index') }}" class="text-decoration-none">{{ $pbt->nama_pbt }}</a> 
                                 </x-table.cell>
                                 <x-table.cell> 
                                     <span style = "background-color: {{ $pbt->active_color }}"

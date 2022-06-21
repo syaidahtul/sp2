@@ -23,6 +23,11 @@ class JenisOperasi extends Model
         'active' => 'boolean'
     ];
 
+    public function lokasis()
+    {
+        return $this->hasMany(Lokasi::class, 'kod_jenis_operasi', 'kod');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('active', true);

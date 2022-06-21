@@ -18,4 +18,9 @@ class JenisKawasans extends Model
     protected $keyType = 'string';
 
     public $timestamps = false;
+
+    public function lokasis()
+    {
+        return $this->hasMany(Lokasi::class, 'kod_jenis_kawasan', 'kod');
+    }
 }

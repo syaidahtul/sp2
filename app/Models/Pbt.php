@@ -28,7 +28,7 @@ class Pbt extends Model
     public function scopeNotKKTP($query)
     {
         if (Auth::user()->current_pbt !== 'KKTP') {
-            return $query->whereNotIn('kod', ['KKTP']);
+            return $query->whereNotIn('kod', ['KKTP'])->where('kod', Auth::user()->current_pbt);
         }
     }
 
