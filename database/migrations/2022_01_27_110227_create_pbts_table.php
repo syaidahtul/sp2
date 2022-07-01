@@ -23,7 +23,7 @@ class CreatePbtsTable extends Migration
             $table->string('state')->default('SABAH');
             $table->double('longitude')->nullable();
             $table->double('latitude')->nullable();
-            $table->boolean('active')->default(true);
+            $table->entityHistory();
         });
     }
 

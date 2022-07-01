@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class OperasiPbt extends Model
 {
@@ -12,7 +15,12 @@ class OperasiPbt extends Model
     const STATUSES = [
         'selesai' => 'Selesai',
         'sedang' => 'Sedang Dilaksanakan',
-        'belum' => 'Belum'
+        'belum' => 'Belum Dilaksanakan'
+    ];
+
+    protected $casts = [
+        'tarikh_operasi_mula' => 'date:d-m-Y',
+        'tarikh_operasi_tamat' => 'date'
     ];
 
     protected $fillable = [
@@ -26,8 +34,27 @@ class OperasiPbt extends Model
         'catatan'
     ];
 
-    public function getDateFormat()
+    public function lokasi()
     {
-        
+        return $this->belongsTo(Lokasi::class, 'lokasi_id', 'id');
+    }
+
+    public function scopeByPbt($query, $kod_pbt)
+    {
+        if ($kod_pbt !== 'KKTP') {
+            return $query->where('kod_pbt', Auth::user()->current_pbt);
+        } else {
+            return $query->where('kod_pbt', $kod_pbt);
+        }
+    }
+
+    protected function getTarikhOperasiMulaAttribute()
+    {
+        return Carbon::parse($this->attributes['tarikh_operasi_mula'])->format('d-m-Y');
+    }
+
+    protected function getTarikhOperasiTamatAttribute()
+    {
+        return Carbon::parse($this->attributes['tarikh_operasi_tamat'])->format('d-m-Y');
     }
 }

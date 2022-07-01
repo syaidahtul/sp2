@@ -21,8 +21,8 @@
                                 class="grid grid-cols-6 gap-4 font-mono text-sm font-bold leading-6 rounded-lg bg-stripes-violet">
                                 <div class="col-span-2 p-4 rounded-lg shadow-lg bg-emerald-400">
                                     <x-jet-label for="request" value="{{ __('Kod PBT') }}" />
-                                    <x-jet-input id="kod_pbt" class="block w-full mt-1 uppercase bg-gray-400" type="text"
-                                        name="kod_pbt" :value="$pbt->kod_pbt" autofocus autocomplete="off" disabled/>
+                                    <x-jet-input id="kod" class="block w-full mt-1 uppercase bg-gray-400" type="text"
+                                        name="kod" :value="$pbt->kod" autofocus autocomplete="off" disabled/>
                                 </div>
                                 <div class="col-span-4 col-start-3 p-4 rounded-lg shadow-lg bg-emerald-400">
                                     <x-jet-label for="nama_pbt" value="{{ __('Nama PBT') }}" />
@@ -40,10 +40,6 @@
                         <a href="{{ route('setup.pbt.index') }}"
                             class='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-gray-500 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'>
                             {{ __('Kembali') }}
-                        </a>
-                        <a href="{{ route('setup.pbt.edit', $pbt) }}"
-                            class='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-gray-500 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'>
-                            {{ __('Kemaskini') }}
                         </a>
                     </div>
                 </div>

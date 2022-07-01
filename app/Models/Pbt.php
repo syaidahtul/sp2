@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\ModelCores\EntityHistory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Pbt extends Model
+class Pbt extends EntityHistory
 {
     use HasFactory;
 
@@ -20,6 +20,11 @@ class Pbt extends Model
 
     protected $keyType = 'string';
 
+    const STATUSES = [
+        'aktif' => 'Aktif',
+        'tidak_aktif' => 'Tidak Aktif'
+    ];
+
     public function users()
     {
         return $this->hasMany(User::class, 'current_pbt', 'kod');
@@ -32,19 +37,23 @@ class Pbt extends Model
         }
     }
 
-    public function getActiveColorAttribute()
+    public function getDeletedAtColorAttribute()
     {
-        return [
-            0 => '#fecdd3', // bg-rose-200
-            1 => '#a7f3d0', // bg-emerald-200
-        ][$this->active] ?? 'gray';
+        if ($this->deleted_at) {
+           return '#fecdd3'; // bg-rose-200
+        } else {
+            return '#a7f3d0';
+        }
+        
     }
     
-    public function getActiveDescAttribute()
-    {
-        return [
-            0 => 'Tidak Aktif',
-            1 => 'Aktif',
-        ][$this->active] ?? 'Opps!';
+    public function getDeletedAtDescAttribute()
+    { 
+        if ($this->deleted_at) {
+            return 'Tidak Aktif';
+        } else {
+            return 'Aktif';
+        }
+         
     }
 }

@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('description');
             $table->decimal('amount');
             $table->string('type');
-            $table->timestamps();
+            $table->entityHistory();
         });
     }
 

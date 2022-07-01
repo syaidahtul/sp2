@@ -12,16 +12,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+    
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">    
     @livewireStyles
-
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
@@ -96,6 +95,15 @@
             <main class="text-sm">
                 {{ $slot }}
             </main>
+
+            
+            <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <livewire:delete-confirmation-modal>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -103,6 +111,7 @@
     @stack('modals')
 
     @livewireScripts
+    <script src="https://unpkg.com/moment"></script>
 
     <script>
 

@@ -19,7 +19,7 @@ class CreateLokasisTable extends Migration
             $table->string('kod_pbt');
             $table->string('kod_jenis_operasi');
             $table->string('kod_jenis_kawasan');
-            $table->timestamps();
+            $table->entityHistory();
             $table->foreign('kod_pbt')->references('kod')->on('pbts');
         });
     }

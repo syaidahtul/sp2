@@ -7,48 +7,51 @@ use App\Http\Controllers\Controller;
 use App\Models\Pbt;
 use App\Models\Roles;
 use App\Models\User;
+use App\Services\PbtService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class UserController extends Controller
 {
 
-    public function __construct()
+    use WithPagination;
+
+    public PbtService $pbtService;
+
+    public function __construct(PbtService $pbtService)
     {
-        
+            $this->pbtService = $pbtService;
     }
     
     public function index(Request $request)
     {
-        $pbts = Pbt::notKKTP()->get();
+        $pbts = $this->pbtService->getPbtDropdown();
         $roles = Roles::all();
-
-        info($roles);
-
-        $name = $request->input('name');
-        $identity_no = $request->input('identity_no');
-        $role = $request->input('role');
-        $pbt = $request->input('pbt');
-
-        $users = User::when($name, function($query) use ($name) {
-                return $query->where('name', 'LIKE', '%'.$name.'%');
-            })
-            ->when($identity_no, function($query) use ($identity_no) {
-                return $query->where('identity_no', 'LIKE', '%'.$identity_no.'%');
-            })
-            ->when($pbt, function ($query) use ($pbt) {
-                return $query->where('current_pbt', $pbt);
-            })
-            ->when($role, function ($query, $role) {
-                return $query->join('model_has_roles', function ($join) use ($role) {
-                    $join->on('model_has_roles.model_id', '=', 'users.id')
-                        ->where('model_has_roles.model_type', '=', 'App\Models\User')
-                        ->where('model_has_roles.role_id', '=', $role);
-                });
-            })
+        
+        $users = User::query()
+            ->when($request->input('name'), fn($query, $name) => $query->where('name', 'LIKE', '%'.$name.'%'))
+            ->when($request->input('identity_no'), fn($query, $identity_no) => $query->where('identity_no', 'LIKE', '%'.$identity_no.'%'))
+            ->when($request->input('pbt'), fn($query, $pbt) => $query->where('current_pbt', $pbt))
+            ->when($request->input('role'), fn($query, $role) => $query->join('model_has_roles', function ($join) use ($role) {
+                $join->on('model_has_roles.model_id', '=', 'users.id')
+                    ->where('model_has_roles.model_type', '=', 'App\Models\User')
+                    ->where('model_has_roles.role_id', '=', $role);
+                }))
             ->paginate(25);
 
         return view('usermanagement.user.index', compact('users', 'roles', 'pbts'));
+    }
+
+    public function getRowsQueryProperty()
+    {
+        $query = User::query()
+            ->when($this->filters['status'], fn($query, $status) => $query->where('status', $status))
+            ->when($this->filters['amount-min'], fn($query, $amount) => $query->where('amount', '>=', $amount))
+            ->when($this->filters['amount-max'], fn($query, $amount) => $query->where('amount', '<=', $amount))
+            ->when($this->filters['search'], fn($query, $search) => $query->where('title', 'like', '%'.$search.'%'));
+
+        return $this->applySorting($query);
     }
 
     // show new user form

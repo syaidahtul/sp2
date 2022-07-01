@@ -32,7 +32,7 @@
 
         <!-- Current PBT -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="current_pbt" value="{{ __('Kementerian/Jabatan') }}" />
+            <x-jet-label for="current_pbt" value="{{ __('Kementerian/PBT') }}" />
             <select wire:model.defer="current_pbt" id="current_pbt" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                 <option value="">{{ __('Sila Pilih') }}</option>
                 @foreach ($pbts as $item)

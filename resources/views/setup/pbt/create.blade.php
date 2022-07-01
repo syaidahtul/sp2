@@ -20,8 +20,8 @@
                                 <div class="grid grid-cols-6 gap-4 font-mono text-sm font-bold leading-6 rounded-lg bg-stripes-violet">
                                     <div class="col-span-2 p-4 rounded-lg shadow-lg bg-emerald-500">
                                         <x-jet-label for="request" value="{{ __('Kod PBT') }}" />
-                                        <x-jet-input id="kod_pbt" class="block w-full mt-1 uppercase" type="text"
-                                            name="kod_pbt" :value="old('kod_pbt')" autofocus autocomplete="off" />
+                                        <x-jet-input id="kod" class="block w-full mt-1 uppercase" type="text"
+                                            name="kod" :value="old('kod')" autofocus autocomplete="off" />
                                     </div>
                                     <div class="col-span-4 col-start-3 p-4 rounded-lg shadow-lg bg-emerald-500">
                                         <x-jet-label for="nama_pbt" value="{{ __('Nama PBT') }}" />

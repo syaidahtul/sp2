@@ -19,7 +19,7 @@ class CreateKosPelupusanSampahsTable extends Migration
             $table->unsignedBigInteger('tapak_pelupusan_sampah_id');
             $table->date('tarikh_kos');
             $table->decimal('amount', 9, 5);
-            $table->timestamps();
+            $table->entityHistory();
             $table->foreign('kod_pbt')->references('kod')->on('pbts');
         });
     }

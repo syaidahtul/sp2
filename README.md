@@ -6,4 +6,5 @@
 6. ensure this table populated
      - Kod PBT
      - Kod Daerah
-7. php artisan optimize
+7. php artisan permission:cache-reset
+8. php artisan optimize

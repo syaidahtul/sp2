@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,6 +23,21 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use SoftDeletes;
     use Uuids;
+
+    // public static function boot()
+    // {
+    //     static::creating(function ($model) {
+    //         $model->created_by = Auth::user()->id;
+    //         $model->updated_at = NULL;
+    //         $model->updated_by = NULL;
+    //     });
+
+    //     static::updating(function ($model) {
+    //         $model->updated_by = Auth::user()->id;
+    //     });
+
+    //     parent::boot();
+    // }
 
     protected $primaryKey = 'id';
 
@@ -63,4 +80,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Pbt::class, 'kod', 'current_pbt');
     }
+
 }

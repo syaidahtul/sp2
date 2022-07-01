@@ -9,13 +9,67 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
-                <div class="px-4bg-white sm:p-6">
-                
-                    <a href="{{ route('setup.pbt.create') }}"
-                        class='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-gray-500 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'>{{
-                        __('PTB Baru') }}</a>
+                <div class="mt-5 md:mt-0 md:col-span-2">
 
+                    <form wire:submit.prevent="submit">
+                        
+                        <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
+                            <div class="px-4 sm:px-0">
+                                <h3 class="text-lg font-medium text-gray-900 uppercase">
+                                    {{ __('Kriteria Carian PBT') }}</h3>
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white shadow sm:p-6">
+
+                            <div class="grid grid-cols-6 gap-6">
+
+                                <div class="col-span-6 sm:col-span-4 md:col-span-1">
+                                    <x-jet-label for="kod" value="{{ __('Kod') }}" />
+                                    <x-jet-input id="kod" type="text" class="block w-full mt-1"
+                                        autocomplete="off" name="kod" value="{{ request()->get('name') }}" />
+                                    <x-jet-input-error for="kod" class="mt-2" />
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-4 md:col-span-4">
+                                    <x-jet-label for="namapbt" value="{{ __('Nama') }}" />
+                                    <x-jet-input id="namapbt" type="text" class="block w-full mt-1" autocomplete="off" name="namapbt"
+                                        value="{{ request()->get('namapbt') }}" />
+                                    <x-jet-input-error for="namapbt" class="mt-2" />
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-4 md:col-span-1">
+                                    <x-jet-label for="aktif" value="{{ __('Aktif') }}" />
+                                    <select name="aktif" id="aktif" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        <option value="">Aktif</option>
+                                        <option value="deactivated" {{ request()->get('aktif') == 'deactivated' ? 'selected' : '' }}>Tidak Aktif</option>
+                                    </select>
+                                    <x-jet-input-error for="aktif" class="mt-2" />
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
+                            <x-button.button-link href="{{ route('setup.pbt.create' ) }}" type="createIcon" svgClass="w-4 h-4 mr-2"><span class="self-center mx-4">{{__('PTB Baru') }} </span> </x-button.button-link>
+
+                            <x-jet-button>
+                                {{ __('Cari') }}
+                            </x-jet-button>
+                        </div>
+
+                    </form>
+                    
                 </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="py-6">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="">
@@ -23,7 +77,7 @@
                             <x-table.heading sortable> Kod PBT </x-table.heading>
                             <x-table.heading sortable> Nama </x-table.heading>
                             <x-table.heading sortable> Status  </x-table.heading>
-                            <x-table.heading>   </x-table.heading>
+                            <x-table.heading>  </x-table.heading>
                         </x-slot>
                         
                         <x-slot name="body">
@@ -33,44 +87,29 @@
                                     <x-table.cell> 
                                         {{ $pbt->kod }}
                                     </x-table.cell>
+
                                     <x-table.cell> 
-                                        {{ $pbt->nama_pbt }} 
+                                        <x-button.button-link type="viewIcon" href="{{ route('setup.pbt.view', $pbt ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
                                     </x-table.cell>
+
                                     <x-table.cell> 
-                                        <span style = "background-color: {{ $pbt->active_color }}"
-                                            class="inline-flex items-center px-2.5 py-1.5 rounded-full text-sm font-medium leading-4 capitalize">
-                                            {{ $pbt->active_desc }} 
+                                        <span style = "background-color: {{ $pbt->deleted_at_color }}"
+                                            class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
+                                            {{ $pbt->deleted_at_desc }} 
                                         </span>
                                     </x-table.cell>
-                                    <x-table.cell class="text-center">
-                                            <a href="{{ route('setup.pbt.view', $pbt ) }}"
-                                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-gray-600 uppercase transition bg-green-300 border border-transparent rounded-md hover:bg-green-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                                    fill="currentColor">
-                                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </a>
-                                            <a href="{{ route('setup.pbt.edit', $pbt ) }}"
-                                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-gray-600 uppercase transition bg-yellow-300 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                                    fill="currentColor">
-                                                    <path
-                                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                                </svg>
-                                            </a>
-                                            <button type="button"
-                                                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-gray-600 uppercase transition bg-red-300 border border-transparent rounded-md hover:bg-red-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'"
-                                                data-modal-toggle="deleteConfirmationModal" onclick="window.livewire.emit('delete-confirmation-modal', 'App\\Models\\Pbt', 'kod', '{{ $pbt->kod_pbt }}', '' )">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                                    fill="currentColor">
-                                                    <path fill-rule="evenodd"
-                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
+                                    
+                                    <x-table.cell class="text-end">
+                                        <x-button.button-link type="viewIcon" href="{{ route('setup.pbt.view', $pbt ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye></x-button.button-link>
+                                        <x-button.button-link type="editIcon" href="{{ route('setup.pbt.edit', $pbt ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
+                                        @if ( $pbt->deleted_at_desc === 'Tidak Aktif' )
+                                            <x-button.button-link type="restoreIcon" href="#"><x-icons.restore class="w-4 h-4" stroke="orange"></x-icons.restore> </x-button.button-link>
+                                        @else
+                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal" 
+                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Pbt', 'kod', '{{ $pbt->kod }}', '', '{{ $pbt->nama_pbt }}' )"> 
+                                                <x-icons.trash class="w-4 h-4" stroke="red"></x-icons.trash>
+                                            </x-button.button-link>
+                                        @endif
                                     </x-table.cell>
                                 </x-table.row>
                             @empty
@@ -89,6 +128,7 @@
 
             </div>
         </div>
+        
     </div>
 
 </x-app-layout>

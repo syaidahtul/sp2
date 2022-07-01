@@ -6,14 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setup\StorePbtRequest;
 use App\Models\Daerah;
 use App\Models\Pbt;
+use App\Services\PbtService;
 use Illuminate\Http\Request;
 
 class PbtController extends Controller
 {
 
-    public function index()
+    public PbtService $pbtService;
+
+    public function __construct(PbtService $pbtService)
     {
-        $pbts = Pbt::orderByDesc('nama_pbt')->paginate(10);
+            $this->pbtService = $pbtService;
+    }
+
+    public function index(Request $request)
+    {
+        info($request->get('namapbt'));
+        $pbts = $this->pbtService->filterRows($request->get('kod'), $request->get('namapbt'), $request->get('aktif'));
         return view('setup.pbt.index', compact('pbts'));
     }
 
@@ -36,14 +45,15 @@ class PbtController extends Controller
         return view('setup.pbt.view', compact('pbt'));
     }
 
-    public function edit(Pbt $pbt)
+    public function edit($kod)
     {
-        return view('setup.pbt.edit', compact('pbt'));
+        $pbt = $this->pbtService->getPbt($kod);
+        return view('setup.pbt.edit')->with('pbt', $pbt);
     }
 
-    public function update(StorePbtRequest $request, Pbt $pbt)
+    public function update(StorePbtRequest $request, $kod)
     {
-        $pbt->update($request->validated());
+        $pbt = $this->pbtService->update($request->safe()->only(['kod', 'nama_pbt', 'status']));
         return redirect()->route('setup.pbt.index');
     }
 

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Index extends Component
+class JadualOperasi extends Component
 {
 
     public $generateNewModal = false;
@@ -57,7 +57,7 @@ class Index extends Component
                 $query->where('kod_jenis_kawasan', $this->jenisKawasan);
                 })
             ->paginate(10);
-        return view('livewire.operasi.index', [ 'operasis' => $operasis]);
+        return view('livewire.operasi.jadual-operasi', [ 'operasis' => $operasis]);
     }
 
     public function create()

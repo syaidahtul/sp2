@@ -30,7 +30,8 @@
                                 <!-- Name -->
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="name" value="{{ __('Name') }}" />
-                                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                                    <input
+                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                         id="name" type="text" name="name" value={{ old('name') }}>
                                     <x-jet-input-error for="name" class="mt-2" />
                                 </div>
@@ -38,7 +39,8 @@
                                 <!-- Email -->
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="email" value="{{ __('Email') }}" />
-                                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                                    <input
+                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                         id="email" type="email" name="email" value={{ old('email') }}>
                                     <x-jet-input-error for="email" class="mt-2" />
                                 </div>
@@ -46,19 +48,23 @@
                                 <!-- Identity No -->
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="identity_no" value="{{ __('Identity No') }}" />
-                                    <input class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-                                        id="identity_no" type="text" name="identity_no" value={{ old('identity_no') }}>
+                                    <input
+                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        id="identity_no" type="text" name="identity_no"
+                                        value={{ old('identity_no') }}>
                                     <x-jet-input-error for="identity_no" class="mt-2" />
                                 </div>
 
                                 <!-- Current PBT -->
                                 <div class="col-span-6 sm:col-span-4">
-                                    <x-jet-label for="current_pbt" value="{{ __('Kementerian/Jabatan') }}" />
+                                    <x-jet-label for="current_pbt" value="{{ __('Kementerian/PBT') }}" />
                                     <select name="current_pbt" id="current_pbt"
-                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
-                            <option value="">{{ __('Sila Pilih') }}</option>
-                               @foreach ($pbts as $item)
-                                        <option value="{{ $item->kod }}" {{ old('current_pbt') == $item->kod ? 'selected' : '' }}> {{ $item->nama_pbt }}</option>
+                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        <option value="">{{ __('Sila Pilih') }}</option>
+                                        @foreach ($pbts as $item)
+                                            <option value="{{ $item->kod }}"
+                                                {{ old('current_pbt') == $item->kod ? 'selected' : '' }}>
+                                                {{ $item->nama_pbt }}</option>
                                         @endforeach
                                     </select>
                                     <x-jet-input-error for="current_pbt" class="mt-2" />
@@ -68,9 +74,9 @@
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="role" value="{{ __('Peranan') }}" />
                                     <select name="role" id="role"
-                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
+                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                             <option value="">{{ __('Sila Pilih') }}</option>
-                               @foreach ($roles as $item)
+                                @foreach ($roles as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old('role') == $item->id ? 'selected' : '' }}> {{ $item->name }}
                                         </option>
@@ -81,13 +87,15 @@
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="password" value="{{ __('New Password') }}" />
-                                    <x-jet-input id="password" type="password" class="block w-full mt-1" name="password" autocomplete="new-password" />
+                                    <x-jet-input id="password" type="password" class="block w-full mt-1"
+                                        name="password" autocomplete="new-password" />
                                     <x-jet-input-error for="password" class="mt-2" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4">
                                     <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                                    <x-jet-input id="password_confirmation" type="password" class="block w-full mt-1" name="password_confirmation" autocomplete="new-password" />
+                                    <x-jet-input id="password_confirmation" type="password" class="block w-full mt-1"
+                                        name="password_confirmation" autocomplete="new-password" />
                                     <x-jet-input-error for="password_confirmation" class="mt-2" />
                                 </div>
 
@@ -107,7 +115,7 @@
 
                         </x-jet-form-section>
 
-                        
+
                     </form>
                 </div>
             </div>

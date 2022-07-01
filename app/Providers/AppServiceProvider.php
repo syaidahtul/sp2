@@ -52,11 +52,11 @@ class AppServiceProvider extends ServiceProvider
         Blueprint::macro('entityHistory', function()
         {
             $this->timestamp('created_at')->useCurrent();
-            $this->unsignedBigInteger('created_by')->nullable();
+            $this->string('created_by')->nullable();
             $this->timestamp('updated_at')->nullable();
-            $this->unsignedBigInteger('updated_by')->nullable();
+            $this->string('updated_by')->nullable();
             $this->timestamp('deleted_at')->nullable();
-            $this->unsignedBigInteger('deleted_by')->nullable();
+            $this->string('deleted_by')->nullable();
         });
 
     }

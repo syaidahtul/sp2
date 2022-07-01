@@ -22,6 +22,14 @@ class CustomCreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'current_pbt' => ['required'],
             'role' =>  ['required'],
+        ], [], 
+        [
+            'name' => 'Nama Pengguna',
+            'email' => 'Alamat Email',
+            'identity_no' => 'No Kad Pengenalan',
+            'password' => 'Kata Laluan',
+            'current_pbt' => 'Kementerian/PBT',
+            'role' => 'Peranan',
         ])->validate();
 
         DB::transaction(function () use ($input) {
