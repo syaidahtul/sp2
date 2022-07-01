@@ -89,7 +89,7 @@
                                     </x-table.cell>
 
                                     <x-table.cell> 
-                                        <x-button.button-link type="viewIcon" href="{{ route('setup.pbt.view', $pbt ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
+                                        <x-button.button-link type="viewIcon" href="{{ route('profailpbt.index', ['kod'=> $pbt->kod] ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
                                     </x-table.cell>
 
                                     <x-table.cell> 

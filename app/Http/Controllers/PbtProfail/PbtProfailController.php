@@ -4,13 +4,29 @@ namespace App\Http\Controllers\PbtProfail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pbt;
+use App\Services\PbtService;
+use App\Services\ProfailPbtService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PbtProfailController extends Controller
 {
-    public function index()
+    
+    public ProfailPbtService $profailPbtService;
+    public PbtService $pbtService;
+
+    public function __construct(ProfailPbtService $profailPbtService, PbtService $pbtService)
     {
+        $this->profailPbtService = $profailPbtService;
+        $this->pbtService = $pbtService;
+    }
+    
+    public function index(Request $request)
+    {
+        if ($request->has('kod') && Auth::user()->current_pbt === 'KKTP' ) {
+
+        }
+
         $pbt = Pbt::with('users')->where('kod', Auth::user()->current_pbt)->first();
         return view('profailpbt.index', compact('pbt'));
     }
