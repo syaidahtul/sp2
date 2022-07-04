@@ -15,11 +15,12 @@ class CreateTapakPelupusanSampahsTable extends Migration
     {
         Schema::create('tapak_pelupusan_sampahs', function (Blueprint $table) {
             $table->id();
-            $table->string('kod_pbt');
-            $table->string('nama');
-            $table->string('jenis_kawasan');
+            $table->string('tempat');
+            $table->string('kaedah_pelupusan');
+            $table->string('city')->nullable();
+            $table->double('longitude')->nullable();
+            $table->double('latitude')->nullable();
             $table->entityHistory();
-            $table->foreign('kod_pbt')->references('kod')->on('pbts');
         });
     }
 

@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Setup;
 
 use App\Http\Controllers\Controller;
-use App\Models\Daerah;
+use App\Http\Requests\Setup\StoreDaerahRequest;
+use App\Services\DaerahService;
 use Illuminate\Http\Request;
 
 class DaerahController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public DaerahService $daerahService;
+
+    public function __construct(DaerahService $daerahService)
     {
-        $daerahs = Daerah::paginate(5);
+            $this->daerahService = $daerahService;
+    }
+
+    public function index(Request $request)
+    {
+        $daerahs = $this->daerahService->filterRows($request->get('kod'), $request->get('nama'), $request->get('aktif'));
         return view('setup.daerah.index', compact('daerahs'));
     }
 
@@ -26,7 +30,7 @@ class DaerahController extends Controller
      */
     public function create()
     {
-        //
+        return view('setup.daerah.create');
     }
 
     /**
@@ -35,43 +39,26 @@ class DaerahController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDaerahRequest $request)
     {
-        //
+        $this->daerahService->store($request->safe()->only(['kod', 'nama', 'status']));
+        session()->flash('flash.banner', $request->nama . ' telah disimpan.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.daerah.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit($kod)
     {
-        //
+        $daerah = $this->daerahService->getDaerah($kod);
+        return view('setup.daerah.edit', compact('daerah'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(StoreDaerahRequest $request, $kod)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $this->daerahService->update($request->safe()->only(['kod', 'nama', 'status']));
+        session()->flash('flash.banner', $request->nama . ' telah dikemaskini.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.daerah.index');
     }
 
     /**

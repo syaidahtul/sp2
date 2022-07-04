@@ -23,19 +23,19 @@ class JenisOperasisTableSeeder extends Seeder
             array (
                 'kod' => 'PARIT',
                 'keterangan' => 'Pembersihan Parit',
-                'active' => true,
+                'aktif' => true,
             ),
             1 => 
             array (
                 'kod' => 'RUMPUT',
                 'keterangan' => 'Pemotongan Rumput',
-                'active' => true,
+                'aktif' => true,
             ),
             2 => 
             array (
                 'kod' => 'SAMPAH',
                 'keterangan' => 'Kutipan Sampah',
-                'active' => true,
+                'aktif' => true,
             ),
         ));
         

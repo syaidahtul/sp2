@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\PbtProfail;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TapakPelupusanSampahController extends Controller
+class KosPengurusanSampahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class TapakPelupusanSampahController extends Controller
      */
     public function index()
     {
-        //
+        return view('operasi.pengurusansampah.index');
     }
 
     /**

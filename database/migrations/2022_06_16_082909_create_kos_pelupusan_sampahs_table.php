@@ -15,12 +15,10 @@ class CreateKosPelupusanSampahsTable extends Migration
     {
         Schema::create('kos_pelupusan_sampahs', function (Blueprint $table) {
             $table->id();
-            $table->string('kod_pbt');
-            $table->unsignedBigInteger('tapak_pelupusan_sampah_id');
+            $table->foreignId('tapak_pelupusan_sampah_id')->constrained('tapak_pelupusan_sampahs');
             $table->date('tarikh_kos');
             $table->decimal('amount', 9, 5);
             $table->entityHistory();
-            $table->foreign('kod_pbt')->references('kod')->on('pbts');
         });
     }
 

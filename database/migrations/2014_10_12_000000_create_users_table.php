@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('current_pbt')->nullable();
+            $table->string('office_no')->nullable();
+            $table->string('mobile_no')->nullable();
             $table->entityHistory();
         });
     }

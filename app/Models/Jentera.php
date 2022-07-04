@@ -40,7 +40,7 @@ class Jentera extends Model
     {
         return [
             'tidak_aktif' => '#fecdd3', // bg-rose-200
-            'aktif' => 'a7f3d0',    // bg-emerald-200
+            'aktif' => '#a7f3d0',    // bg-emerald-200
         ][$this->status] ?? 'gray';
     }
     

@@ -23,11 +23,14 @@ class PbtProfailController extends Controller
     
     public function index(Request $request)
     {
+        
+        $kod = Auth::user()->current_pbt;
+        
         if ($request->has('kod') && Auth::user()->current_pbt === 'KKTP' ) {
-
+            $kod = $request->get('kod');
         }
 
-        $pbt = Pbt::with('users')->where('kod', Auth::user()->current_pbt)->first();
+        $pbt = Pbt::with('users')->where('kod', $kod)->first();
         return view('profailpbt.index', compact('pbt'));
     }
 

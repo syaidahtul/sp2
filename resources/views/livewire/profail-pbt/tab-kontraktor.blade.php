@@ -1,5 +1,5 @@
 <div>
-    <x-table class="">
+    <x-table class="mb-4 sm:rounded-sm">
                                 
         <x-slot name="head">
             <x-table.heading sortable> Nama </x-table.heading>

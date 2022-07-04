@@ -25,7 +25,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans text-sm antialiased">
 
     <x-jet-banner />
 
@@ -44,48 +44,18 @@
                 </svg>
             </button>
         </div>
-
-        <!-- sidebar 
-        <div
-            class="absolute inset-y-0 left-0 w-64 px-2 space-y-6 transition duration-200 ease-in-out transform -translate-x-full text-sky-100 bg-sky-800 sidebar py-7 md:relative md:translate-x-0">
-
-            <a href="{{ route('dashboard') }}" class="flex items-center justify-center px-4 space-x-2 text-white">
-                <x-jet-application-mark class="items-center block w-auto h-10"/>
-                <span class="text-2xl font-extrabold">{{ config('app.name', 'SP2-v1') }}</span>
-            </a>
-
-            <nav>
-                <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-sky-700 hover:text-white">
-                    {{ __('Home') }}
-                </a>
-                <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-sky-700 hover:text-white">
-                    {{ __('Profail PBT') }}
-                </a>
-                <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-sky-700 hover:text-white">
-                    {{ __('Operasi') }}
-                </a>
-
-                <hr class="py-4 my-4"/>
-                <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-sky-700 hover:text-white">
-                    {{ __('Parameter Sistem') }}
-                </a>
-                <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-sky-700 hover:text-white">
-                    {{ __('Pengurusan Pengguna') }}
-                </a>
-            </nav>
-        </div>
-        -->
+        
         <div class="flex-1">
 
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="flex justify-between bg-white shadow">
+                <header class="flex flex-wrap justify-between bg-white shadow">
                     <div class="p-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
-                    <div class="items-center p-4 text-sm text-gray-400 text-end lg:px-8">
+                    <div class="items-center p-4 text-gray-400 text-start lg:px-8">
                         PBT: {{ Auth::user()->currentPbt->nama_pbt }}
                     </div>
                 </header>

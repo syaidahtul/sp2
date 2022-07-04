@@ -16,7 +16,7 @@ class CreateJenisOperasisTable extends Migration
         Schema::create('jenis_operasis', function (Blueprint $table) {
             $table->string('kod')->primary();
             $table->string('keterangan');
-            $table->boolean('active')->default(true);
+            $table->boolean('aktif')->default(true);
         });
     }
 

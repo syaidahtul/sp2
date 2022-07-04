@@ -99,7 +99,7 @@
                                         <!-- Cancel Team Invitation -->
                                         <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                             wire:click="cancelTeamInvitation({{ $invitation->id }})">
-                                            {{ __('Cancel') }}
+                                            {{ __('Kembali') }}
                                         </button>
                                     @endif
                                 </div>
@@ -203,7 +203,7 @@
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="stopManagingRole" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ __('Kembali') }}
             </x-jet-secondary-button>
 
             <x-jet-button class="ml-3" wire:click="updateRole" wire:loading.attr="disabled">
@@ -224,7 +224,7 @@
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('confirmingLeavingTeam')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ __('Kembali') }}
             </x-jet-secondary-button>
 
             <x-jet-danger-button class="ml-3" wire:click="leaveTeam" wire:loading.attr="disabled">
@@ -245,7 +245,7 @@
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('confirmingTeamMemberRemoval')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ __('Kembali') }}
             </x-jet-secondary-button>
 
             <x-jet-danger-button class="ml-3" wire:click="removeTeamMember" wire:loading.attr="disabled">

@@ -3,16 +3,13 @@
 namespace App\Models;
 
 use App\Models\ModelCores\EntityHistory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
 class Pbt extends EntityHistory
 {
-    use HasFactory;
-
     public $timestamps = false;
 
-    protected $fillable = ['kod','nama_pbt'];
+    protected $fillable = ['kod','nama_pbt','no_tel','no_fax','alamat','poskod','region','state','longitude','latitude'];
 
     protected $primaryKey = 'kod';
 
@@ -28,6 +25,11 @@ class Pbt extends EntityHistory
     public function users()
     {
         return $this->hasMany(User::class, 'current_pbt', 'kod');
+    }
+
+    public function tapakPelupusanSampahs()
+    {
+        return $this->belongsToMany(TapakPelupusanSampahs::class, 'pbt_tapak_pelupusan_sampahs', 'kod_pbt', 'tapak_pelupusan_sampah_id');
     }
 
     public function scopeNotKKTP($query)

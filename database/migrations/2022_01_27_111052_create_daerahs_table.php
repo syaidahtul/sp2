@@ -14,9 +14,9 @@ class CreateDaerahsTable extends Migration
     public function up()
     {
         Schema::create('daerahs', function (Blueprint $table) {
-            $table->string('kod_daerah')->primary();
-            $table->string('nama_daerah');
-            $table->boolean('active')->default(true);
+            $table->string('kod')->primary();
+            $table->string('nama');
+            $table->boolean('aktif')->default(true);
         });
     }
 

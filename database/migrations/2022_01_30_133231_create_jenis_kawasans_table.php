@@ -16,7 +16,7 @@ class CreateJenisKawasansTable extends Migration
         Schema::create('jenis_kawasans', function (Blueprint $table) {
             $table->string('kod')->primary();
             $table->string('keterangan');
-            $table->boolean('active')->default(true);
+            $table->boolean('aktif')->default(true);
         });
     }
 

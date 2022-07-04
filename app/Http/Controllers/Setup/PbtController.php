@@ -51,9 +51,9 @@ class PbtController extends Controller
         return view('setup.pbt.edit')->with('pbt', $pbt);
     }
 
-    public function update(StorePbtRequest $request, $kod)
+    public function update(StorePbtRequest $request)
     {
-        $pbt = $this->pbtService->update($request->safe()->only(['kod', 'nama_pbt', 'status']));
+        $this->pbtService->update($request->safe()->only(['kod', 'nama_pbt', 'status']));
         return redirect()->route('setup.pbt.index');
     }
 

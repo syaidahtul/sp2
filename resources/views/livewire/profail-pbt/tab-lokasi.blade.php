@@ -1,7 +1,6 @@
-<div> 
+<div wire:ignore.self> 
     
-    <div class="px-4 py-5 bg-white border border-gray-200 rounded-t-lg sm:p-6">
-        
+    
         <div class="grid grid-flow-col grid-cols-6 gap-6 py-3 grid-row-3">
             
             <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
@@ -41,7 +40,7 @@
             
         </div>
 
-        <x-table wire:ignore.self class="mb-4">
+        <x-table wire:ignore.self class="my-4 rounded-md">
                             
             <x-slot name="head">
                 <x-table.heading sortable> No </x-table.heading>
@@ -98,14 +97,7 @@
         </x-table>
 
         {{ $lokasis->links() }}
-        
-    </div>
-        
-    <div class="flex items-center justify-end gap-4 px-4 py-3 text-right border-gray-200 bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-        <x-button.button-link-secondary href="{{ route('dashboard') }}">
-            {{ __('Back') }}
-        </x-button.button-link-secondary>
-    </div>
+    
     
     <!-- Save Transaction Modal -->
     <form wire:submit.prevent="save">
@@ -151,7 +143,7 @@
 
             <x-slot name="footer">
                 <div class="gap-6">
-                    <x-button.button-link-secondary wire:click="$set('showEditModal', false)">{{ __('Cancel') }}</x-button.secondary>
+                    <x-button.button-link-secondary wire:click="$set('showEditModal', false)">{{ __('Kembali') }}</x-button.secondary>
     
                     <x-jet-button type="submit">{{ __('Save') }}</x-button.primary>
                 </div>

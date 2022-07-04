@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class'=>'mb-4 min-w-full overflow-hidden overflow-x-auto shadow sm:rounded-lg']) }}>
+<div {{ $attributes->merge(['class'=>'min-w-full overflow-hidden overflow-x-auto shadow']) }}>
     
     <table class="min-w-full divide-y divide-gray-200">
     

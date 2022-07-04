@@ -15,13 +15,19 @@ class CreateKontraktorsTable extends Migration
     {
         Schema::create('kontraktors', function (Blueprint $table) {
             $table->id();
-            $table->string('kod_pbt');
             $table->string('nama', 250);
-            $table->date('tarikh_mula');
-            $table->date('tarikh_tamat');
+            $table->string('jenis_perkhidmatan')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('poskod')->nullable();
+            $table->string('region')->nullable();
+            $table->string('state')->default('SABAH');
+            $table->string('no_tel_office')->nullable();
+            $table->string('no_fax_office')->nullable();
+            $table->string('contact_person_nama')->nullable();
+            $table->string('contact_person_no_tel')->nullable();
+            $table->string('status')->default('aktif');
             $table->text('catatan')->nullable();
-            $table->entityHistory();
-            $table->foreign('kod_pbt')->references('kod')->on('pbts');
+            $table->timestamps();
         });
     }
 

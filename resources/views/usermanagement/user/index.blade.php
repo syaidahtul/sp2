@@ -74,12 +74,9 @@
 
                         <div
                             class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-                            <x-button.button-link href="{{ route('usermgmt.user.create') }}">
-                                {{ __('Pengguna Baru') }}
-                            </x-button.button-link>
-
+                            <x-button.button-link class="px-4 py-2" href="{{ route('usermgmt.user.create' ) }}" type="createIcon" svgClass="w-4 h-4"><span class="self-center mx-2">{{__('Pengguna Baru') }} </span> </x-button.button-link>
                             <x-jet-button>
-                                {{ __('Cari') }}
+                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span> 
                             </x-jet-button>
                         </div>
 

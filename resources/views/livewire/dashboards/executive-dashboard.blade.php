@@ -16,7 +16,7 @@
             <!-- senarai pbt -->
             <div class="px-4 py-5 bg-white sm:p-6">
                 
-                <x-table class="">
+                <x-table class="mb-4 sm:rounded-sm">
                     <x-slot name="head">
                         <x-table.heading sortable> Kod PBT </x-table.heading>
                         <x-table.heading sortable> Nama </x-table.heading>
@@ -31,7 +31,7 @@
                                     {{ $pbt->kod }}
                                 </x-table.cell>
                                 <x-table.cell> 
-                                    <a href="{{ route('profailpbt.index') }}" class="text-decoration-none">{{ $pbt->nama_pbt }}</a> 
+                                    <x-button.button-link-secondary type="viewIcon" href="{{ route('profailpbt.index', ['kod' => $pbt->kod] ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link-secondary>
                                 </x-table.cell>
                                 <x-table.cell> 
                                     <span style = "background-color: {{ $pbt->active_color }}"

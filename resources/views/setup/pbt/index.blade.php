@@ -27,7 +27,7 @@
                                 <div class="col-span-6 sm:col-span-4 md:col-span-1">
                                     <x-jet-label for="kod" value="{{ __('Kod') }}" />
                                     <x-jet-input id="kod" type="text" class="block w-full mt-1"
-                                        autocomplete="off" name="kod" value="{{ request()->get('name') }}" />
+                                        autocomplete="off" name="kod" value="{{ request()->get('kod') }}" />
                                     <x-jet-input-error for="kod" class="mt-2" />
                                 </div>
 
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4 md:col-span-1">
-                                    <x-jet-label for="aktif" value="{{ __('Aktif') }}" />
+                                    <x-jet-label for="aktif" value="{{ __('Status') }}" />
                                     <select name="aktif" id="aktif" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                         <option value="">Aktif</option>
                                         <option value="deactivated" {{ request()->get('aktif') == 'deactivated' ? 'selected' : '' }}>Tidak Aktif</option>
@@ -52,14 +52,14 @@
                         </div>
 
                         <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-                            <x-button.button-link href="{{ route('setup.pbt.create' ) }}" type="createIcon" svgClass="w-4 h-4 mr-2"><span class="self-center mx-4">{{__('PTB Baru') }} </span> </x-button.button-link>
+                            <x-button.button-link class="px-4 py-2" href="{{ route('setup.pbt.create' ) }}" type="createIcon" svgClass="w-4 h-4"><span class="self-center mx-2">{{__('PTB Baru') }} </span> </x-button.button-link>
 
                             <x-jet-button>
-                                {{ __('Cari') }}
+                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span> 
                             </x-jet-button>
                         </div>
 
-                    </form>
+                    </form> 
                     
                 </div>
                 
@@ -67,12 +67,12 @@
         </div>
     </div>
 
-    <div class="py-6">
+    <div class="pb-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
-                    <x-table class="">
+                    <x-table class="mb-4 sm:rounded-sm">
                         <x-slot name="head">
                             <x-table.heading sortable> Kod PBT </x-table.heading>
                             <x-table.heading sortable> Nama </x-table.heading>
@@ -89,7 +89,7 @@
                                     </x-table.cell>
 
                                     <x-table.cell> 
-                                        <x-button.button-link type="viewIcon" href="{{ route('profailpbt.index', ['kod'=> $pbt->kod] ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
+                                        <x-button.button-link type="viewIcon" href="{{ route('profailpbt.index', ['kod' => $pbt->kod] ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
                                     </x-table.cell>
 
                                     <x-table.cell> 
@@ -113,8 +113,10 @@
                                     </x-table.cell>
                                 </x-table.row>
                             @empty
-                                <x-table.row colspan=2>
-                                    {{ __('Tiada rekod.') }}
+                                <x-table.row>
+                                    <x-table.cell colspan=2> 
+                                        <span class="text-center">{{ __('Tiada rekod.') }}</span>
+                                    </x-table.cell>
                                 </x-table.row>
                             @endforelse
                             

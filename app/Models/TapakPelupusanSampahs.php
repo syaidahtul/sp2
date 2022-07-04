@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class TapakPelupusanSampahs extends Model
 {
-    use HasFactory;
+    const KAEDAHPELUPUSAN = [
+        'open' => 'Open Dumping',
+        'sanitary' => 'Sanitary Landfill'
+    ];
 
-    protected $fillable = [];
-    
-    function pbt() {
-        return $this->belongsTo(Pbt::class,'kod_pbt');
+    protected $fillable = ['nama', 'kaedah_pelupusan','longitude','latitude'];
+
+    function pbt()
+    {
+        return $this->belongsToMany(Pbt::class, 'pbt_tapak_pelupusan_sampahs');
     }
 
     function kos()
     {
-        return $this->hasMany(KosPelupusanSampah::class, 'tapak_pelupusan_sampah_id', 'id');
+        return $this->hasManyThrough(KosPelupusanSampah::class, PbtTapakPelupusanSampahs::class, 'pbt_tapak_pelupusan_sampahs');
     }
 
     public function scopeByPbt($query, $kod_pbt)
@@ -28,5 +31,10 @@ class TapakPelupusanSampahs extends Model
         } else {
             return $query->where('kod_pbt', $kod_pbt);
         }
+    }
+
+    public function getKaedahPelupusanLabelAttribute()
+    {
+        return TapakPelupusanSampahs::KAEDAHPELUPUSAN[$this->kaedah_pelupusan];
     }
 }

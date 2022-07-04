@@ -11,9 +11,9 @@
                 </div>
                 <div class="md:col-span-5">
                     <x-input.select wire:model="filters.kod_pbt" id="kod_pbt" placeholder="Sila Pilih">
-                            @foreach ($pbts as $item)
-                                <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
-                            @endforeach
+                        @foreach ($pbts as $item)
+                            <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
+                        @endforeach
                     </x-input.select>
                 </div>
 
@@ -42,7 +42,7 @@
 
     </div>
 
-    <x-table class="">
+    <x-table class="mb-4 sm:rounded-sm">
                                 
         <x-slot name="head">
             <x-table.heading sortable> Nama Lokasi </x-table.heading>

@@ -18,8 +18,9 @@ class CreatePbtsTable extends Migration
             $table->string('nama_pbt');
             $table->string('no_tel')->nullable();
             $table->string('no_fax')->nullable();
-            $table->string('alamat_line1')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('poskod')->nullable();
+            $table->string('region')->nullable();
             $table->string('state')->default('SABAH');
             $table->double('longitude')->nullable();
             $table->double('latitude')->nullable();

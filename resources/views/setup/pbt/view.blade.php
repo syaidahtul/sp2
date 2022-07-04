@@ -37,10 +37,9 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-2 p-4 m-4">
-                        <a href="{{ route('setup.pbt.index') }}"
-                            class='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-gray-500 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'>
-                            {{ __('Kembali') }}
-                        </a>
+                        <x-button.button-link-secondary href="{{ route('setup.pbt.index' ) }}" svgClass="w-4 h-4 mr-2" type="backIcon" stroke="currentColor">
+                            <span class="self-center mx-4">{{__('Kembali') }} </span>
+                        </x-button.button-link-secondary>
                     </div>
                 </div>
 

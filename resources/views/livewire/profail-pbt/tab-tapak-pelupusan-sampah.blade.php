@@ -1,46 +1,55 @@
-<x-jet-form-section submit="updateProfileInformation">
-    
-    <x-slot name="title">
-        {{ __('Tapak Pelupusan Sampah') }}
-    </x-slot>
+<div class="py-6 sm:py-4">
 
-    <x-slot name="description">
-        {{ __('') }}
-    </x-slot>
+    <form wire:submit.prevent="save">
 
-    <x-slot name="form">
-        
-        <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="block w-full mt-1" wire:model.defer="name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+        <x-table class="sm:rounded-sm">
+
+            <x-slot name="head">
+                <x-table.heading sortable> Nama Tempat </x-table.heading>
+                <x-table.heading sortable> Kaedah Pelupusan </x-table.heading>
+                <x-table.heading> </x-table.heading>
+                <x-table.heading> </x-table.heading>
+            </x-slot>
+
+            <x-slot name="body">
+                @forelse ($tapaks as $item)
+                    <x-table.row>
+                        <x-table.cell>
+                            {{ $item->tempat }}
+                        </x-table.cell>
+                        <x-table.cell>
+                            {{ $item->kaedah_pelupusan_label }}
+                        </x-table.cell>
+                        <x-table.cell class="text-end">
+                            <x-button.button-link-secondary class="px-4 py-2" href="{{ route('operasi.pengurusansampah.index', ['back','tabtapakpelupusansampah'] ) }}" svgClass="w-4 h-4">
+                                <span class="self-center mx-2">{{__('Kos Pengurusan Sampah') }} </span>
+                            </x-button.button-link-secondary>
+                        </x-table.cell>
+                    </x-table.row>
+                @empty
+                    <x-table.row>
+                        <x-table.cell colspan=3 class="text-center">
+                            {{ __('Tiada rekod.') }}
+                        </x-table.cell>
+                    </x-table.row>
+                @endforelse
+            </x-slot>
+
+        </x-table>
+
+        <!-- action -->
+        <div
+            class="flex items-center justify-end pt-3 text-right">
+            <x-jet-action-message class="mr-3" on="saved">
+                {{ __('Saved.') }}
+            </x-jet-action-message>
+
+            <x-jet-button wire:loading.attr="disabled" wire:target="photo">
+                {{ __('Save') }}
+            </x-jet-button>
         </div>
 
-        <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="block w-full mt-1" wire:model.defer="email" />
-            <x-jet-input-error for="email" class="mt-2" />
-        </div>
+    </form>
 
-        <!-- Identity No -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="identity_no" value="{{ __('Identity No') }}" />
-            <x-jet-input id="identity_no" type="text" class="block w-full mt-1" wire:model.defer="identity_no" />
-            <x-jet-input-error for="identity_no" class="mt-2" />
-        </div>
-        
-    </x-slot>
+</div>
 
-    <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
-        </x-jet-action-message>
-
-        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-jet-button>
-    </x-slot>
-    
-</x-jet-form-section>

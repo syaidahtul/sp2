@@ -13,7 +13,7 @@ class StorePbtRequest extends FormRequest
 
     public function authorize()
     {
-        return Auth::user()->hasRole('admin');
+        return Auth::user()->hasRole('ADMIN');
     }
 
     public function rules(Request $re)

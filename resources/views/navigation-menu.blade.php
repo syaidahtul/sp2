@@ -16,9 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
+                    
+                    @hasanyrole(['Pengguna PBT'])
                     <x-jet-nav-link href="{{ route('profailpbt.index') }}" :active="request()->routeIs('profailpbt*')">
                         {{ __('Profail PBT') }}
                     </x-jet-nav-link>
+                    @endhasanyrole
 
                     <x-jet-nav-link href="{{ route('operasi.index') }}" :active="request()->routeIs('operasi*')">
                         {{ __('Operasi') }}
@@ -46,12 +49,12 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-jet-dropdown-link href="{{ route('setup.pbt.index') }}">
-                                {{ __('PBT') }}
-                            </x-jet-dropdown-link>
-
                             <x-jet-dropdown-link href="{{ route('setup.daerah.index') }}">
                                 {{ __('Daerah') }}
+                            </x-jet-dropdown-link>
+                            
+                            <x-jet-dropdown-link href="{{ route('setup.pbt.index') }}">
+                                {{ __('PBT') }}
                             </x-jet-dropdown-link>
 
                             <x-jet-dropdown-link href="{{ route('setup.jenis_operasis.index') }}">
@@ -64,6 +67,10 @@
 
                             <x-jet-dropdown-link href="{{ route('setup.jenis_jentera.index') }}">
                                 {{ __('Jenis Jentera') }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('setup.kontraktor.index') }}">
+                                {{ __('Kontraktor') }}
                             </x-jet-dropdown-link>
                         </x-slot>
                         </x-jet-dropdown>

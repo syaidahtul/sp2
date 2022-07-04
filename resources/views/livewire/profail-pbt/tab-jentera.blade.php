@@ -36,7 +36,7 @@
         
     </div>
     
-    <x-table class="">
+    <x-table class="mb-4 sm:rounded-sm">
                                 
         <x-slot name="head">
             <x-table.heading sortable> No. Pendaftaran </x-table.heading>
@@ -128,7 +128,7 @@
             <x-slot name="footer">
                 
                 <div class="gap-6">
-                    <x-button.button-link-secondary wire:click="$set('showEditModal', false)">{{ __('Cancel') }}</x-button.secondary>
+                    <x-button.button-link-secondary wire:click="$set('showEditModal', false)">{{ __('Kembali') }}</x-button.secondary>
     
                     <x-jet-button type="submit">{{ __('Save') }}</x-button.primary>
                 </div>

@@ -16,16 +16,16 @@ return [
     'accepted' => ':attribute perlu accepted.',
     'accepted_if' => ':attribute perlu accepted when :other is :value.',
     'active_url' => ':attribute is not a valid URL.',
-    'after' => ':attribute perlu a date after :date.',
-    'after_or_equal' => ':attribute perlu a date after or equal to :date.',
+    'after' => ':attribute perlu selepas :date.',
+    'after_or_equal' => ':attribute perlu selepas atau pada :date.',
     'alpha' => ':attribute must only contain letters.',
     'alpha_dash' => ':attribute must only contain letters, numbers, dashes dan underscores.',
     'alpha_num' => ':attribute must only contain letters dan numbers.',
     'array' => ':attribute perlu an array.',
-    'before' => ':attribute perlu a date before :date.',
-    'before_or_equal' => ':attribute perlu a date before or equal to :date.',
+    'before' => ':attribute perlu sebelum :date.',
+    'before_or_equal' => ':attribute perlu sebelum atau pada :date.',
     'between' => [
-        'numeric' => ':attribute perlu diantara :min dan :max.',
+        'numeric' => ':attribute perlu diantara :min dan :max angka.',
         'file' => ':attribute perlu diantara :min dan :max kilobytes.',
         'string' => ':attribute perlu diantara :min dan :max karakter.',
         'array' => ':attribute must have between :min dan :max items.',
@@ -50,13 +50,13 @@ return [
     'file' => ':attribute perlu a file.',
     'filled' => ':attribute field must have a value.',
     'gt' => [
-        'numeric' => ':attribute perlu greater than :value.',
+        'numeric' => ':attribute perlu greater than :value angka.',
         'file' => ':attribute perlu greater than :value kilobytes.',
         'string' => ':attribute perlu greater than :value karakter.',
         'array' => ':attribute must have more than :value items.',
     ],
     'gte' => [
-        'numeric' => ':attribute perlu greater than or equal to :value.',
+        'numeric' => ':attribute perlu greater than or equal to :value angka.',
         'file' => ':attribute perlu greater than or equal to :value kilobytes.',
         'string' => ':attribute perlu greater than or equal to :value karakter.',
         'array' => ':attribute must have :value items or more.',
@@ -71,15 +71,15 @@ return [
     'mac_address' => ':attribute perlu a valid MAC address.',
     'json' => ':attribute perlu a valid JSON string.',
     'lt' => [
-        'numeric' => ':attribute perlu less than :value.',
-        'file' => ':attribute perlu less than :value kilobytes.',
-        'string' => ':attribute perlu less than :value karakter.',
-        'array' => ':attribute must have less than :value items.',
+        'numeric' => ':attribute perlu lebih kecil dari :value.',
+        'file' => ':attribute perlu lebih kecil dari :value kilobytes.',
+        'string' => ':attribute perlu lebih kecil dari :value karakter.',
+        'array' => ':attribute must have lebih kecil dari :value items.',
     ],
     'lte' => [
-        'numeric' => ':attribute perlu less than or equal to :value.',
-        'file' => ':attribute perlu less than or equal to :value kilobytes.',
-        'string' => ':attribute perlu less than or equal to :value karakter.',
+        'numeric' => ':attribute perlu lebih kecil atau sama dengan to :value angka.',
+        'file' => ':attribute perlu lebih kecil atau sama dengan to :value kilobytes.',
+        'string' => ':attribute perlu lebih kecil atau sama dengan to :value karakter.',
         'array' => ':attribute must not have more than :value items.',
     ],
     'max' => [
@@ -159,7 +159,13 @@ return [
 
     'attributes' => [
         'identity_no' => 'No Kad Pengenalan',
-        'no_tel' => 'No Telefon'
+        'no_tel' => 'No Telefon',
+        'kod' => 'Kod',
+        'nama' => 'Nama',
+        'status' => 'Status',
+        'state' => 'Negeri',
+        'region' => 'Daerah',
+        'poskod' => 'Poskod'
     ],
 
 ];

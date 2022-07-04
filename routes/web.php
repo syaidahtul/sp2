@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\KosPengurusanSampahController;
 use App\Http\Controllers\OperasiController;
 use App\Http\Controllers\PbtProfail\LokasiController;
 use App\Http\Controllers\PbtProfail\PbtProfailController;
-use App\Http\Controllers\PbtProfail\TapakPelupusanSampahController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Setup\PbtController;
@@ -11,6 +11,8 @@ use App\Http\Controllers\Setup\DaerahController;
 use App\Http\Controllers\Setup\JenisKawasansController;
 use App\Http\Controllers\Setup\JenisJenterasController;
 use App\Http\Controllers\Setup\JenisOperasisController;
+use App\Http\Controllers\Setup\KontraktorController;
+use App\Http\Controllers\Setup\TapakPelupusanSampahController;
 use App\Http\Controllers\UserManagement\UserController;
 use App\Http\Livewire\Dashboards\ExecutiveDashboard;
 
@@ -29,6 +31,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/daerah', [DaerahController::class, 'index'])->name('daerah.index');
         Route::get('/daerah/baru', [DaerahController::class, 'create'])->name('daerah.create');
+        Route::post('/daerah/simpan', [DaerahController::class, 'store'])->name('daerah.store');
+        Route::get('/daerah/edit/{daerah}', [DaerahController::class, 'edit'])->name('daerah.edit');
+        Route::put('/daerah/kemaskini/{daerah}', [DaerahController::class, 'update'])->name('daerah.update');
+
+        Route::get('/tapak_pelupusan_sampah', [TapakPelupusanSampahController::class, 'index'])->name('tapak_pelupusan_sampah.index');
+        Route::get('/tapak_pelupusan_sampah/baru', [TapakPelupusanSampahController::class, 'create'])->name('tapak_pelupusan_sampah.create');
+        Route::post('/tapak_pelupusan_sampah/simpan', [TapakPelupusanSampahController::class, 'store'])->name('tapak_pelupusan_sampah.store');
+        Route::get('/tapak_pelupusan_sampah/edit/{tapak}', [TapakPelupusanSampahController::class, 'edit'])->name('tapak_pelupusan_sampah.edit');
+        Route::put('/tapak_pelupusan_sampah/kemaskini/{tapak}', [TapakPelupusanSampahController::class, 'update'])->name('tapak_pelupusan_sampah.update');
 
         Route::get('/jenis_operasis', [JenisOperasisController::class, 'index'])->name('jenis_operasis.index');
         Route::get('/jenis_operasis/baru', [JenisOperasisController::class, 'create'])->name('jenis_operasis.create');
@@ -42,6 +53,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/jenis_jentera', [JenisJenterasController::class, 'index'])->name('jenis_jentera.index');
         Route::get('/jenis_jentera/baru', [JenisJenterasController::class, 'create'])->name('jenis_jentera.create');
         Route::post('/jenis_jentera/simpan', [JenisJenterasController::class, 'store'])->name('jenis_jentera.store');
+
+        Route::get('/kontraktor', [KontraktorController::class, 'index'])->name('kontraktor.index');
+        Route::get('/kontraktor/baru', [KontraktorController::class, 'create'])->name('kontraktor.create');
+        Route::post('/kontraktor/simpan', [KontraktorController::class, 'store'])->name('kontraktor.store');
+        Route::get('/kontraktor/papar/{kontraktor}', [KontraktorController::class, 'view'])->name('kontraktor.view');
+        Route::get('/kontraktor/edit/{kontraktor}', [KontraktorController::class, 'edit'])->name('kontraktor.edit');
+        Route::put('/kontraktor/kemaskini/{kontraktor}', [KontraktorController::class, 'update'])->name('kontraktor.update');
+        Route::get('/kontraktor/suntingPBT/{kontraktor}', [KontraktorController::class, 'addPbt'])->name('kontraktor.addPbt');
+        Route::post('/kontraktor/kemaskiniPBT/{kontraktor}', [KontraktorController::class, 'updatePBT'])->name('kontraktor.updatePbt');
     });
 
     Route::group(['prefix' => 'usermgmt', 'as' => 'usermgmt.'], function () {
@@ -68,20 +88,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/lokasi/kemaskini/{lokasi}', [LokasiController::class, 'update'])->name('lokasi.update');
         Route::delete('/lokasi/padam/{lokasi}', [LokasiController::class, 'destroy'])->name('lokasi.destroy');
 
-        Route::get('/tapakpelupusan', [TapakPelupusanSampahController::class, 'index'])->name('tapakpelupusansampah.index');
-        Route::get('/tapakpelupusan/baru', [TapakPelupusanSampahController::class, 'create'])->name('tapakpelupusansampah.create');
-        Route::post('/tapakpelupusan/simpan', [TapakPelupusanSampahController::class, 'store'])->name('tapakpelupusansampah.store');
-        Route::get('/tapakpelupusan/papar/{lokasi}', [TapakPelupusanSampahController::class, 'view'])->name('tapakpelupusansampah.view');
-        Route::get('/tapakpelupusan/edit/{lokasi}', [TapakPelupusanSampahController::class, 'edit'])->name('tapakpelupusansampah.edit');
-        Route::put('/tapakpelupusan/kemaskini/{lokasi}', [TapakPelupusanSampahController::class, 'update'])->name('tapakpelupusansampah.update');
-        Route::delete('/tapakpelupusan/padam/{lokasi}', [TapakPelupusanSampahController::class, 'destroy'])->name('tapakpelupusansampah.destroy');
-
     });
 
     Route::group(['prefix' => 'operasi', 'as' => 'operasi.'], function () {
 
         Route::get('/', [OperasiController::class, 'index'])->name('index');
 
+        Route::get('/kospengurusansampah', [KosPengurusanSampahController::class, 'index'])->name('pengurusansampah.index');
     });
 
 });

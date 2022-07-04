@@ -22,7 +22,7 @@ class LokasiFactory extends Factory
     public function definition()
     {
         return [
-            'nama_lokasi' => $this->faker->name(),
+            'nama_lokasi' => $this->faker->company(),
             'kod_pbt'=> $this->faker->randomElement(['KKTP','DBKK','MDLD','MDPPR','MDPTN','MDPTS']),
             'kod_jenis_operasi' => $this->faker->randomElement(['PARIT','RUMPUT','SAMPAH']),
             'kod_jenis_kawasan' => $this->faker->randomElement(['KOMERSIAL','PERUMAHAN']),

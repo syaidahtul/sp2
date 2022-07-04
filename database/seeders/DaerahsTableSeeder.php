@@ -21,153 +21,153 @@ class DaerahsTableSeeder extends Seeder
         \DB::table('daerahs')->insert(array (
             0 => 
             array (
-                'kod_daerah' => '01',
-                'nama_daerah' => 'Kota Kinabalu',
-                'active' => true,
+                'kod' => '01',
+                'nama' => 'Kota Kinabalu',
+                'aktif' => true,
             ),
             1 => 
             array (
-                'kod_daerah' => '02',
-                'nama_daerah' => 'Sandakan',
-                'active' => true,
+                'kod' => '02',
+                'nama' => 'Sandakan',
+                'aktif' => true,
             ),
             2 => 
             array (
-                'kod_daerah' => '03',
-                'nama_daerah' => 'Tawau',
-                'active' => true,
+                'kod' => '03',
+                'nama' => 'Tawau',
+                'aktif' => true,
             ),
             3 => 
             array (
-                'kod_daerah' => '04',
-                'nama_daerah' => 'Kudat',
-                'active' => true,
+                'kod' => '04',
+                'nama' => 'Kudat',
+                'aktif' => true,
             ),
             4 => 
             array (
-                'kod_daerah' => '05',
-                'nama_daerah' => 'Keningau',
-                'active' => true,
+                'kod' => '05',
+                'nama' => 'Keningau',
+                'aktif' => true,
             ),
             5 => 
             array (
-                'kod_daerah' => '06',
-                'nama_daerah' => 'Lahad Datu',
-                'active' => true,
+                'kod' => '06',
+                'nama' => 'Lahad Datu',
+                'aktif' => true,
             ),
             6 => 
             array (
-                'kod_daerah' => '07',
-                'nama_daerah' => 'Penampang',
-                'active' => true,
+                'kod' => '07',
+                'nama' => 'Penampang',
+                'aktif' => true,
             ),
             7 => 
             array (
-                'kod_daerah' => '08',
-                'nama_daerah' => 'Semporna',
-                'active' => true,
+                'kod' => '08',
+                'nama' => 'Semporna',
+                'aktif' => true,
             ),
             8 => 
             array (
-                'kod_daerah' => '09',
-                'nama_daerah' => 'Tuaran',
-                'active' => true,
+                'kod' => '09',
+                'nama' => 'Tuaran',
+                'aktif' => true,
             ),
             9 => 
             array (
-                'kod_daerah' => '10',
-                'nama_daerah' => 'Papar',
-                'active' => true,
+                'kod' => '10',
+                'nama' => 'Papar',
+                'aktif' => true,
             ),
             10 => 
             array (
-                'kod_daerah' => '11',
-                'nama_daerah' => 'Beaufort',
-                'active' => true,
+                'kod' => '11',
+                'nama' => 'Beaufort',
+                'aktif' => true,
             ),
             11 => 
             array (
-                'kod_daerah' => '12',
-                'nama_daerah' => 'Sipitang',
-                'active' => true,
+                'kod' => '12',
+                'nama' => 'Sipitang',
+                'aktif' => true,
             ),
             12 => 
             array (
-                'kod_daerah' => '13',
-                'nama_daerah' => 'Kuala Penyu',
-                'active' => true,
+                'kod' => '13',
+                'nama' => 'Kuala Penyu',
+                'aktif' => true,
             ),
             13 => 
             array (
-                'kod_daerah' => '14',
-                'nama_daerah' => 'Kota Belud',
-                'active' => true,
+                'kod' => '14',
+                'nama' => 'Kota Belud',
+                'aktif' => true,
             ),
             14 => 
             array (
-                'kod_daerah' => '15',
-                'nama_daerah' => 'Ranau',
-                'active' => true,
+                'kod' => '15',
+                'nama' => 'Ranau',
+                'aktif' => true,
             ),
             15 => 
             array (
-                'kod_daerah' => '16',
-                'nama_daerah' => 'Kota Marudu',
-                'active' => true,
+                'kod' => '16',
+                'nama' => 'Kota Marudu',
+                'aktif' => true,
             ),
             16 => 
             array (
-                'kod_daerah' => '17',
-                'nama_daerah' => 'Pitas',
-                'active' => true,
+                'kod' => '17',
+                'nama' => 'Pitas',
+                'aktif' => true,
             ),
             17 => 
             array (
-                'kod_daerah' => '18',
-                'nama_daerah' => 'Beluran',
-                'active' => true,
+                'kod' => '18',
+                'nama' => 'Beluran',
+                'aktif' => true,
             ),
             18 => 
             array (
-                'kod_daerah' => '19',
-                'nama_daerah' => 'Kinabatangan',
-                'active' => true,
+                'kod' => '19',
+                'nama' => 'Kinabatangan',
+                'aktif' => true,
             ),
             19 => 
             array (
-                'kod_daerah' => '20',
-                'nama_daerah' => 'Kunak',
-                'active' => true,
+                'kod' => '20',
+                'nama' => 'Kunak',
+                'aktif' => true,
             ),
             20 => 
             array (
-                'kod_daerah' => '21',
-                'nama_daerah' => 'Tambunan',
-                'active' => true,
+                'kod' => '21',
+                'nama' => 'Tambunan',
+                'aktif' => true,
             ),
             21 => 
             array (
-                'kod_daerah' => '22',
-                'nama_daerah' => 'Tenom',
-                'active' => true,
+                'kod' => '22',
+                'nama' => 'Tenom',
+                'aktif' => true,
             ),
             22 => 
             array (
-                'kod_daerah' => '23',
-                'nama_daerah' => 'Nabawan',
-                'active' => true,
+                'kod' => '23',
+                'nama' => 'Nabawan',
+                'aktif' => true,
             ),
             23 => 
             array (
-                'kod_daerah' => '24',
-                'nama_daerah' => 'Tongod',
-                'active' => true,
+                'kod' => '24',
+                'nama' => 'Tongod',
+                'aktif' => true,
             ),
             24 => 
             array (
-                'kod_daerah' => '25',
-                'nama_daerah' => 'Putata',
-                'active' => true,
+                'kod' => '25',
+                'nama' => 'Putata',
+                'aktif' => true,
             ),
         ));
         

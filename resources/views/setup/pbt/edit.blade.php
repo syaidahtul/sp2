@@ -53,8 +53,8 @@
                     </div>
 
                     <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-                        <x-button.button-link-secondary href="{{ route('setup.pbt.index' ) }}" svgClass="w-4 h-4 mr-2">
-                            <x-icons.back class="w-4 h-4" stroke="currentColor"></x-icons.back> <span class="self-center mx-4">{{__('Kembali') }} </span>
+                        <x-button.button-link-secondary href="{{ route('setup.pbt.index' ) }}" svgClass="w-4 h-4 mr-2" type="backIcon" stroke="currentColor">
+                            <span class="self-center mx-4">{{__('Kembali') }} </span>
                         </x-button.button-link-secondary>
 
                         <x-jet-button>
