@@ -82,24 +82,30 @@
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
                         <x-slot name="head">
-                            <x-table.heading sortable> PBT </x-table.heading>
                             <x-table.heading sortable> Nama </x-table.heading>
+                            {{-- <x-table.heading sortable> PBT </x-table.heading> --}}
+                            <x-table.heading sortable> Catatan </x-table.heading>
                             <x-table.heading sortable> Status  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
                         </x-slot>
                         
                         <x-slot name="body">
-
+                            
                             @forelse ($kontraktors as $item)
                                 <x-table.row>
-                                    <x-table.cell> 
-                                        @foreach ($item->pbts as $pbt)
-                                            <div class="sm:py-1 md:py-2 lg:py-2">{{ $loop->iteration }}. {{ $pbt->nama_pbt }}</div>
-                                        @endforeach
-                                    </x-table.cell>
 
                                     <x-table.cell> 
                                         {{ $item->nama }}
+                                    </x-table.cell>
+                                    
+                                    {{-- <x-table.cell> 
+                                        @foreach ($item->pbtKontraktors as $pbt)
+                                            <div class="sm:py-1 md:py-2 lg:py-2">{{ $loop->iteration }}. {{ $pbt->nama_pbt }}</div>
+                                        @endforeach
+                                    </x-table.cell> --}}
+
+                                    <x-table.cell> 
+                                        {{ $item->catatan }}
                                     </x-table.cell>
 
                                     <x-table.cell> 
@@ -112,8 +118,8 @@
                                     <x-table.cell class="text-end">
                                         <x-button.button-link type="viewIcon" href="{{ route('setup.kontraktor.view', $item->id ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye> </x-button.button-link>
                                         <x-button.button-link type="editIcon" href="{{ route('setup.kontraktor.edit', $item->id ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
-                                        @if ( $item->status_desc !== 'Tidak Aktif' )
-                                            <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.addPbt', $item->id ) }}" title="Tambah PBT berkenaan"> 
+                                        @if ( strcmp($item->status_desc, 'Tidak aktif') !== 0 )
+                                            <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.createPbtKontraktor', $item->id ) }}" title="Tambah PBT berkenaan"> 
                                                 <x-icons.user-add class="w-4 h-4" stroke="orange"></x-icons.user-add>
                                             </x-button.button-link>
                                         @endif

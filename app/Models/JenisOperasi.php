@@ -9,7 +9,7 @@ class JenisOperasi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kod', 'keterangan', 'active'];
+    protected $fillable = ['kod', 'keterangan', 'aktif'];
 
     protected $primaryKey = 'kod';
 
@@ -20,7 +20,7 @@ class JenisOperasi extends Model
     public $timestamps = false;
     
     protected $cast = [
-        'active' => 'boolean'
+        'aktif' => 'boolean'
     ];
 
     public function lokasis()
@@ -28,8 +28,8 @@ class JenisOperasi extends Model
         return $this->hasMany(Lokasi::class, 'kod_jenis_operasi', 'kod');
     }
 
-    public function scopeActive($query)
+    public function scopeAktif($query)
     {
-        return $query->where('active', true);
+        return $query->where('aktif', true);
     }
 }

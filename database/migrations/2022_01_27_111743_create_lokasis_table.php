@@ -18,7 +18,9 @@ class CreateLokasisTable extends Migration
             $table->string('nama_lokasi');
             $table->string('kod_pbt');
             $table->string('kod_jenis_operasi');
-            $table->string('kod_jenis_kawasan');
+            $table->string('kod_jenis_kawasan')->nullable();
+            $table->integer('bilangan_lot')->nullable();
+            $table->string('catatan')->nullable();
             $table->entityHistory();
             $table->foreign('kod_pbt')->references('kod')->on('pbts');
         });

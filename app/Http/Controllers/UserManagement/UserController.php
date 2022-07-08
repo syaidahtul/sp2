@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\UserManagement;
 
 use App\Actions\CustomCreateNewUser;
+use App\Actions\CustomResetUserPassword;
 use App\Http\Controllers\Controller;
 use App\Models\Pbt;
 use App\Models\Roles;
 use App\Models\User;
 use App\Services\PbtService;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Livewire\WithPagination;
 
 class UserController extends Controller
@@ -81,9 +85,31 @@ class UserController extends Controller
         return view('usermanagement.user.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function forceChangePassword()
     {
-        //
+        $user = auth()->user();
+        return view('usermanagement.user.force_change_password', compact('user'));
+    }
+
+    public function updateforceChangePassword(Request $request, CustomResetUserPassword $reseter)
+    {
+        Validator::make($request->all(), [
+            'password' => ['required'],
+        ], [], 
+        [
+            'password' => 'Kata Laluan',
+        ])->validate();
+
+        try { 
+            $reseter->reset(auth()->user(), $request->all());
+            session()->flash('flash.banner', 'Kata laluan telah dikemaskini');
+            session()->flash('flash.bannerStyle', 'success');
+            return redirect( route('dashboard') );
+        } catch ( Exception $e ) {
+            session()->flash('flash.banner', $e);
+            session()->flash('flash.bannerStyle', 'danger');
+            return back();
+        }
     }
 
     public function destroy($uuid)

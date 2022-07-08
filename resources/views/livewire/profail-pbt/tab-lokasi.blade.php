@@ -116,7 +116,7 @@
                     
                     <div class="col-span-6 sm:col-span-4 md:col-span-2">
                         <x-jet-label for="editing.kod_jenis_operasi" value="{{ __('Jenis Operasi') }}" />
-                        <select wire:model.defer="editing.kod_jenis_operasi" name="editing.kod_jenis_operasi" id="editing.kod_jenis_operasi" 
+                        <select wire:model.defer="editing.kod_jenis_operasi" id="editing.kod_jenis_operasi" 
                             class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
                             <option value="">{{ __('Sila Pilih') }}</option>
                             @foreach ($jenisOperasis as $item)

@@ -34,7 +34,9 @@
                 </div>
 
                 <div class="md:col-span-2 ">
-                    <x-input.month wire:model="filters.bulan" id="bulan" monthOnly />
+                    <x-jet-input id="tarikh_tamat" class="block w-full mt-1" type="date"
+                        wire:model="filters.bulan" autofocus autocomplete="off" />
+                    <x-jet-input-error for="tarikh_tamat" class="mt-2" />
                 </div>
             </div>
 

@@ -17,7 +17,8 @@ class TabKontraktor extends Component
 
     public function render()
     {
-        $kontraktors = ModelsKontraktor::byPbt(Auth::user()->current_pbt)->get();
+        // $kontraktors = ModelsKontraktor::whereHas('pbts', fn($query) => $query->where('kod_pbt', '=', $this->pbt->kod ) )->get();
+        $kontraktors = $this->pbt->kontraktors;
         return view('livewire.profail-pbt.tab-kontraktor', ['kontraktors' => $kontraktors]);
     }
 }

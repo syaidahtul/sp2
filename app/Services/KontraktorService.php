@@ -25,26 +25,32 @@ class KontraktorService
 
     public function filterRows($kod, $nama, $aktif)
     {
-        info((empty($kod) && $aktif));
-
-        $query = Kontraktor::with('pbts')
+        $query = Kontraktor::with('pbtKontraktors')
             ->when($nama, fn($query, $nama) => $query->where('nama', 'LIKE', '%'.$nama.'%'));
 
-        if (($kod && empty($aktif))) {
-            $query->whereHas('pbts', function ($query)  use ($kod) {
+        if ($kod && empty($aktif)) {
+            $query->whereHas('pbtKontraktors', function ($query)  use ($kod) {
                 $query->where('kod_pbt', '=', $kod);
             });
         }
 
-        if ((empty($kod) && $aktif)) {
-            $query->leftjoin('pbts', function ($query)  use ($kod) {
+        if (empty($kod) && $aktif) {
+            $query->leftjoin('pbtKontraktors', function ($query)  use ($kod) {
                 $query->where('pbts.kod', '=', $kod);
             })
             ->orWhere('status', '=', $aktif);
         }
 
-        $rows = $query->orderBy('kontraktors.created_at', 'desc')->paginate(15);
+        if ($kod && $aktif) {
+            $query->leftjoin('pbtKontraktors', function ($query)  use ($kod) {
+                $query->where('pbts.kod', '=', $kod)->where('');
+            })
+            ->orWhere('status', '=', $aktif);
+        }
 
+
+        $rows = $query->orderBy('kontraktors.status')->orderBy('kontraktors.created_at', 'desc')->paginate(15);
+        
         return $rows;
     }
 
@@ -60,6 +66,7 @@ class KontraktorService
 
     public function createPbtKontraktor($validated)
     {
+        Kontraktor::where('id', $validated['kontraktor_id'])->update(['status'=>'progressing']);
         PbtKontraktors::create($validated);
     }
     
@@ -75,5 +82,12 @@ class KontraktorService
     public function getRecord($id)
     {
         return Kontraktor::findOrFail($id);
+    }
+
+    public function getKontrakAktif($kontraktorId)
+    {
+        return PbtKontraktors::where('kontraktor_id', $kontraktorId)
+            ->where('status_perkhidmatan', 'aktif')
+            ->where('tarikh_tamat', '<=', Carbon::now())->get();
     }
 }

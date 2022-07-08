@@ -29,7 +29,7 @@ class JadualOperasi extends Component
     public function mount()
     {
         $this->jenisOperasi='RUMPUT';
-        $this->jenisOperasis = ModelsJenisOperasi::active()->get();
+        $this->jenisOperasis = ModelsJenisOperasi::aktif()->get();
         $this->jenisKawasans = ModelJenisKawasans::all();
     }
 

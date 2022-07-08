@@ -32,7 +32,7 @@ class CustomCreateNewUser implements CreatesNewUsers
             'role' => 'Peranan',
         ])->validate();
 
-        DB::transaction(function () use ($input) {
+        $user = DB::transaction(function () use ($input) {
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
@@ -42,7 +42,7 @@ class CustomCreateNewUser implements CreatesNewUsers
             ])->assignRole( $input['role'])
             );
         });
-
+        
         return redirect(route('usermgmt.user.index'));
     }
 }

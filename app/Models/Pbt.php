@@ -32,6 +32,11 @@ class Pbt extends EntityHistory
         return $this->belongsToMany(TapakPelupusanSampahs::class, 'pbt_tapak_pelupusan_sampahs', 'kod_pbt', 'tapak_pelupusan_sampah_id');
     }
 
+    public function kontraktors()
+    {
+        return $this->belongsToMany(Kontraktor::class, 'pbt_kontraktors', 'kod_pbt')->withPivot('tarikh_mula', 'tarikh_tamat', 'no_kontrak', 'status_perkhidmatan', 'catatan');
+    }
+
     public function scopeNotKKTP($query)
     {
         if (Auth::user()->current_pbt !== 'KKTP') {

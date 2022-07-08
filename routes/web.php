@@ -16,7 +16,14 @@ use App\Http\Controllers\Setup\TapakPelupusanSampahController;
 use App\Http\Controllers\UserManagement\UserController;
 use App\Http\Livewire\Dashboards\ExecutiveDashboard;
 
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/tukarKataLaluan', [UserController::class, 'forceChangePassword'])->name('user.forceChangePassword');
+    Route::post('/kemaskiniKataLaluan', [UserController::class, 'updateforceChangePassword'])->name('user.updateforceChangePassword');
+});
+
+Route::middleware(['auth', 'checkPassword',  'verified'])->group(function () {
     
     Route::get('/', ExecutiveDashboard::class)->name('dashboard');
 
@@ -60,8 +67,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/kontraktor/papar/{kontraktor}', [KontraktorController::class, 'view'])->name('kontraktor.view');
         Route::get('/kontraktor/edit/{kontraktor}', [KontraktorController::class, 'edit'])->name('kontraktor.edit');
         Route::put('/kontraktor/kemaskini/{kontraktor}', [KontraktorController::class, 'update'])->name('kontraktor.update');
-        Route::get('/kontraktor/suntingPBT/{kontraktor}', [KontraktorController::class, 'addPbt'])->name('kontraktor.addPbt');
-        Route::post('/kontraktor/kemaskiniPBT/{kontraktor}', [KontraktorController::class, 'updatePBT'])->name('kontraktor.updatePbt');
+        Route::get('/kontraktor/suntingPBT/{kontraktor}', [KontraktorController::class, 'createPbtKontraktor'])->name('kontraktor.createPbtKontraktor');
+        Route::post('/kontraktor/kemaskiniPBT/{kontraktor}', [KontraktorController::class, 'storePbtKontraktor'])->name('kontraktor.storePbtKontraktor');
     });
 
     Route::group(['prefix' => 'usermgmt', 'as' => 'usermgmt.'], function () {

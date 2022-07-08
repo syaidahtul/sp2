@@ -17,8 +17,8 @@ class StorePbtKontraktorRequest extends FormRequest
         return [
             'kod_pbt' => 'required',
             'kontraktor_id' => 'required',
-            'tarikh_mula' => 'required',
-            'tarikh_tamat' => 'required|after:tarikh_mula',
+            'tarikh_mula' => 'date',
+            'tarikh_tamat' => 'required|date|after:tarikh_mula',
             'no_kontrak' => 'required',
             'status_perkhidmatan' => 'required',
             'catatan' => 'required',

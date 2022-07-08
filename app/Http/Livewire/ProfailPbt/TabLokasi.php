@@ -31,13 +31,13 @@ class TabLokasi extends Component
             'editing.nama_lokasi' => 'required',
             'editing.kod_pbt' => 'required',
             'editing.kod_jenis_operasi' => 'required',
-            'editing.kod_jenis_kawasan' => 'required',
+            'editing.kod_jenis_kawasan' => 'nullable',
         ];
     }
 
     public function mount($pbt)
     {
-        $this->jenisOperasis = ModelsJenisOperasi::active()->get();
+        $this->jenisOperasis = ModelsJenisOperasi::aktif()->get();
         $this->jenisKawasans = ModelJenisKawasans::all();
         $this->pbt = $pbt;
         $this->editing = $this->makeBlankLokasi();
@@ -45,8 +45,6 @@ class TabLokasi extends Component
 
     public function render()
     {
-        sleep(1);
-        
         $lokasis = ModelsLokasi::lokasiPbt($this->pbt->kod)
             ->with('jenisOperasi')
             ->when($this->namaLokasi, function($query) {

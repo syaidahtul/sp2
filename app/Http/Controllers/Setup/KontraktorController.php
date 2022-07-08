@@ -9,6 +9,8 @@ use App\Models\Kontraktor;
 use App\Services\DaerahService;
 use App\Services\KontraktorService;
 use App\Services\PbtService;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class KontraktorController extends Controller
@@ -32,6 +34,10 @@ class KontraktorController extends Controller
             $request->get('nama'),
             $request->get('aktif')
         );
+        foreach($kontraktors as $k)
+        {
+            info($k);
+        }
         return view('setup.kontraktor.index', compact('pbts', 'kontraktors'));
     }
 
@@ -71,19 +77,29 @@ class KontraktorController extends Controller
         return redirect()->route('setup.kontraktor.index');
     }
 
-    public function addPbt($id)
+    public function createPbtKontraktor($id)
     {
-        $pbts = $this->pbtService->getPbtDropdown();
-        $kontraktor = $this->kontraktorService->getRecord($id);
-        return view('setup.kontraktor.addPbt', compact(['pbts']))->with('kontraktor', $kontraktor);
+            $pbts = $this->pbtService->getPbtDropdown();
+            $kontraktor = $this->kontraktorService->getRecord($id);
+            $pbtKontraktor = $kontraktor->pbtKontraktors;
+            return view('setup.kontraktor.createPbtKontraktor', compact(['pbts','pbtKontraktor']))->with('kontraktor', $kontraktor);
     }
 
-    public function updatePbt(StorePbtKontraktorRequest $request, $id)
+    public function storePbtKontraktor(StorePbtKontraktorRequest $request, $id)
     {
-        $this->kontraktorService->createPbtKontraktor($request->validated());
-        session()->flash('flash.banner', $request->kod_pbt . ' telah dikemaskini.');
-        session()->flash('flash.bannerStyle', 'success');
-        return redirect( route('setup.kontraktor.index'));
+        try {
+            $this->kontraktorService->createPbtKontraktor($request->validated());
+            session()->flash('flash.banner', $request->kod_pbt . ' telah dikemaskini.');
+            session()->flash('flash.bannerStyle', 'success');
+            return redirect( route('setup.kontraktor.index'));
+        } catch (QueryException $err) {
+            session()->flash('flash.banner', $err->getPrevious()->getMessage());
+            session()->flash('flash.bannerStyle', 'danger');
+        } catch (Exception $err ) {
+            session()->flash('flash.banner', $err->getCode());
+            session()->flash('flash.bannerStyle', 'danger');
+        }
+        return back()->withInput();
     }
 
     public function destroy(Kontraktor $pbt)

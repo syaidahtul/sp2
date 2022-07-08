@@ -9,9 +9,6 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="w-11/12 mx-auto overflow-hidden sm:rounded-lg">
 
-                <form action="{{ route('setup.kontraktor.store') }}" method="post">
-                    @csrf
-
                     <div class="px-4 py-5 bg-white shadow sm:p-6">
 
                         <div class="grid grid-cols-6 gap-6">
@@ -94,6 +91,57 @@
                             
                         </div>
                         
+                        
+                        
+                        <x-jet-section-border />
+                        
+                        <x-table class="mt-4 sm:rounded-sm">
+                            <x-slot name="head">
+                                <x-table.heading sortable> PBT </x-table.heading>
+                                <x-table.heading sortable> Tarikh Mula </x-table.heading>
+                                <x-table.heading sortable> Tarikh Tamat </x-table.heading>
+                                <x-table.heading sortable> Status  </x-table.heading>
+                                <x-table.heading>  </x-table.heading>
+                            </x-slot>
+                            
+                            <x-slot name="body">
+                                
+                                @forelse ($kontraktor->pbtKontraktors as $item)
+                                    <x-table.row>
+                                        <x-table.cell> 
+                                            {{ $item->nama_pbt }}
+                                        </x-table.cell>
+                
+                                        <x-table.cell class="text-center"> 
+                                            {{ date('d-m-Y', strtotime($item->pivot->tarikh_mula)); }}
+                                        </x-table.cell>
+                
+                                        <x-table.cell class="text-center"> 
+                                            {{ date('d-m-Y', strtotime($item->pivot->tarikh_tamat)); }}
+                                        </x-table.cell>
+                
+                                        <x-table.cell> 
+                                            <span style = "background-color: {{ $item->status_color }}"
+                                                class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
+                                                {{ $item->status_desc }} 
+                                            </span>
+                                        </x-table.cell>
+                                        
+                                        <x-table.cell class="text-end">
+                                            
+                                        </x-table.cell>
+                                    </x-table.row>
+                                @empty
+                                    <x-table.row>
+                                        <x-table.cell colspan=3 class="text-center"> 
+                                            {{ __('Tiada rekod.') }}
+                                        </x-table.cell>
+                                    </x-table.row>
+                                @endforelse
+                                
+                            </x-slot>
+                        </x-table>
+                            
                     </div>
 
                     <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
@@ -102,9 +150,8 @@
                         </x-button.button-link-secondary>
                     </div>
 
-                </form>
-
             </div>
+        
         </div>
     </div>
 </x-app-layout>

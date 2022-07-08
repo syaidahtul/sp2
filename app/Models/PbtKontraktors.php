@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +13,11 @@ class PbtKontraktors extends Model
         'Aktif',
         'Tamat',
         'Ditamatkan',
+    ];
+
+    protected $casts = [
+        'tarikh_mula' => 'date:d-m-Y',
+        'tarikh_tamat' => 'date:d-m-Y',
     ];
     
     protected $fillable =['kod_pbt', 'kontraktor_id', 'tarikh_mula', 'tarikh_tamat', 'no_kontrak', 'status_perkhidmatan', 'catatan'];
@@ -28,5 +34,4 @@ class PbtKontraktors extends Model
             return $query->where('kod_pbt', $kod_pbt);
         }
     }
-
 }

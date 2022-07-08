@@ -27,9 +27,9 @@ class Kontraktor extends Model
         'status'
     ];
 
-    function pbts()
+    function pbtKontraktors()
     {
-        return $this->hasManyThrough(Pbt::class, PbtKontraktors::class, 'kontraktor_id', 'kod', 'id', 'kod_pbt');
+        return $this->belongsToMany(Pbt::class, 'pbt_kontraktors', 'kontraktor_id', 'kod_pbt')->withPivot('tarikh_mula', 'tarikh_tamat', 'no_kontrak', 'status_perkhidmatan', 'catatan');
     }
 
     public function scopeByPbt($query, $kod_pbt)

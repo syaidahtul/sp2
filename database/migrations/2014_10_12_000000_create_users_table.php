@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('identity_no', 12);
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('current_pbt')->nullable();
             $table->string('office_no')->nullable();
             $table->string('mobile_no')->nullable();
+            $table->timestamp('last_password_change')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->entityHistory();
         });
     }

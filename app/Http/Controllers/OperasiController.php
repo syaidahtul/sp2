@@ -10,7 +10,7 @@ class OperasiController extends Controller
     
     public function index()
     {
-        $jenisOperasis = ModelsJenisOperasi::active()->get();
+        $jenisOperasis = ModelsJenisOperasi::all();
         return view('operasi.index', ['jenisOperasis' => $jenisOperasis]);
     }
 

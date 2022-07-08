@@ -2,27 +2,32 @@
     <x-table class="mb-4 sm:rounded-sm">
                                 
         <x-slot name="head">
-            <x-table.heading sortable> Nama </x-table.heading>
-            <x-table.heading sortable> Catatan </x-table.heading>
+            <x-table.heading sortable> Nama Syarikat/Kontraktor </x-table.heading>
+            <x-table.heading sortable> No Kontrak </x-table.heading>
             <x-table.heading sortable> Tarikh Mula  </x-table.heading>
             <x-table.heading sortable> Tarikh Tamat  </x-table.heading>
+            <x-table.heading sortable> Catatan </x-table.heading>
             <x-table.heading> </x-table.heading>
         </x-slot>
 
         <x-slot name="body">
-            @forelse ($kontraktors as $kontraktor)
+            @forelse ($pbt->kontraktors as $kontraktor)
                 <x-table.row>
                     <x-table.cell> 
                         {{ $kontraktor->nama }}
+                        <p class="mt-2 text-sm text-gray-500">{{ $kontraktor->catatan }}</p>
                     </x-table.cell>
                     <x-table.cell> 
-                        {{ $kontraktor->catatan }} 
+                        {{ $kontraktor->pivot->no_kontrak }}
                     </x-table.cell>
                     <x-table.cell> 
-                        {{ $kontraktor->tarikh_mula }} 
+                        {{ $kontraktor->pivot->tarikh_mula }} 
                     </x-table.cell>
                     <x-table.cell> 
-                        {{ $kontraktor->tarikh_tamat }} 
+                        {{ $kontraktor->pivot->tarikh_tamat }} 
+                    </x-table.cell>
+                    <x-table.cell> 
+                        {{ $kontraktor->pivot->catatan }} 
                     </x-table.cell>
                 </x-table.row>
             @empty                                        
