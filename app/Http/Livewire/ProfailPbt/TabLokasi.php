@@ -6,6 +6,7 @@ use App\Models\JenisKawasans as ModelJenisKawasans;
 use App\Models\JenisOperasi as ModelsJenisOperasi;
 use App\Models\Lokasi as ModelsLokasi;
 use App\Models\Pbt;
+use App\Services\JenisOperasiService;
 use App\Traits\WithCachedRows;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -37,9 +38,9 @@ class TabLokasi extends Component
 
     public function mount($pbt)
     {
-        $this->jenisOperasis = ModelsJenisOperasi::aktif()->get();
-        $this->jenisKawasans = ModelJenisKawasans::all();
         $this->pbt = $pbt;
+        $this->jenisOperasis = (new JenisOperasiService)->getDropdown();
+        $this->jenisKawasans = ModelJenisKawasans::all();
         $this->editing = $this->makeBlankLokasi();
     }
 
@@ -56,7 +57,7 @@ class TabLokasi extends Component
             ->when($this->jenisKawasan, function($query) {
                     $query->where('kod_jenis_kawasan', $this->jenisKawasan);
                 })
-            ->paginate(10);
+            ->paginate(15);
 
         return view('livewire.profail-pbt.tab-lokasi', [ 'lokasis' => $lokasis ] );
     }

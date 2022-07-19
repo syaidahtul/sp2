@@ -26,6 +26,7 @@ class LokasiFactory extends Factory
             'kod_pbt'=> $this->faker->randomElement(['KKTP','DBKK','MDLD','MDPPR','MDPTN','MDPTS']),
             'kod_jenis_operasi' => $this->faker->randomElement(['PARIT','RUMPUT','SAMPAH']),
             'kod_jenis_kawasan' => $this->faker->randomElement(['KOMERSIAL','PERUMAHAN']),
+            'bilangan_lot' => $this->faker->randomDigit(),
         ];
     }
 }

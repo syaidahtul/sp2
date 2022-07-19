@@ -5,7 +5,7 @@
             
             <div class="col-span-6 md:col-start-1 sm:col-span-4 md:col-span-2">
                 <x-jet-label for="namaLokasi" value="{{ __('Nama Lokasi') }}" />
-                <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model="namaLokasi"/>
+                <x-jet-input id="namaLokasi" type="text" class="block w-full mt-1 text-sm" wire:model.lazy="namaLokasi"/>
                 <x-jet-input-error for="namaLokasi" class="mt-2" />
             </div>
             
