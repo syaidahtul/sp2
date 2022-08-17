@@ -19,7 +19,7 @@ class PbtKontraktors extends Model
         'tarikh_mula' => 'date:d-m-Y',
         'tarikh_tamat' => 'date:d-m-Y',
     ];
-    
+
     protected $fillable =['kod_pbt', 'kontraktor_id', 'tarikh_mula', 'tarikh_tamat', 'no_kontrak', 'status_perkhidmatan', 'catatan'];
 
     function pbt() {

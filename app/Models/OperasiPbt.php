@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +18,8 @@ class OperasiPbt extends Model
     ];
 
     protected $casts = [
-        'tarikh_operasi_mula' => 'date:d-m-Y',
-        'tarikh_operasi_tamat' => 'date'
+        'tarikh_operasi_mula'  => 'datetime:Y-m-d',
+        'tarikh_operasi_tamat' => 'datetime:Y-m-d'
     ];
 
     protected $fillable = [
@@ -50,11 +49,35 @@ class OperasiPbt extends Model
 
     protected function getTarikhOperasiMulaAttribute()
     {
-        return Carbon::parse($this->attributes['tarikh_operasi_mula'])->format('d-m-Y');
+        if($this->attributes['tarikh_operasi_mula']){
+            return $this->attributes['tarikh_operasi_mula'] = Carbon::parse($this->attributes['tarikh_operasi_mula'] )->format('d/m/Y');
+        } else { return null; }
     }
 
     protected function getTarikhOperasiTamatAttribute()
     {
-        return Carbon::parse($this->attributes['tarikh_operasi_tamat'])->format('d-m-Y');
+        if($this->attributes['tarikh_operasi_tamat']){
+            return Carbon::parse($this->attributes['tarikh_operasi_tamat'])->format('d/m/Y');
+        } else { return null; }
+    }
+
+    protected function getStatusOperasiColorAttribute()
+    {
+        if($this->attributes['status_operasi'] === 'selesai') {
+            return 'bg-green-100';
+        } elseif($this->attributes['status_operasi'] === 'sedang'){
+            return 'bg-gray-100';
+        } else {
+            return 'bg-red-100';
+        };
+    }
+
+    protected function getStatusOperasiAttribute()
+    {
+        if($this->attributes['status_operasi']) {
+            return $this->attributes['status_operasi'];
+        } else {
+            return 'Opps!';
+        };
     }
 }

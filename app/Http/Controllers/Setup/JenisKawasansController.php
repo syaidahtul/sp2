@@ -4,92 +4,51 @@ namespace App\Http\Controllers\Setup;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setup\StoreJenisKawasansRequest;
+use App\Http\Requests\Setup\UpdateJenisKawasansRequest;
 use App\Models\JenisKawasans;
+use App\Services\JenisKawasanService;
 use Illuminate\Http\Request;
 
 class JenisKawasansController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public JenisKawasanService $service;
+
+    public function __construct(JenisKawasanService $service)
     {
-        $jenis_kawasans = JenisKawasans::paginate(5);
+            $this->service = $service;
+    }
+
+    public function index(Request $request)
+    {
+        $jenis_kawasans = $this->service->filterRows($request->get('kod'), $request->get('keterangan'), $request->get('status'));
         return view('setup.jenis_kawasan.index', compact('jenis_kawasans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('setup.jenis_kawasan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreJenisKawasansRequest $request)
     {
-        Jeniskawasans::create([
-            'kod' => $request->validated()['kod_kawasan'],
-            'keterangan' => $request->validated()['keterangan_kawasan'], 
-        ]);
-        session()->flash('flash.banner', $request->kod_kawasan . ' telah disimpan.');
-        session()->flash('flash.banner', $request->keterangan_kawasan . ' telah disimpan.');
+        $this->service->store($request->safe()->only(['kod','keterangan','status']));
+        session()->flash('flash.banner', $request->keterangan . ' telah disimpan.');
         session()->flash('flash.bannerStyle', 'success');
         return redirect()->route('setup.jenis_kawasan.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $jenis_kawasan = $this->service->getRecord($id);
+        return view('setup.jenis_kawasan.edit', compact('jenis_kawasan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateJenisKawasansRequest $request, $id)
     {
-        //
+        $this->service->update($request->safe()->only(['kod', 'keterangan', 'status']));
+        session()->flash('flash.banner', $request->keterangan . ' telah dikemaskini.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.jenis_kawasan.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

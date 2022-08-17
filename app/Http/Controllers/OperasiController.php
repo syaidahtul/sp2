@@ -7,18 +7,13 @@ use Illuminate\Http\Request;
 
 class OperasiController extends Controller
 {
-    
+
     public function index()
     {
         $jenisOperasis = ModelsJenisOperasi::all();
         return view('operasi.index', ['jenisOperasis' => $jenisOperasis]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //

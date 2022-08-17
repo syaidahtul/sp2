@@ -1,11 +1,11 @@
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Senarai Kontraktor') }}
         </h2>
-    </x-slot>   
-    
+    </x-slot>
+
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -13,7 +13,7 @@
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
                     <form wire:submit.prevent="submit">
-                        
+
                         <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
                             <div class="px-4 sm:px-0">
                                 <h3 class="text-lg font-medium text-gray-900 uppercase">
@@ -54,23 +54,23 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
 
                         <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
                             <x-button.button-link-secondary type=bordered class="px-4 py-2" href="{{ route('setup.kontraktor.create' ) }}">
-                                <x-icons.plus class="w-4 h-4" stroke="currentColor"></x-icons.plus> <span class="self-center mx-2">{{__('Kontraktor Baru') }} </span> 
+                                <x-icons.plus class="w-4 h-4" stroke="currentColor"></x-icons.plus> <span class="self-center mx-2">{{__('Kontraktor Baru') }} </span>
                             </x-button.button-link-secondary>
 
                             <x-jet-button>
-                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span> 
+                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span>
                             </x-jet-button>
                         </div>
 
-                    </form> 
-                    
+                    </form>
+
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -88,38 +88,38 @@
                             <x-table.heading sortable> Status  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
                         </x-slot>
-                        
+
                         <x-slot name="body">
-                            
+
                             @forelse ($kontraktors as $item)
                                 <x-table.row>
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         {{ $item->nama }}
                                     </x-table.cell>
-                                    
-                                    {{-- <x-table.cell> 
+
+                                    {{-- <x-table.cell>
                                         @foreach ($item->pbtKontraktors as $pbt)
                                             <div class="sm:py-1 md:py-2 lg:py-2">{{ $loop->iteration }}. {{ $pbt->nama_pbt }}</div>
                                         @endforeach
                                     </x-table.cell> --}}
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         {{ $item->catatan }}
                                     </x-table.cell>
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         <span style = "background-color: {{ $item->status_color }}"
                                             class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                            {{ $item->status_desc }} 
+                                            {{ $item->status_desc }}
                                         </span>
                                     </x-table.cell>
-                                    
+
                                     <x-table.cell class="text-end">
                                         <x-button.button-link type="viewIcon" href="{{ route('setup.kontraktor.view', $item->id ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye> </x-button.button-link>
                                         <x-button.button-link type="editIcon" href="{{ route('setup.kontraktor.edit', $item->id ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
                                         @if ( strcmp($item->status_desc, 'Tidak aktif') !== 0 )
-                                            <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.createPbtKontraktor', $item->id ) }}" title="Tambah PBT berkenaan"> 
+                                            <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.createPbtKontraktor', $item->id ) }}" title="Tambah PBT berkenaan">
                                                 <x-icons.user-add class="w-4 h-4" stroke="orange"></x-icons.user-add>
                                             </x-button.button-link>
                                         @endif
@@ -127,23 +127,23 @@
                                 </x-table.row>
                             @empty
                                 <x-table.row>
-                                    <x-table.cell colspan=3 class="text-center"> 
+                                    <x-table.cell colspan=3 class="text-center">
                                         {{ __('Tiada rekod.') }}
                                     </x-table.cell>
                                 </x-table.row>
                             @endforelse
-                            
+
                         </x-slot>
-                        
+
                     </x-table>
-                    
+
                     {{ $kontraktors->links() }}
                 </div>
-                
+
 
             </div>
         </div>
-        
+
     </div>
 
-</x-app-layout> 
+</x-app-layout>

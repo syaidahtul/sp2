@@ -8,10 +8,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class KontraktorService 
+class KontraktorService
 {
-    public function getKontraktorDropdown() 
-    {    
+    public function getKontraktorDropdown()
+    {
         if (Cache::has('kontraktors')) {
             $kontraktors = Cache::get('kontraktors');
         } else {
@@ -25,32 +25,18 @@ class KontraktorService
 
     public function filterRows($kod, $nama, $aktif)
     {
-        $query = Kontraktor::with('pbtKontraktors')
-            ->when($nama, fn($query, $nama) => $query->where('nama', 'LIKE', '%'.$nama.'%'));
+        $query = Kontraktor::query()
+        ->leftjoin('pbt_kontraktors', function ($join) {
+            $join->on('kontraktors.id', '=', 'pbt_kontraktors.kontraktor_id');
+        })
+        ->when($kod, fn($query, $kod) => $query->where('kod_pbt', 'LIKE', '%'.$kod.'%'))
+        // ->when($nama, fn($query, $nama) => $query->where('keterangan', 'LIKE', '%'.$nama.'%'))
+        // ->when($aktif, fn($query) => $query->where('aktif', '=', $aktif))
+        ;
 
-        if ($kod && empty($aktif)) {
-            $query->whereHas('pbtKontraktors', function ($query)  use ($kod) {
-                $query->where('kod_pbt', '=', $kod);
-            });
-        }
+        $rows = $query->orderBy('kontraktors.status')->orderBy('kontraktors.created_at', 'desc')
+            ->paginate(15)->withQueryString();
 
-        if (empty($kod) && $aktif) {
-            $query->leftjoin('pbtKontraktors', function ($query)  use ($kod) {
-                $query->where('pbts.kod', '=', $kod);
-            })
-            ->orWhere('status', '=', $aktif);
-        }
-
-        if ($kod && $aktif) {
-            $query->leftjoin('pbtKontraktors', function ($query)  use ($kod) {
-                $query->where('pbts.kod', '=', $kod)->where('');
-            })
-            ->orWhere('status', '=', $aktif);
-        }
-
-
-        $rows = $query->orderBy('kontraktors.status')->orderBy('kontraktors.created_at', 'desc')->paginate(15);
-        
         return $rows;
     }
 
@@ -60,7 +46,7 @@ class KontraktorService
     }
 
     public function update($validated, $id)
-    {       
+    {
         Kontraktor::where('id', $id)->update($validated);
     }
 
@@ -69,7 +55,7 @@ class KontraktorService
         Kontraktor::where('id', $validated['kontraktor_id'])->update(['status'=>'progressing']);
         PbtKontraktors::create($validated);
     }
-    
+
     public function delete($validated)
     {
         return [

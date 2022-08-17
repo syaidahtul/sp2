@@ -1,11 +1,11 @@
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Senarai Daerah') }}
         </h2>
-    </x-slot>   
-    
+    </x-slot>
+
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
@@ -13,7 +13,7 @@
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
                     <form wire:submit.prevent="submit">
-                        
+
                         <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
                             <div class="px-4 sm:px-0">
                                 <h3 class="text-lg font-medium text-gray-900 uppercase">
@@ -49,23 +49,23 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
 
                         <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
                             <x-button.button-link-secondary type=bordered class="px-4 py-2" href="{{ route('setup.daerah.create' ) }}">
-                                <x-icons.plus class="w-4 h-4" stroke="currentColor"></x-icons.plus> <span class="self-center mx-2">{{__('Daerah Baru') }} </span> 
+                                <x-icons.plus class="w-4 h-4" stroke="currentColor"></x-icons.plus> <span class="self-center mx-2">{{__('Daerah Baru') }} </span>
                             </x-button.button-link-secondary>
 
                             <x-jet-button>
-                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span> 
+                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span>
                             </x-jet-button>
                         </div>
 
-                    </form> 
-                    
+                    </form>
+
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -77,36 +77,36 @@
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
                         <x-slot name="head">
-                            <x-table.heading sortable> Kod </x-table.heading>
-                            <x-table.heading sortable> Nama </x-table.heading>
-                            <x-table.heading sortable> Status  </x-table.heading>
+                            <x-table.heading> Kod </x-table.heading>
+                            <x-table.heading> Nama </x-table.heading>
+                            <x-table.heading> Status  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
                         </x-slot>
-                        
+
                         <x-slot name="body">
 
                             @forelse ($daerahs as $item)
                                 <x-table.row>
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         {{ $item->kod }}
                                     </x-table.cell>
 
-                                    <x-table.cell> 
-                                        {{ $item->nama }}
+                                    <x-table.cell>
+                                        {{ $item->keterangan }}
                                     </x-table.cell>
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         <span style = "background-color: {{ $item->aktif_color }}"
                                             class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                            {{ $item->aktif_desc }} 
+                                            {{ $item->aktif_desc }}
                                         </span>
                                     </x-table.cell>
-                                    
+
                                     <x-table.cell class="text-end">
                                         <x-button.button-link type="editIcon" href="{{ route('setup.daerah.edit', $item->kod ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
                                         {{-- @if ( $item->aktif_desc === 'Aktif' )
-                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal" 
-                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Daerah', 'kod', '{{ $item->kod }}', '', '{{ $item->nama }}' )"> 
+                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal"
+                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Daerah', 'kod', '{{ $item->kod }}', '', '{{ $item->nama }}' )">
                                                 <x-icons.trash class="w-4 h-4" stroke="red"></x-icons.trash>
                                             </x-button.button-link>
                                         @endif --}}
@@ -114,23 +114,23 @@
                                 </x-table.row>
                             @empty
                                 <x-table.row>
-                                    <x-table.cell colspan=2> 
+                                    <x-table.cell colspan=2>
                                         <span class="text-center">{{ __('Tiada rekod.') }}</span>
                                     </x-table.cell>
                                 </x-table.row>
                             @endforelse
-                            
+
                         </x-slot>
-                        
+
                     </x-table>
-                    
+
                     {{ $daerahs->links() }}
                 </div>
-                
+
 
             </div>
         </div>
-        
+
     </div>
 
-</x-app-layout> 
+</x-app-layout>

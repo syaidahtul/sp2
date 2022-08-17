@@ -24,7 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'checkPassword',  'verified'])->group(function () {
-    
+
     Route::get('/', ExecutiveDashboard::class)->name('dashboard');
 
     Route::group(['prefix' => 'setup', 'as' => 'setup.'], function () {
@@ -52,14 +52,20 @@ Route::middleware(['auth', 'checkPassword',  'verified'])->group(function () {
         Route::get('/jenis_operasis/baru', [JenisOperasisController::class, 'create'])->name('jenis_operasis.create');
         Route::post('/jenis_operasis/simpan', [JenisOperasisController::class, 'store'])->name('jenis_operasis.store');
         Route::get('/jenis_operasis/papar/{jenis_operasis}', [JenisOperasisController::class, 'view'])->name('jenis_operasis.view');
+        Route::get('/jenis_operasis/edit/{jenis_operasis}', [JenisOperasisController::class, 'edit'])->name('jenis_operasis.edit');
+        Route::put('/jenis_operasis/kemaskini/{jenis_operasis}', [JenisOperasisController::class, 'update'])->name('jenis_operasis.update');
 
         Route::get('/jenis_kawasan', [JenisKawasansController::class, 'index'])->name('jenis_kawasan.index');
         Route::get('/jenis_kawasan/baru', [JenisKawasansController::class, 'create'])->name('jenis_kawasan.create');
         Route::post('/jenis_kawasan/simpan', [JenisKawasansController::class, 'store'])->name('jenis_kawasan.store');
+        Route::get('/jenis_kawasan/edit/{jenis_kawasan}', [JenisKawasansController::class, 'edit'])->name('jenis_kawasan.edit');
+        Route::put('/jenis_kawasan/kemaskini/{jenis_kawasan}', [JenisKawasansController::class, 'update'])->name('jenis_kawasan.update');
 
         Route::get('/jenis_jentera', [JenisJenterasController::class, 'index'])->name('jenis_jentera.index');
         Route::get('/jenis_jentera/baru', [JenisJenterasController::class, 'create'])->name('jenis_jentera.create');
         Route::post('/jenis_jentera/simpan', [JenisJenterasController::class, 'store'])->name('jenis_jentera.store');
+        Route::get('/jenis_jentera/edit/{jenis_jentera}', [JenisJenterasController::class, 'edit'])->name('jenis_jentera.edit');
+        Route::put('/jenis_jentera/kemaskini/{jenis_jentera}', [JenisJenterasController::class, 'update'])->name('jenis_jentera.update');
 
         Route::get('/kontraktor', [KontraktorController::class, 'index'])->name('kontraktor.index');
         Route::get('/kontraktor/baru', [KontraktorController::class, 'create'])->name('kontraktor.create');

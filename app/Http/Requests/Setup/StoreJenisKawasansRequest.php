@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Setup;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreJenisKawasansRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class StoreJenisKawasansRequest extends FormRequest
     public function rules()
     {
         return [
-            'kod_kawasan' => 'required|min:3|max:6',
-            'keterangan_kawasan' => 'required|max:255'
+            'kod' => [
+                'required', 'min:3', 'max:6',
+                Rule::unique('jenis_kawasans')->ignore('kod','kod')
+            ],
+            'keterangan' => 'required|max:255',
+            'status' => 'required'
         ];
     }
 }

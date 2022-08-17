@@ -16,7 +16,7 @@ use Livewire\Component;
 class JadualOperasi extends Component
 {
     use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows;
-    
+
     public $pbts;
     public $upload;
 
@@ -39,16 +39,11 @@ class JadualOperasi extends Component
     public function mount()
     {
         $this->pbts = Pbt::notKktp()->get();
-        $this->filters['jenis_operasi'] = "RUMPUT";
-        $this->filters['bulan'] = Carbon::parse()->format('m-Y');
     }
 
     public function render()
     {
-
-        info('-----');
-        info($this->rows);
-        info('-----');
+        // dd($this->rows);
         return view('livewire.operasi.jadual-operasi', [
             'rows' => $this->rows,
         ]);
@@ -59,30 +54,33 @@ class JadualOperasi extends Component
         $this->emit('saved');
     }
 
-    public function updatedFilters() { 
+    public function updatedFilters() {
         info($this->filters['bulan']);
-        $this->resetPage(); 
+        $this->resetPage();
     }
-    public function resetFilters() { 
-        $this->reset('filters'); 
+
+    public function resetFilters() {
+        $this->reset('filters');
     }
 
     public function getRowsQueryProperty()
     {
-        info($this->filters['bulan']);
-        $dateMonthArray = explode('-', $this->filters['bulan']);
-        
-        $month = $dateMonthArray[0];
-        $year = $dateMonthArray[1];
+        if ($this->filters['bulan']) {
+            $dateMonthArray = explode('-', $this->filters['bulan']);
 
-        $start = Carbon::createFromDate($year, $month)->startOfMonth();;
-        $end = Carbon::createFromDate($year, $month)->endOfMonth();
-        
+            $month = $dateMonthArray[0];
+            $year = $dateMonthArray[1];
+
+            $start = Carbon::createFromDate($year, $month)->startOfMonth();
+            $end = Carbon::createFromDate($year, $month)->endOfMonth();
+        }
 
         $kod_pbt = Auth::user()->current_pbt;
         if (Auth::user()->current_pbt === 'KKTP') {
             $kod_pbt = $this->filters['kod_pbt'];
         }
+
+        info($kod_pbt);
 
         info($this->filters['jenis_operasi']);
 
@@ -91,9 +89,8 @@ class JadualOperasi extends Component
                 $join->on('lokasis.id', '=', 'operasi_pbts.lokasi_id');
             })
             ->when($this->filters['kod_pbt'], fn($query, $kod_pbt) => $query->where('operasi_pbts.kod_pbt', $kod_pbt))
-            ->when($this->filters['bulan'], fn($query) => $query->whereBetween('tarikh_operasi_mula', [$start, $end]))
-            ->when($this->filters['jenis_operasi'], fn($query, $jenis_operasi) => $query->where('jenis_operasi', $jenis_operasi));
-
+            ->when($this->filters['bulan'], fn($query) => $query->whereBetween('operasi_pbts.tarikh_operasi_mula', [$start, $end]))
+            ->when($this->filters['jenis_operasi'], fn($query, $jenis_operasi) => $query->where('operasi_pbt.jenis_operasi', $jenis_operasi));
         return $this->applySorting($query);
     }
 
@@ -103,4 +100,5 @@ class JadualOperasi extends Component
             return $this->applyPagination($this->rowsQuery);
         });
     }
+
 }

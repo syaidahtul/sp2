@@ -34,10 +34,7 @@ class KontraktorController extends Controller
             $request->get('nama'),
             $request->get('aktif')
         );
-        foreach($kontraktors as $k)
-        {
-            info($k);
-        }
+
         return view('setup.kontraktor.index', compact('pbts', 'kontraktors'));
     }
 
