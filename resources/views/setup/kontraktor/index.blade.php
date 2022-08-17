@@ -27,12 +27,12 @@
 
                                 <div class="col-span-6 sm:col-span-4 md:col-span-2">
                                     <x-jet-label for="kodpbt" value="{{ __('PBT') }}" />
-                                    <select name="kodpbt" id="kodpbt" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <x-input.select name="kodpbt" id="kodpbt" >
                                         <option value=""> Sila Pilih </option>
                                         @foreach ($pbts as $item)
                                             <option value="{{ $item->kod }}" {{ request()->get('kodpbt') === $item->kod ? 'selected' : '' }}> {{ $item->nama_pbt }}</option>
                                         @endforeach
-                                    </select>
+                                    </x-input.select>
                                     <x-jet-input-error for="kodpbt" class="mt-2" />
                                 </div>
 
@@ -44,13 +44,14 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-4 md:col-span-1">
-                                    <x-jet-label for="aktif" value="{{ __('Status') }}" />
-                                    <select name="aktif" id="aktif" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <x-jet-label for="status" value="{{ __('Status') }}" />
+                                    <x-input.select name="kodpbt" id="kodpbt" >
+                                        <option value=""> Sila Pilih </option>
                                         @foreach (App\Models\Kontraktor::STATUSES as $value => $label)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}" {{ (request()->get('status') == $value) ? 'selected' : '' }}>{{ $label }}</option>
                                         @endforeach
-                                    </select>
-                                    <x-jet-input-error for="aktif" class="mt-2" />
+                                    </x-input.select>
+                                    <x-jet-input-error for="status" class="mt-2" />
                                 </div>
 
                             </div>
@@ -139,7 +140,6 @@
 
                     {{ $kontraktors->links() }}
                 </div>
-
 
             </div>
         </div>

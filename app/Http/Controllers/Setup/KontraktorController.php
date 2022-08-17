@@ -32,7 +32,7 @@ class KontraktorController extends Controller
         $kontraktors = $this->kontraktorService->filterRows(
             $request->get('kodpbt'),
             $request->get('nama'),
-            $request->get('aktif')
+            $request->get('status')
         );
 
         return view('setup.kontraktor.index', compact('pbts', 'kontraktors'));

@@ -54,10 +54,10 @@
                         </div>
 
                         <x-jet-section-border />
-                        
+
                         <form action="{{ route('setup.kontraktor.storePbtKontraktor', $kontraktor) }}" method="post">
                             @csrf
-                            
+
                             <div class="grid grid-cols-6 gap-6 px-4 py-5 bg-white shadow sm:p-6">
                                 <input type="hidden" name="kontraktor_id" value={{ $kontraktor->id }}>
                                 <div class="col-span-6 sm:col-span-4 md:col-span-3">
@@ -104,7 +104,7 @@
                                         name="tarikh_tamat" :value="old('tarikh_tamat')" autofocus autocomplete="off" />
                                     <x-jet-input-error for="tarikh_tamat" class="mt-2" />
                                 </div>
-                                
+
 
                                 <div class="col-span-6 row-span-2 rounded-lg sm:col-span-4 md:col-span-6">
                                     <x-jet-label for="catatan" value="{{ __('Catatan') }}" />
@@ -112,7 +112,7 @@
                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="catatan"> {{ old('catatan') }}</textarea>
                                     <x-jet-input-error for="catatan" class="mt-2" />
                                 </div>
-                                
+
                             </div>
 
                             <div
@@ -124,56 +124,75 @@
 
                         </form>
 
-                        <x-jet-section-border />
-                        
-                        <x-table class="mb-4 sm:rounded-sm">
-                            <x-slot name="head">
-                                <x-table.heading sortable> PBT </x-table.heading>
-                                <x-table.heading sortable> Tarikh Mula </x-table.heading>
-                                <x-table.heading sortable> Tarikh Tamat </x-table.heading>
-                                <x-table.heading sortable> Status  </x-table.heading>
-                                <x-table.heading>  </x-table.heading>
-                            </x-slot>
-                            
-                            <x-slot name="body">
-                                
-                                @forelse ($pbtKontraktor as $item)
-                                    <x-table.row>
-                                        <x-table.cell> 
-                                            {{ $item->nama_pbt }}
-                                        </x-table.cell>
-    
-                                        <x-table.cell class="text-center"> 
-                                            {{ date('d-m-Y', strtotime($item->pivot->tarikh_mula)); }}
-                                        </x-table.cell>
-    
-                                        <x-table.cell class="text-center"> 
-                                            {{ date('d-m-Y', strtotime($item->pivot->tarikh_tamat)); }}
-                                        </x-table.cell>
-    
-                                        <x-table.cell> 
-                                            <span style = "background-color: {{ $item->status_color }}"
-                                                class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                                {{ $item->status_desc }} 
-                                            </span>
-                                        </x-table.cell>
-                                        
-                                        <x-table.cell class="text-end">
-                                            
-                                        </x-table.cell>
-                                    </x-table.row>
-                                @empty
-                                    <x-table.row>
-                                        <x-table.cell colspan=3 class="text-center"> 
-                                            {{ __('Tiada rekod.') }}
-                                        </x-table.cell>
-                                    </x-table.row>
-                                @endforelse
-                                
-                            </x-slot>
-                            
-                        </x-table>
-                        
+
+                        <div class="mt-5 md:col-span-2">
+                            <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
+                                <div class="px-4 sm:px-0">
+                                    <h3 class="text-lg font-medium text-gray-900 uppercase">
+                                        {{ __('Senarai PBT') }}</h3>
+                                </div>
+                            </div>
+
+                            <x-table class="mb-4 sm:rounded-sm">
+                                <x-slot name="head">
+                                    <x-table.heading> PBT </x-table.heading>
+                                    <x-table.heading> No. Kontrak </x-table.heading>
+                                    <x-table.heading> Tarikh Mula </x-table.heading>
+                                    <x-table.heading> Tarikh Tamat </x-table.heading>
+                                    <x-table.heading> Status  </x-table.heading>
+                                    <x-table.heading>  </x-table.heading>
+                                </x-slot>
+
+                                <x-slot name="body">
+
+                                    @forelse ($pbtKontraktor as $item)
+                                        <x-table.row>
+                                            <x-table.cell>
+                                                {{ $item->nama_pbt }}
+                                            </x-table.cell>
+
+                                            <x-table.cell>
+                                                {{ $item->pivot->no_kontrak }}
+                                            </x-table.cell>
+
+                                            <x-table.cell class="text-center">
+                                                {{ date('d-m-Y', strtotime($item->pivot->tarikh_mula)); }}
+                                            </x-table.cell>
+
+                                            <x-table.cell class="text-center">
+                                                {{ date('d-m-Y', strtotime($item->pivot->tarikh_tamat)); }}
+                                            </x-table.cell>
+
+                                            <x-table.cell>
+                                                <span style = "background-color: {{ $item->status_color }}"
+                                                    class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
+                                                    {{ $item->pivot->status_perkhidmatan }}
+                                                </span>
+                                            </x-table.cell>
+
+                                            <x-table.cell class="text-end">
+                                                <x-button.button-link type="viewIcon" href="{{ route('setup.kontraktor.view', $item->id ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye> </x-button.button-link>
+                                                <x-button.button-link type="editIcon" href="{{ route('setup.kontraktor.edit', $item->id ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
+                                                @if ( strcmp($item->status_desc, 'Tidak aktif') !== 0 )
+                                                    <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.createPbtKontraktor', $item->id ) }}" title="Tambah PBT berkenaan">
+                                                        <x-icons.user-add class="w-4 h-4" stroke="orange"></x-icons.user-add>
+                                                    </x-button.button-link>
+                                                @endif
+                                            </x-table.cell>
+                                        </x-table.row>
+                                    @empty
+                                        <x-table.row>
+                                            <x-table.cell colspan=5 class="text-center">
+                                                {{ __('Tiada rekod.') }}
+                                            </x-table.cell>
+                                        </x-table.row>
+                                    @endforelse
+
+                                </x-slot>
+
+                            </x-table>
+                        </div>
+
                     </div>
 
                     <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">

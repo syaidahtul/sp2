@@ -30,9 +30,8 @@ class KontraktorService
             $join->on('kontraktors.id', '=', 'pbt_kontraktors.kontraktor_id');
         })
         ->when($kod, fn($query, $kod) => $query->where('kod_pbt', 'LIKE', '%'.$kod.'%'))
-        // ->when($nama, fn($query, $nama) => $query->where('keterangan', 'LIKE', '%'.$nama.'%'))
-        // ->when($aktif, fn($query) => $query->where('aktif', '=', $aktif))
-        ;
+        ->when($nama, fn($query, $nama) => $query->where('nama', 'LIKE', '%'.$nama.'%'))
+        ->when($aktif, fn($query) => $query->where('status', '=', $aktif));
 
         $rows = $query->orderBy('kontraktors.status')->orderBy('kontraktors.created_at', 'desc')
             ->paginate(15)->withQueryString();

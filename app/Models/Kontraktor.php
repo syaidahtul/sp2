@@ -12,16 +12,16 @@ class Kontraktor extends Model
         'progressing' => 'Dalam kontrak',
         'tidak_aktif' => 'Tidak Aktif'
     ];
-    
+
     protected $fillable =[
         'nama',
         'alamat',
         'poskod',
         'region',
-        'state', 
+        'state',
         'no_tel_office',
         'no_fax_office',
-        'contact_person_nama', 
+        'contact_person_nama',
         'contact_person_no_tel',
         'catatan',
         'status'
@@ -48,13 +48,13 @@ class Kontraktor extends Model
             'tidak_aktif' => '#fecdd3', // bg-rose-200
         ][$this->status] ?? 'gray';
     }
-    
+
     public function getStatusDescAttribute()
-    { 
+    {
         return [
             'aktif' => 'Aktif',    // bg-emerald-200
             'tidak_aktif' => 'Tidak aktif', // bg-rose-200
-        ][$this->status] ?? 'Dalam kontrak';         
+        ][$this->status] ?? 'Dalam kontrak';
     }
 
 }

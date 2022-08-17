@@ -42,7 +42,7 @@
                             <div class="col-span-6 row-span-2 rounded-lg sm:col-span-4 md:col-span-6">
                                 <x-jet-label for="alamat" value="{{ __('Alamat') }}" />
                                 <textarea id="alamat"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="alamat"> {{ old('alamat') }}</textarea>
+                                    class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="alamat"> {{ old('alamat') }}</textarea>
                                 <x-jet-input-error for="alamat" class="mt-2" />
                             </div>
 
@@ -54,9 +54,10 @@
 
                             <div class="col-span-6 sm:col-span-2 md:col-span-2">
                                 <x-jet-label for="region" value="{{ __('Daerah') }}" />
-                                <select name="region" id="region" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <select name="region" id="region" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value=""> {{ __(' - Sila Pilih - ') }}</option>
                                     @foreach ($daerahs as $item)
-                                        <option value="{{ $item->kod }}" {{ old('region') === $item->kod ? 'selected' : '' }}> {{ $item->nama }}</option>
+                                        <option value="{{ $item->nama }}" {{ old('region') === $item->kod ? 'selected' : '' }}> {{ $item->nama }}</option>
                                     @endforeach
                                 </select>
                                 <x-jet-input-error for="region" class="mt-2" />
@@ -83,9 +84,9 @@
                                 <x-jet-input id="no_fax_office" type="text" class="block w-full mt-1" name="no_fax_office"  :value="old('no_fax_office')"/>
                                 <x-jet-input-error for="no_fax_office" class="mt-2" />
                             </div>
-                            
+
                         </div>
-                        
+
                         <x-jet-section-border />
 
                         <div class="grid grid-cols-6 gap-6">
@@ -93,12 +94,12 @@
                             <div class="col-span-6 row-span-2 rounded-lg sm:col-span-4 md:col-span-6">
                                 <x-jet-label for="catatan" value="{{ __('Catatan') }}" />
                                 <textarea id="catatan"
-                                    class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="catatan"> {{ old('alamat') }}</textarea>
+                                    class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="catatan"> {{ old('alamat') }}</textarea>
                                 <x-jet-input-error for="catatan" class="mt-2" />
                             </div>
-                            
+
                         </div>
-                        
+
                         <x-jet-section-border />
 
                         <div class="grid grid-cols-6 gap-6">
@@ -116,9 +117,9 @@
                                     :value="old('contact_person_no_tel')" autofocus autocomplete="off" />
                                 <x-jet-input-error for="contact_person_no_tel" class="mt-2" />
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
 
                     <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
