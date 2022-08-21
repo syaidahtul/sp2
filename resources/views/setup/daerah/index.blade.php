@@ -8,7 +8,7 @@
 
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
@@ -41,10 +41,10 @@
 
                                 <div class="col-span-6 sm:col-span-4 md:col-span-1">
                                     <x-jet-label for="aktif" value="{{ __('Status') }}" />
-                                    <select name="aktif" id="aktif" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <x-input.select name="aktif" id="aktif" >
                                         <option value="1" {{ request()->get('aktif') == '1' ? 'selected' : '' }}>Aktif</option>
                                         <option value="0" {{ request()->get('aktif') == '0' ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
+                                    </x-input.select>
                                     <x-jet-input-error for="aktif" class="mt-2" />
                                 </div>
 
@@ -72,7 +72,7 @@
 
     <div class="pb-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
@@ -87,15 +87,15 @@
 
                             @forelse ($daerahs as $item)
                                 <x-table.row>
-                                    <x-table.cell>
+                                    <x-table.cell class="text-center">
                                         {{ $item->kod }}
                                     </x-table.cell>
 
                                     <x-table.cell>
-                                        {{ $item->keterangan }}
+                                        {{ $item->nama }}
                                     </x-table.cell>
 
-                                    <x-table.cell>
+                                    <x-table.cell class="text-center">
                                         <span style = "background-color: {{ $item->aktif_color }}"
                                             class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
                                             {{ $item->aktif_desc }}
@@ -104,12 +104,6 @@
 
                                     <x-table.cell class="text-end">
                                         <x-button.button-link type="editIcon" href="{{ route('setup.daerah.edit', $item->kod ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
-                                        {{-- @if ( $item->aktif_desc === 'Aktif' )
-                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal"
-                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Daerah', 'kod', '{{ $item->kod }}', '', '{{ $item->nama }}' )">
-                                                <x-icons.trash class="w-4 h-4" stroke="red"></x-icons.trash>
-                                            </x-button.button-link>
-                                        @endif --}}
                                     </x-table.cell>
                                 </x-table.row>
                             @empty

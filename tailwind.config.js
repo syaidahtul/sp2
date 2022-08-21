@@ -4,7 +4,8 @@ const colors = require('tailwindcss/colors');
 module.exports = {
     safelist: [
         {
-          pattern: /.*/ 
+          pattern: /.*/,
+          variants: ['sm', 'md', 'lg'],
         },
     ],
 

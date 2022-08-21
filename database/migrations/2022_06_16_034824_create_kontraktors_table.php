@@ -16,6 +16,7 @@ class CreateKontraktorsTable extends Migration
         Schema::create('kontraktors', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 250);
+            $table->string('no_lesen', 150)->nullable();
             $table->string('jenis_perkhidmatan')->nullable();
             $table->string('alamat')->nullable();
             $table->string('poskod')->nullable();
@@ -31,11 +32,6 @@ class CreateKontraktorsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('kontraktors');

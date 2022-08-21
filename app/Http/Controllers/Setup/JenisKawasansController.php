@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Setup;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setup\StoreJenisKawasansRequest;
 use App\Http\Requests\Setup\UpdateJenisKawasansRequest;
-use App\Models\JenisKawasans;
 use App\Services\JenisKawasanService;
 use Illuminate\Http\Request;
 

@@ -12,11 +12,11 @@ class TapakPelupusanSampahs extends Model
         'sanitary' => 'Sanitary Landfill'
     ];
 
-    protected $fillable = ['nama', 'kaedah_pelupusan','longitude','latitude'];
+    protected $fillable = ['tempat', 'kaedah_pelupusan', 'city', 'longitude','latitude'];
 
     function pbt()
     {
-        return $this->belongsToMany(Pbt::class, 'pbt_tapak_pelupusan_sampahs');
+        return $this->belongsToMany(Pbt::class, PbtTapakPelupusanSampahs::class, 'tapak_pelupusan_sampah_id', 'kod_pbt');
     }
 
     function kos()

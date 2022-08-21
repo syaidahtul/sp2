@@ -19,14 +19,14 @@ class ExecutiveDashboard extends Component
 
     public $showDataLabels = false;
 
-    public function mount() 
+    public function mount()
     {
 
     }
 
     public function render()
     {
-        $pbts = Pbt::notKKTP()->paginate(10);
+        $pbts = Pbt::notKKTP()->paginate(25);
         $expenses = KosPelupusanSampah::all();
 
         $this->firstRun = false;

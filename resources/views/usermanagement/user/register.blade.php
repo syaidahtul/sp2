@@ -9,7 +9,7 @@
 
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-6">
 

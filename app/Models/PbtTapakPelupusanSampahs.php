@@ -11,7 +11,7 @@ class PbtTapakPelupusanSampahs extends Model
     use HasFactory;
 
     protected $fillable = ['kod_pbt', 'tapak_pelupusan_sampah_id'];
-    
+
     function pbt() {
         return $this->belongsTo(Pbt::class,'kod_pbt');
     }

@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    
+
                     @hasanyrole(['Pengguna PBT'])
                     <x-jet-nav-link href="{{ route('profailpbt.index') }}" :active="request()->routeIs('profailpbt*')">
                         {{ __('Profail PBT') }}
@@ -52,7 +52,7 @@
                             <x-jet-dropdown-link href="{{ route('setup.daerah.index') }}">
                                 {{ __('Daerah') }}
                             </x-jet-dropdown-link>
-                            
+
                             <x-jet-dropdown-link href="{{ route('setup.pbt.index') }}">
                                 {{ __('PBT') }}
                             </x-jet-dropdown-link>
@@ -67,6 +67,10 @@
 
                             <x-jet-dropdown-link href="{{ route('setup.jenis_jentera.index') }}">
                                 {{ __('Jenis Jentera') }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('setup.tapak_pelupusan_sampah.index') }}">
+                                {{ __('Tapak Pelupusan Sampah') }}
                             </x-jet-dropdown-link>
 
                             <x-jet-dropdown-link href="{{ route('setup.kontraktor.index') }}">

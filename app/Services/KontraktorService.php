@@ -34,7 +34,7 @@ class KontraktorService
         ->when($aktif, fn($query) => $query->where('status', '=', $aktif));
 
         $rows = $query->orderBy('kontraktors.status')->orderBy('kontraktors.created_at', 'desc')
-            ->paginate(15)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         return $rows;
     }

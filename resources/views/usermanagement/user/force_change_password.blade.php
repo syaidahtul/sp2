@@ -9,18 +9,18 @@
 
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-6">
-                    
+
                     <form method="POST" action="{{ route('user.updateforceChangePassword') }}">
                         @csrf
-                        
+
                         <div class="block">
                             <x-jet-label for="email" value="{{ __('Email') }}" />
                             <x-jet-input id="email" class="block w-full mt-1 bg-gray-100" type="email" name="email" :value="$user->email" disabled autofocus />
                         </div>
-                        
+
                         <div class="mt-4">
                             <x-jet-label for="identity_no" value="{{ __('Identity No') }}" />
                             <x-jet-input id="identity_no" class="block w-full mt-1 bg-gray-100" type="text" name="identity_no" :value="$user->identity_no" disabled autofocus />
@@ -43,7 +43,7 @@
                                 {{ __('Reset Password') }}
                             </x-jet-button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

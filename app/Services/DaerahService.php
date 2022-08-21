@@ -5,11 +5,11 @@ namespace App\Services;
 use App\Models\Daerah;
 use Illuminate\Support\Facades\Cache;
 
-class DaerahService 
+class DaerahService
 {
-    
-    public function getDaerahDropdown() 
-    {    
+
+    public function getDaerahDropdown()
+    {
         if (Cache::has('daerahs')) {
             $Daerahs = Cache::get('daerahs');
         } else {
@@ -28,7 +28,7 @@ class DaerahService
             ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
             ->when($nama, fn($query, $nama) => $query->where('nama', 'LIKE', '%'.$nama.'%'))
             ->when($aktif, fn($query, $aktif) => $query->where('aktif', $aktif))
-            ->paginate(15)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         return $rows;
     }
@@ -39,7 +39,7 @@ class DaerahService
     }
 
     public function update($validated)
-    {        
+    {
         Daerah::where('kod', $validated['kod'])->update([
             'nama' => $validated['nama'],
             'aktif' => $validated['status']

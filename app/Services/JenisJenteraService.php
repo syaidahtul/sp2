@@ -2,18 +2,19 @@
 
 namespace App\Services;
 
-use App\Models\JenisKawasans;
+use App\Models\JenisJenteras;
 use Illuminate\Support\Facades\Cache;
 
-class JenisKawasanService
+class JenisJenteraService
 {
     public function getDropdown()
     {
-        if (Cache::has('jenisKawasans')) {
-            $pbts = Cache::get('jenisKawasans');
+        if (Cache::has('jenisJentera')) {
+
+            $pbts = Cache::get('jenisJentera');
         } else {
-            $pbts = Cache::remember('jenisKawasans', 3600, function () {
-                return JenisKawasans::aktif()->get();
+            $pbts = Cache::remember('jenisJentera', 3600, function () {
+                return JenisJenteras::aktif()->get();
             });
         }
 
@@ -22,7 +23,7 @@ class JenisKawasanService
 
     public function filterRows($kod, $nama, $aktif)
     {
-        $rows = JenisKawasans::query()
+        $rows = JenisJenteras::query()
             ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
             ->when($nama, fn($query, $nama) => $query->where('keterangan', 'LIKE', '%'.$nama.'%'))
             ->when($aktif, fn($query) => $query->where('aktif', '=', $aktif))
@@ -33,12 +34,12 @@ class JenisKawasanService
 
     public function getRecord($kod)
     {
-        return JenisKawasans::where('kod', $kod)->first();
+        return JenisJenteras::where('kod', $kod)->first();
     }
 
     public function store($validated)
     {
-        JenisKawasans::create([
+        JenisJenteras::create([
             'kod' => strtoupper($validated['kod']),
             'keterangan' => $validated['keterangan'],
             'aktif' => $validated['status']
@@ -52,7 +53,7 @@ class JenisKawasanService
             'keterangan' => $validated['keterangan'],
             'aktif' => $validated['status']
         ];
-        JenisKawasans::where('kod', $validated['kod'])->update($data);
+        JenisJenteras::where('kod', $validated['kod'])->update($data);
     }
 
 }

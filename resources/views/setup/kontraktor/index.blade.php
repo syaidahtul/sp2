@@ -8,7 +8,7 @@
 
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
@@ -78,13 +78,14 @@
 
     <div class="pb-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
                         <x-slot name="head">
                             <x-table.heading sortable> Nama </x-table.heading>
-                            {{-- <x-table.heading sortable> PBT </x-table.heading> --}}
+                            <x-table.heading sortable> No Lesen </x-table.heading>
+                            <x-table.heading sortable> No Kontrak </x-table.heading>
                             <x-table.heading sortable> Catatan </x-table.heading>
                             <x-table.heading sortable> Status  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
@@ -99,11 +100,15 @@
                                         {{ $item->nama }}
                                     </x-table.cell>
 
-                                    {{-- <x-table.cell>
+                                    <x-table.cell>
+                                        {{ $item->no_lesen }}
+                                    </x-table.cell>
+
+                                    <x-table.cell>
                                         @foreach ($item->pbtKontraktors as $pbt)
-                                            <div class="sm:py-1 md:py-2 lg:py-2">{{ $loop->iteration }}. {{ $pbt->nama_pbt }}</div>
+                                            <div class="sm:py-1 md:py-2 lg:py-2">{{ $loop->iteration }}. {{ $pbt->pivot->no_kontrak }}</div>
                                         @endforeach
-                                    </x-table.cell> --}}
+                                    </x-table.cell>
 
                                     <x-table.cell>
                                         {{ $item->catatan }}

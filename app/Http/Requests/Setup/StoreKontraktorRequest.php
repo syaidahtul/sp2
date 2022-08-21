@@ -17,11 +17,12 @@ class StoreKontraktorRequest extends FormRequest
     {
         return Auth::user()->hasRole('ADMIN');
     }
-    
+
     public function messages()
     {
         return [
-                '*.required_unless' => ':attribute diperlukan kecuali status adalah Tidak Aktif',
+                'state.required_unless' => ':attribute diperlukan kecuali status adalah Tidak Aktif',
+                'region.required_if' => ':attribute diperlukan bagi negeri SABAH',
         ];
     }
 
@@ -29,40 +30,42 @@ class StoreKontraktorRequest extends FormRequest
     {
         $tidakAktif = [
             'nama' => 'nullable',
+            'no_lesen' => 'nullable|sometimes|max:150',
             'no_tel' => 'nullable',
             'no_fax' => 'nullable',
             'alamat' => 'nullable',
             'poskod' => 'nullable|sometimes|numeric',
             'region' => 'nullable',
-            'state' => ['nullable','sometimes', 
-                Rule::in(Daerah::NEGERI) 
+            'state' => ['nullable','sometimes',
+                Rule::in(Daerah::NEGERI)
             ],
-            'contact_person_nama' => 'nullable', 
+            'contact_person_nama' => 'nullable',
             'contact_person_no_tel' => 'nullable',
             'catatan' => 'nullable|sometimes|max:500',
             'status' => ['required',
-                Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray()) 
+                Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray())
             ],
         ];
 
         if (strcmp($request->status, 'tidak_aktif') === 0 && $this->_method === 'PUT') {
-            return [ 
+            return [
                 'nama' => ['nullable',
                     new TiadaKontrakAktif($request->kontraktor)
                 ],
+                'no_lesen' => 'nullable|sometimes|max:150',
                 'no_tel' => 'nullable',
                 'no_fax' => 'nullable',
                 'alamat' => 'nullable',
                 'poskod' => 'nullable|sometimes|numeric',
                 'region' => 'nullable',
-                'state' => ['nullable','sometimes', 
-                    Rule::in(Daerah::NEGERI) 
+                'state' => ['nullable','sometimes',
+                    Rule::in(Daerah::NEGERI)
                 ],
-                'contact_person_nama' => 'nullable', 
+                'contact_person_nama' => 'nullable',
                 'contact_person_no_tel' => 'nullable',
                 'catatan' => 'nullable|sometimes|max:500',
                 'status' => ['required',
-                    Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray()) 
+                    Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray())
                 ],
             ];
         }
@@ -71,20 +74,21 @@ class StoreKontraktorRequest extends FormRequest
             return $tidakAktif;
         } else {
             return [
-                'nama' => 'required',
+                'nama' => 'required|max:250',
+                'no_lesen' => 'nullable|sometimes|max:150',
                 'no_tel' => 'nullable',
                 'no_fax' => 'nullable',
                 'alamat' => 'nullable',
                 'poskod' => 'nullable|sometimes|numeric',
-                'region' => 'required_unless:status,tidak_aktif|exists:daerahs,kod',
-                'state' => ['required_unless:status,tidak_aktif', 
-                    Rule::in(Daerah::NEGERI) 
+                'region' => 'required_if:state,SABAH|exists:daerahs,kod',
+                'state' => ['required_unless:status,tidak_aktif',
+                    Rule::in(Daerah::NEGERI)
                 ],
-                'contact_person_nama' => 'nullable', 
+                'contact_person_nama' => 'nullable',
                 'contact_person_no_tel' => 'nullable',
                 'catatan' => 'nullable|sometimes|max:500',
                 'status' => ['required',
-                    Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray()) 
+                    Rule::in(collect(Kontraktor::STATUSES)->keys()->toArray())
                 ],
             ];
         }

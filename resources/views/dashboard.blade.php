@@ -7,8 +7,8 @@
 
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
+
 
                 <div class="p-4 bg-white border rounded shadow" style="height: 32rem;">
                     <livewire:livewire-radar-chart
@@ -23,7 +23,7 @@
                         :tree-map-chart-model="$treeChartModel"
                     />
                 </div>
-                
+
             </div>
         </div>
     </div>

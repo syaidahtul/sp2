@@ -11,44 +11,47 @@
 
                 <form action="{{ route('setup.jenis_jentera.store') }}" method="post">
                     @csrf
-                    <div class="mt-4 -mb-3">
-                        <div class="relative overflow-hidden not-prose bg-slate-50 rounded-xl dark:bg-slate-800/25">
-                            <div style="background-position:10px 10px"
-                                class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))]
-                                    dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]">
+
+                    <div class="px-4 py-5 bg-white shadow sm:p-6">
+
+                        <div class="grid grid-cols-6 gap-6">
+
+                            <div class="col-span-6 sm:col-span-4 md:col-span-1">
+                                <x-jet-label for="kod" value="{{ __('Kod') }}" />
+                                <x-jet-input id="kod" class="block w-full mt-1 font-semibold uppercase" type="text"
+                                    name="kod" :value="old('kod')" autofocus autocomplete="off" />
+                                <x-jet-input-error for="kod" class="mt-2" />
                             </div>
 
-                            <div class="relative p-8 overflow-auto rounded-xl">
-                                <div
-                                    class="grid grid-cols-6 gap-4 font-mono text-sm font-bold leading-6 rounded-lg bg-stripes-violet">
-                                    <div class="col-span-2 p-4 rounded-lg shadow-lg bg-emerald-500">
-                                        <x-jet-label for="request" value="{{ __('Kod Jentera Baru') }}" />
-                                        <x-jet-input id="kod_jentera" class="block w-full mt-1 uppercase" type="text"
-                                            name="kod_jentera" :value="old('kod_jentera')" autofocus autocomplete="off" />
-                                        <x-jet-input-error for="kod_jentera" class="mt-2" />
-                                    </div>
-                                    <div class="col-span-4 col-start-3 p-4 rounded-lg shadow-lg bg-emerald-500">
-                                        <x-jet-label for="keterangan_jentera" value="{{ __('Keterangan Jentera Baru') }}" />
-                                        <x-jet-input id="keterangan_jentera" class="block w-full mt-1" type="text" name="keterangan_jentera"
-                                            :value="old('keterangan_jentera')" autofocus autocomplete="off" />
-                                        <x-jet-input-error for="keterangan_jentera" class="mt-2" />
-                                    </div>
-                                </div>
+                            <div class="col-span-6 sm:col-span-4 md:col-span-4">
+                                <x-jet-label for="keterangan" value="{{ __('Keterangan') }}" />
+                                <x-jet-input id="keterangan" class="block w-full mt-1" type="text" name="keterangan"
+                                    :value="old('keterangan')" autofocus autocomplete="off" />
+                                <x-jet-input-error for="keterangan" class="mt-2" />
                             </div>
-                            <div
-                                class="absolute inset-0 border pointer-events-none border-black/5 rounded-xl dark:border-white/5">
+
+                            <div class="col-span-6 sm:col-span-4 md:col-span-1">
+                                <x-jet-label for="status" value="{{ __('Status') }}" />
+                                <select name="status" id="status" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    @foreach (App\Models\JenisJenteras::STATUSES as $value => $label)
+                                        <option value="{{ $value }}" {{ (old('status') === $label) ? 'selected' : ''}}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                                <x-jet-input-error for="status" class="mt-2" />
                             </div>
+
                         </div>
 
-                        <div class="flex items-center justify-end p-4 m-4">
-                            <a href="{{ route('setup.jenis_jentera.index') }}"
-                                class='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition bg-gray-500 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25'>
-                                {{ __('Kembali') }}
-                            </a>
-                            <x-jet-button class="ml-4">
-                                {{ __('Simpan') }}
-                            </x-jet-button>
-                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
+                        <x-button.button-link-secondary href="{{ route('setup.jenis_jentera.index' ) }}" svgClass="w-4 h-4 mr-2" type="backIcon" stroke="currentColor">
+                            <span class="self-center mx-4">{{__('Kembali') }} </span>
+                        </x-button.button-link-secondary>
+
+                        <x-jet-button>
+                            {{ __('Save') }}
+                        </x-jet-button>
                     </div>
 
                 </form>

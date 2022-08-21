@@ -3,29 +3,32 @@
 namespace App\Http\Requests\Setup;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreJenisJenterasRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function messages()
+    {
+        return [
+            'kod.regex' => 'Gunakan huruf dan nombor sahaja.'
+        ];
+    }
+
     public function rules()
     {
         return [
-            'kod_jentera' => 'required|min:3|max:6',
-            'keterangan_jentera' => 'required|max:255'
+            'kod' => [
+                'required', 'min:3', 'max:6', 'regex:/(^[A-Za-z0-9]+$)+/',
+                Rule::unique('jenis_jenteras')->ignore('kod','kod')
+            ],
+            'keterangan' => 'required|max:255',
+            'status' => 'required'
         ];
     }
 }

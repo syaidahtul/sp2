@@ -15,6 +15,7 @@ class Kontraktor extends Model
 
     protected $fillable =[
         'nama',
+        'no_lesen',
         'alamat',
         'poskod',
         'region',

@@ -19,8 +19,8 @@
 
                             <div class="col-span-6 sm:col-span-4 md:col-span-1">
                                 <x-jet-label for="kod" value="{{ __('Kod') }}" />
-                                <x-jet-input id="kod" class="block w-full mt-1 uppercase" type="text"
-                                    name="kod" :value="$daerah->kod" autofocus autocomplete="off" />
+                                <x-jet-input id="kod" class="block w-full mt-1 font-semibold uppercase bg-gray-200" type="text"
+                                    name="kod" :value="$daerah->kod" autofocus autocomplete="off" readonly />
                                 <x-jet-input-error for="kod" class="mt-2" />
                             </div>
 
@@ -33,16 +33,15 @@
 
                             <div class="col-span-6 sm:col-span-4 md:col-span-1">
                                 <x-jet-label for="status" value="{{ __('Status') }}" />
-                                <select name="status" id="status" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    @foreach (App\Models\Daerah::STATUSES as $value => $label)
-                                        <option value="{{ $value }}" {{ ( $daerah->aktif === $value ) ? 'selected' : ''}}>{{ $label }}</option>
-                                    @endforeach
-                                </select>
+                                <x-input.select name="status" id="status" >
+                                    <option value="1" {{ request()->get('aktif') == '1' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="0" {{ request()->get('aktif') == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                                </x-input.select>
                                 <x-jet-input-error for="status" class="mt-2" />
                             </div>
 
                         </div>
-                        
+
                     </div>
 
                     <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">

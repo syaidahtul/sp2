@@ -1,208 +1,42 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('PBT Kontraktor') }}
+            {{ __('Kontrak') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="w-11/12 mx-auto overflow-hidden sm:rounded-lg">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <!-- maklumat kontraktor -->
+        <div class="m-4 border border-green-100 rounded-md shadow-sm bg-green-50 sm:m-0 md:m-4">
+            <div class="grid gap-4 md:p-4 xs:grid-cols-1 md:grid-cols-6 bg-green-50">
+                <div class="relative col-span-12 md:col-span-4 lg:col-span-4">
+                    <input type="text" id="floating_outlined"
+                        class="col-span-full lg:col-span-6 block px-2.5 pb-2.5 pt-4 font-semibold w-full text-sm text-gray-900 bg-green-50 rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        value="{{ $kontraktor->nama }}"/>
+                    <label for="floating_outlined"
+                        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-green-50 dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Nama
+                        Kontraktor</label>
+                </div>
 
-                    <div class="px-4 py-5 bg-white shadow sm:p-6">
-
-                        <div class="grid grid-cols-6 gap-6">
-
-                            <div class="col-span-6 sm:col-span-4 md:col-span-3">
-                                <x-jet-label for="nama" value="{{ __('Nama Syarikat') }}" class="mandatory" />
-                                <x-jet-input id="nama" class="block w-full mt-1 bg-gray-100" type="text"
-                                    name="nama" disabled :value="$kontraktor->nama" autofocus autocomplete="off" />
-                                <x-jet-input-error for="nama" class="mt-2" />
-                            </div>
-
-                            <div class="col-span-6 sm:col-span-2 md:col-span-2">
-                                <x-jet-label for="no_lesen" value="{{ __('No. Lesen (sekiranya berkenaan)') }}" />
-                                <x-jet-input id="no_lesen" type="text" class="block w-full mt-1 bg-gray-100"
-                                    name="no_lesen" :value="$kontraktor->no_lesen" disabled />
-                                <x-jet-input-error for="no_lesen" class="mt-2" />
-                            </div>
-
-                            <div class="col-span-6 sm:col-span-2 md:col-span-1">
-                                <x-jet-label for="status" value="{{ __('Status') }}" class="mandatory" />
-                                <x-jet-input id="poskod" type="text" class="block w-full mt-1 bg-gray-100"
-                                    name="poskod" :value="$kontraktor->status_desc" disabled />
-                                <x-jet-input-error for="status" class="mt-2" />
-                            </div>
-
-                            <div class="col-span-6 sm:col-span-4 md:col-span-4">
-                                <x-jet-label for="contact_person_nama" value="{{ __('Nama Orang Perhubungan') }}" />
-                                <x-jet-input id="contact_person_nama" class="block w-full mt-1 bg-gray-100"
-                                    type="text" name="contact_person_nama" :value="$kontraktor->contact_person_nama" autofocus
-                                    autocomplete="off" disabled />
-                                <x-jet-input-error for="contact_person_nama" class="mt-2" />
-                            </div>
-
-                            <div class="col-span-6 sm:col-span-4 md:col-span-2">
-                                <x-jet-label for="contact_person_no_tel"
-                                    value="{{ __('No Tel Orang Perhubungan') }}" />
-                                <x-jet-input id="contact_person_no_tel" class="block w-full mt-1 bg-gray-100"
-                                    type="text" name="contact_person_no_tel" :value="$kontraktor->contact_person_no_tel" autofocus
-                                    autocomplete="off" disabled />
-                                <x-jet-input-error for="contact_person_no_tel" class="mt-2" />
-                            </div>
-
-                        </div>
-
-                        <x-jet-section-border />
-
-                        <form action="{{ route('setup.kontraktor.storePbtKontraktor', $kontraktor) }}" method="post">
-                            @csrf
-
-                            <div class="grid grid-cols-6 gap-6 px-4 py-5 bg-white shadow sm:p-6">
-                                <input type="hidden" name="kontraktor_id" value={{ $kontraktor->id }}>
-                                <div class="col-span-6 sm:col-span-4 md:col-span-3">
-                                    <x-jet-label for="kod_pbt" value="{{ __('PBT') }}" class="mandatory" />
-                                    <select name="kod_pbt" id="kod_pbt"
-                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" ">
-                                        <option value="">{{ __('Sila Pilih') }}</option>
-                                         @foreach ($pbts as $item)
-                                        <option value="{{ $item->kod }}"
-                                            {{ old('kod_pbt') === $item->kod ? 'selected' : '' }}>
-                                            {{ $item->nama_pbt }} ({{ $item->kod }})</option>
-                                        @endforeach
-                                    </select>
-                                    <x-jet-input-error for="kod_pbt" class="mt-2" />
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-4 md:col-span-2">
-                                    <x-jet-label for="no_kontrak" value="{{ __('No Kontrak') }}" class="mandatory" />
-                                    <x-jet-input id="no_kontrak" class="block w-full mt-1" type="text"
-                                        name="no_kontrak" :value="old('no_kontrak')" autofocus autocomplete="off" />
-                                    <x-jet-input-error for="no_kontrak" class="mt-2" />
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-4 md:col-span-1">
-                                    <x-jet-label for="status_perkhidmatan" value="{{ __('Status') }}" class="mandatory" />
-                                    <select name="status_perkhidmatan" id="status_perkhidmatan" class="w-full mt-1 text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                        @foreach (App\Models\PbtKontraktors::STATUSPERKHIDMATAN as $value)
-                                            <option value="{{ $value }}" {{ old('status_perkhidmatan') === $value ? 'selected' : ''}}>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                    <x-jet-input-error for="status_perkhidmatan" class="mt-2" />
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-4 md:col-span-3">
-                                    <x-jet-label for="tarikh_mula" value="{{ __('Tarikh Mula') }}" class="mandatory" />
-                                    <x-jet-input id="tarikh_mula" class="block w-full mt-1" type="date"
-                                        name="tarikh_mula" :value="old('tarikh_mula')" autofocus autocomplete="off" />
-                                    <x-jet-input-error for="tarikh_mula" class="mt-2" />
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-4 md:col-span-3">
-                                    <x-jet-label for="tarikh_tamat" value="{{ __('Tarikh Tamat') }}" class="mandatory" />
-                                    <x-jet-input id="tarikh_tamat" class="block w-full mt-1" type="date"
-                                        name="tarikh_tamat" :value="old('tarikh_tamat')" autofocus autocomplete="off" />
-                                    <x-jet-input-error for="tarikh_tamat" class="mt-2" />
-                                </div>
-
-
-                                <div class="col-span-6 row-span-2 rounded-lg sm:col-span-4 md:col-span-6">
-                                    <x-jet-label for="catatan" value="{{ __('Catatan') }}" />
-                                    <textarea id="catatan"
-                                        class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="catatan"> {{ old('catatan') }}</textarea>
-                                    <x-jet-input-error for="catatan" class="mt-2" />
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-                                <x-jet-button>
-                                    {{ __('Save') }}
-                                </x-jet-button>
-                            </div>
-
-                        </form>
-
-
-                        <div class="mt-5 md:col-span-2">
-                            <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
-                                <div class="px-4 sm:px-0">
-                                    <h3 class="text-lg font-medium text-gray-900 uppercase">
-                                        {{ __('Senarai PBT') }}</h3>
-                                </div>
-                            </div>
-
-                            <x-table class="mb-4 sm:rounded-sm">
-                                <x-slot name="head">
-                                    <x-table.heading> PBT </x-table.heading>
-                                    <x-table.heading> No. Kontrak </x-table.heading>
-                                    <x-table.heading> Tarikh Mula </x-table.heading>
-                                    <x-table.heading> Tarikh Tamat </x-table.heading>
-                                    <x-table.heading> Status  </x-table.heading>
-                                    <x-table.heading>  </x-table.heading>
-                                </x-slot>
-
-                                <x-slot name="body">
-
-                                    @forelse ($pbtKontraktor as $item)
-                                        <x-table.row>
-                                            <x-table.cell>
-                                                {{ $item->nama_pbt }}
-                                            </x-table.cell>
-
-                                            <x-table.cell>
-                                                {{ $item->pivot->no_kontrak }}
-                                            </x-table.cell>
-
-                                            <x-table.cell class="text-center">
-                                                {{ date('d-m-Y', strtotime($item->pivot->tarikh_mula)); }}
-                                            </x-table.cell>
-
-                                            <x-table.cell class="text-center">
-                                                {{ date('d-m-Y', strtotime($item->pivot->tarikh_tamat)); }}
-                                            </x-table.cell>
-
-                                            <x-table.cell>
-                                                <span style = "background-color: {{ $item->status_color }}"
-                                                    class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                                    {{ $item->pivot->status_perkhidmatan }}
-                                                </span>
-                                            </x-table.cell>
-
-                                            <x-table.cell class="text-end">
-                                                <x-button.button-link type="viewIcon" href="{{ route('setup.kontraktor.view', $item->id ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye> </x-button.button-link>
-                                                <x-button.button-link type="editIcon" href="{{ route('setup.kontraktor.edit', $item->id ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
-                                                @if ( strcmp($item->status_desc, 'Tidak aktif') !== 0 )
-                                                    <x-button.button-link type="restoreIcon" href="{{ route('setup.kontraktor.createPbtKontraktor', $item->id ) }}" title="Tambah PBT berkenaan">
-                                                        <x-icons.user-add class="w-4 h-4" stroke="orange"></x-icons.user-add>
-                                                    </x-button.button-link>
-                                                @endif
-                                            </x-table.cell>
-                                        </x-table.row>
-                                    @empty
-                                        <x-table.row>
-                                            <x-table.cell colspan=5 class="text-center">
-                                                {{ __('Tiada rekod.') }}
-                                            </x-table.cell>
-                                        </x-table.row>
-                                    @endforelse
-
-                                </x-slot>
-
-                            </x-table>
-                        </div>
-
-                    </div>
-
-                    <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
-                        <x-button.button-link-secondary href="{{ route('setup.kontraktor.index') }}"
-                            svgClass="w-4 h-4 mr-2" type="backIcon" stroke="currentColor">
-                            <span class="self-center mx-4">{{ __('Kembali') }} </span>
-                        </x-button.button-link-secondary>
-                    </div>
-
+                <div class="relative col-span-12 md:col-span-2 lg:col-span-2">
+                    <input type="text" id="floating_outlined"
+                        class="col-span-full lg:col-span-6 block px-2.5 pb-2.5 pt-4 font-semibold w-full text-sm text-gray-900 bg-green-50 rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        value="{{ $kontraktor->no_lesen }}"/>
+                    <label for="floating_outlined"
+                        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-green-50 dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                        No Lesen
+                    </label>
+                </div>
             </div>
         </div>
+
+        <!-- maklumat kontraktor -->
+        <div class="flex justify-start w-full m-4 overflow-hidden rounded-md ">
+
+        </div>
+
+        <!-- maklumat kontraktor -->
+
     </div>
 </x-app-layout>

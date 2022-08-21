@@ -57,7 +57,7 @@ class TabLokasi extends Component
             ->when($this->jenisKawasan, function($query) {
                     $query->where('kod_jenis_kawasan', $this->jenisKawasan);
                 })
-            ->paginate(15);
+            ->paginate(25);
 
         return view('livewire.profail-pbt.tab-lokasi', [ 'lokasis' => $lokasis ] );
     }
@@ -69,7 +69,7 @@ class TabLokasi extends Component
 
     public function resetFilters()
     {
-    
+
     }
 
     public function edit(ModelsLokasi $lokasi)

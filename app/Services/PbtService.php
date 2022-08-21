@@ -7,10 +7,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class PbtService 
+class PbtService
 {
-    public function getPbtDropdown() 
-    {    
+    public function getPbtDropdown()
+    {
         if (Cache::has('pbts')) {
             $pbts = Cache::get('pbts');
         } else {
@@ -30,7 +30,7 @@ class PbtService
             ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
             ->when($nama, fn($query, $nama) => $query->where('nama_pbt', 'LIKE', '%'.$nama.'%'))
             ->when($aktif, fn($query) => $query->whereNotNull('deleted_at'), fn($query) => $query->whereNull('deleted_at'))
-            ->paginate(15)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         return $rows;
     }
@@ -41,13 +41,13 @@ class PbtService
     }
 
     public function update($validated)
-    {        
+    {
         if ( strcasecmp($validated['status'],'aktif') == 0) {
             $data = $this->saveData($validated);
         } else {
             $data = $this->delete($validated);
         }
-        
+
         Pbt::where('kod', $validated['kod'])->update($data);
     }
 

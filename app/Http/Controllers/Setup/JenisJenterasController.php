@@ -4,14 +4,23 @@ namespace App\Http\Controllers\Setup;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setup\StoreJenisJenterasRequest;
+use App\Http\Requests\Setup\UpdateJenisJenterasRequest;
 use App\Models\JenisJenteras;
+use App\Services\JenisJenteraService;
 use Illuminate\Http\Request;
 
 class JenisJenterasController extends Controller
 {
-    public function index()
+    public JenisJenteraService $service;
+
+    public function __construct(JenisJenteraService $service)
     {
-        $jenis_jenteras = JenisJenteras::paginate(5);
+            $this->service = $service;
+    }
+
+    public function index(Request $request)
+    {
+        $jenis_jenteras = $this->service->filterRows($request->get('kod'), $request->get('keterangan'), $request->get('status'));
         return view('setup.jenis_jentera.index', compact('jenis_jenteras'));
     }
 
@@ -22,39 +31,24 @@ class JenisJenterasController extends Controller
 
     public function store(StoreJenisJenterasRequest $request)
     {
-        Jenisjenteras::create([
-            'kod' => $request->validated()['kod_jentera'],
-            'keterangan' => $request->validated()['keterangan_jentera'],
-        ]);
-        session()->flash('flash.banner', $request->kod_jentera . ' telah disimpan.');
-        session()->flash('flash.banner', $request->keterangan_jentera . ' telah disimpan.');
+        $this->service->store($request->safe()->only(['kod','keterangan','status']));
+        session()->flash('flash.banner', $request->keterangan . ' telah disimpan.');
         session()->flash('flash.bannerStyle', 'success');
         return redirect()->route('setup.jenis_jentera.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
-        //
+        $jenis_jentera = $this->service->getRecord($id);
+        return view('setup.jenis_jentera.edit', compact('jenis_jentera'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateJenisJenterasRequest $request, $id)
     {
-        //
+        $this->service->update($request->safe()->only(['kod', 'keterangan', 'status']));
+        session()->flash('flash.banner', $request->keterangan . ' telah dikemaskini.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.jenis_jentera.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -7,12 +7,12 @@
 
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
                     <form wire:submit.prevent="submit">
-                        
+
                         <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
                             <div class="px-4 sm:px-0">
                                 <h3 class="text-lg font-medium text-gray-900 uppercase">
@@ -48,28 +48,28 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
 
                         <div class="flex items-center justify-end gap-4 px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
                             <x-button.button-link class="px-4 py-2" href="{{ route('setup.pbt.create' ) }}" type="createIcon" svgClass="w-4 h-4"><span class="self-center mx-2">{{__('PTB Baru') }} </span> </x-button.button-link>
 
                             <x-jet-button>
-                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span> 
+                                <x-icons.search stroke="currentColor" class="w-4 h-4"></x-icons.search><span class="self-center mx-2">{{__('Cari') }} </span>
                             </x-jet-button>
                         </div>
 
-                    </form> 
-                    
+                    </form>
+
                 </div>
-                
+
             </div>
         </div>
     </div>
 
     <div class="pb-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
@@ -79,34 +79,34 @@
                             <x-table.heading sortable> Status  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
                         </x-slot>
-                        
+
                         <x-slot name="body">
 
                             @forelse ($pbts as $pbt)
                                 <x-table.row>
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         {{ $pbt->kod }}
                                     </x-table.cell>
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         <x-button.button-link type="viewIcon" href="{{ route('profailpbt.index', ['kod' => $pbt->kod] ) }}" title="Profail PBT">{{ $pbt->nama_pbt }} <x-icons.eye class="w-4 h-4 mx-2" stroke="green"></x-icons.eye></x-button.button-link>
                                     </x-table.cell>
 
-                                    <x-table.cell> 
+                                    <x-table.cell>
                                         <span style = "background-color: {{ $pbt->deleted_at_color }}"
                                             class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                            {{ $pbt->deleted_at_desc }} 
+                                            {{ $pbt->deleted_at_desc }}
                                         </span>
                                     </x-table.cell>
-                                    
+
                                     <x-table.cell class="text-end">
                                         <x-button.button-link type="viewIcon" href="{{ route('setup.pbt.view', $pbt ) }}"><x-icons.eye class="w-4 h-4" stroke="green"></x-icons.eye></x-button.button-link>
                                         <x-button.button-link type="editIcon" href="{{ route('setup.pbt.edit', $pbt ) }}"><x-icons.pencil class="w-4 h-4" stroke="blue"></x-icons.pencil> </x-button.button-link>
                                         @if ( $pbt->deleted_at_desc === 'Tidak Aktif' )
                                             <x-button.button-link type="restoreIcon" href="#"><x-icons.restore class="w-4 h-4" stroke="orange"></x-icons.restore> </x-button.button-link>
                                         @else
-                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal" 
-                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Pbt', 'kod', '{{ $pbt->kod }}', '', '{{ $pbt->nama_pbt }}' )"> 
+                                            <x-button.button-link type="deleteIcon" href="#" data-modal-target="#deleteConfirmationModal" data-modal-toggle="deleteConfirmationModal"
+                                                onclick="window.livewire.emit('delete-confirmation-modal', '\\\App\\\Models\\\Pbt', 'kod', '{{ $pbt->kod }}', '', '{{ $pbt->nama_pbt }}' )">
                                                 <x-icons.trash class="w-4 h-4" stroke="red"></x-icons.trash>
                                             </x-button.button-link>
                                         @endif
@@ -114,23 +114,23 @@
                                 </x-table.row>
                             @empty
                                 <x-table.row>
-                                    <x-table.cell colspan=2> 
+                                    <x-table.cell colspan=2>
                                         <span class="text-center">{{ __('Tiada rekod.') }}</span>
                                     </x-table.cell>
                                 </x-table.row>
                             @endforelse
-                            
+
                         </x-slot>
-                        
+
                     </x-table>
-                    
+
                     {{ $pbts->links() }}
                 </div>
-                
+
 
             </div>
         </div>
-        
+
     </div>
 
 </x-app-layout>

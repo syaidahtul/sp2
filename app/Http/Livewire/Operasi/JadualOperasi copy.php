@@ -18,7 +18,7 @@ class JadualOperasi extends Component
     public $generateNewModal = false;
     public $bulanBaru;
     public $jenisOperasiBaru;
-    
+
     public $month;
     public $namaLokasi;
     public $jenisOperasi;
@@ -49,14 +49,14 @@ class JadualOperasi extends Component
                 })
             ->when($this->jenisOperasi, function($query) {
                     $query->where('kod_jenis_operasi', $this->jenisOperasi);
-                }, 
+                },
                 function ($query) {
                     $query->where('kod_jenis_operasi', 'SAMPAH');
                 })
             ->when($this->jenisKawasan, function($query) {
                 $query->where('kod_jenis_kawasan', $this->jenisKawasan);
                 })
-            ->paginate(10);
+            ->paginate(25);
         return view('livewire.operasi.jadual-operasi', [ 'operasis' => $operasis]);
     }
 
@@ -70,7 +70,7 @@ class JadualOperasi extends Component
         $parseBulan = Carbon::parse($this->bulanBaru);
         try {
             DB::statement(
-                "insert into operasi_pbts (kod_pbt, lokasi_id, jenis_operasi, tarikh_laporan) select :pbt, id, :operasi, :bulan from lokasis where lokasis.kod_pbt = :pbtkod and lokasis.kod_jenis_operasi = :jenoperasi", 
+                "insert into operasi_pbts (kod_pbt, lokasi_id, jenis_operasi, tarikh_laporan) select :pbt, id, :operasi, :bulan from lokasis where lokasis.kod_pbt = :pbtkod and lokasis.kod_jenis_operasi = :jenoperasi",
                 array('pbt' => Auth::user()->current_pbt, 'operasi' => $this->jenisOperasiBaru, 'bulan' => $parseBulan, 'pbtkod' => Auth::user()->current_pbt, 'jenoperasi' => $this->jenisOperasiBaru ) );
         } catch (Exception $e) {
             dd($e);

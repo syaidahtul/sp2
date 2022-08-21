@@ -24,7 +24,6 @@
                         Jenis Operasi
                     </label>
                 </div>
-
                 <div class="md:col-span-2 ">
                     <x-input.text wire:model="filters.jenis_operasi" id="jenis_operasi" />
                 </div>

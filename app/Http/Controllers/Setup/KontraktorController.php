@@ -34,7 +34,7 @@ class KontraktorController extends Controller
             $request->get('nama'),
             $request->get('status')
         );
-
+        info($kontraktors);
         return view('setup.kontraktor.index', compact('pbts', 'kontraktors'));
     }
 

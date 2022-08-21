@@ -11,7 +11,7 @@ class LokasiController extends Controller
 {
     public function index()
     {
-        $lokasis = Lokasi::paginate(10);
+        $lokasis = Lokasi::paginate(25);
         return view('profailpbt.lokasi.index', compact('lokasis'));
     }
 

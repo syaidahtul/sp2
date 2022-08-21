@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Setup;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTapakPelupusanSampahRequest;
+use App\Http\Requests\Setup\StoreTapakPelupusanSampahRequest;
 use App\Services\PbtService;
 use App\Services\TapakPelupusanSampahService;
 use Illuminate\Http\Request;
@@ -11,80 +11,47 @@ use Illuminate\Http\Request;
 class TapakPelupusanSampahController extends Controller
 {
 
-    public TapakPelupusanSampahService $tapakPelupusanSampahService;
+    public TapakPelupusanSampahService $service;
     public PbtService $pbtService;
 
-    public function __construct(TapakPelupusanSampahService $tapakPelupusanSampahService, PbtService $pbtService)
+    public function __construct(TapakPelupusanSampahService $service, PbtService $pbtService)
     {
-        $this->tapakPelupusanSampahService = $tapakPelupusanSampahService;
+        $this->service = $service;
         $this->pbtService = $pbtService;
     }
-    
+
     public function index(Request $request)
     {
-        $tapak_pelupusan_sampahs = $this->tapakPelupusanSampahService->filterRows($request->get('nama_tempat'), $request->get('kaedah_pelupusan'), $request->get('aktif'));
-        return view('setup.tapak_pelupusan_sampah.index', compact('tapak_pelupusan_sampahs'));
+        $pbts = $this->pbtService->getPbtDropdown();
+        $tapak_pelupusan_sampahs = $this->service->filterRows($request->get('nama_tempat'), $request->get('kaedah_pelupusan'), $request->get('aktif'));
+        return view('setup.tapak_pelupusan_sampah.index', compact(['pbts','tapak_pelupusan_sampahs']));
     }
-    
+
     public function create()
     {
         return view('setup.tapak_pelupusan_sampah.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreTapakPelupusanSampahRequest $request)
     {
-        //
+        $tapak = $this->service->store($request->validated());
+        session()->flash('flash.banner', $request->tempat . ' telah disimpan.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.tapak_pelupusan_sampah.edit', $tapak);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $tapaks = $this->tapakPelupusanSampahService->getRecord($id);
-        return view('setup.tapak_pelupusan_sampah.edit', $tapaks);
+        $tapak = $this->service->getRecord($id);
+        return view('setup.tapak_pelupusan_sampah.edit', compact(['tapak']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(StoreTapakPelupusanSampahRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $tapak = $this->service->getRecord($id);
+        $this->service->store($request->validated(), $tapak);
+        session()->flash('flash.banner', $request->tempat . ' telah dikemaskini.');
+        session()->flash('flash.bannerStyle', 'success');
+        return redirect()->route('setup.tapak_pelupusan_sampah.index');
     }
 }

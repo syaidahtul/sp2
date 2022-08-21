@@ -26,7 +26,7 @@ class JenisOperasiService
             ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
             ->when($nama, fn($query, $nama) => $query->where('keterangan', 'LIKE', '%'.$nama.'%'))
             ->when($aktif, fn($query) => $query->where('aktif', '=', $aktif))
-            ->paginate(15)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         return $rows;
     }

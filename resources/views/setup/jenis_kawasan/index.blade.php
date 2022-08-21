@@ -8,7 +8,7 @@
 
     <div class="py-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
@@ -17,7 +17,7 @@
                         <div class="flex items-center justify-start px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-tl-md sm:rounded-tr-md">
                             <div class="px-4 sm:px-0">
                                 <h3 class="text-lg font-medium text-gray-900 uppercase">
-                                    {{ __('Kriteria Carian Jenis Operasi') }}</h3>
+                                    {{ __('Kriteria Carian Jenis Kawasan') }}</h3>
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
 
     <div class="pb-6">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-md sm:rounded-lg">
 
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
