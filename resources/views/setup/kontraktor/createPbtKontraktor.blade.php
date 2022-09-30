@@ -33,7 +33,49 @@
 
         <!-- maklumat kontraktor -->
         <div class="flex justify-start w-full m-4 overflow-hidden rounded-md ">
+            <div class="grid gap-4 md:p-4 xs:grid-cols-1 md:grid-cols-12">
+                <label for="kod_pbt" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                    Nama PBT
+                </label>
+                <div class="md:col-span-5">
+                    <x-input.select wire:model="filters.kod_pbt" id="kod_pbt" placeholder="Sila Pilih">
+                        @foreach ($pbts as $item)
+                            <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
+                        @endforeach
+                    </x-input.select>
+                </div>
+                <label for="kod_pbt" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                    No Kontrak
+                </label>
+                <div class="md:col-span-5">
+                    <x-input.select wire:model="filters.kod_pbt" id="kod_pbt" placeholder="Sila Pilih">
+                        @foreach ($pbts as $item)
+                            <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
+                        @endforeach
+                    </x-input.select>
+                </div>
+                <label for="kod_pbt" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                    Tarikh Mula Kontrak
+                </label>
+                <div class="md:col-span-5">
+                    <x-input.select wire:model="filters.kod_pbt" id="kod_pbt" placeholder="Sila Pilih">
+                        @foreach ($pbts as $item)
+                            <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
+                        @endforeach
+                    </x-input.select>
+                </div>
+                <label for="kod_pbt" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                    Tarikh Tamat Kontrak
+                </label>
+                <div class="md:col-span-5">
+                    <x-input.select wire:model="filters.kod_pbt" id="kod_pbt" placeholder="Sila Pilih">
+                        @foreach ($pbts as $item)
+                            <option value="{{ $item->kod }}"> {{ $item->nama_pbt }}</option>
+                        @endforeach
+                    </x-input.select>
+                </div>
 
+            </div>
         </div>
 
         <!-- maklumat kontraktor -->

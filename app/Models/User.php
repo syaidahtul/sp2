@@ -19,7 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasProfilePhoto;
     use HasRoles;
     use Notifiable;
-    use SoftDeletes;
     use Uuids;
 
     // public static function boot()
@@ -70,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         parent::__construct($attributes);
         self::created(function (User $user) {
-            
+
         });
     }
 
@@ -78,5 +77,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Pbt::class, 'kod', 'current_pbt');
     }
-    
+
 }

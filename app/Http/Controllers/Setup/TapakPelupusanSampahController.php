@@ -34,10 +34,10 @@ class TapakPelupusanSampahController extends Controller
 
     public function store(StoreTapakPelupusanSampahRequest $request)
     {
-        $tapak = $this->service->store($request->validated());
+        $this->service->store($request->validated());
         session()->flash('flash.banner', $request->tempat . ' telah disimpan.');
         session()->flash('flash.bannerStyle', 'success');
-        return redirect()->route('setup.tapak_pelupusan_sampah.edit', $tapak);
+        return redirect()->route('setup.tapak_pelupusan_sampah.index');
     }
 
     public function edit($id)

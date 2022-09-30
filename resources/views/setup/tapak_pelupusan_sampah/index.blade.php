@@ -83,9 +83,9 @@
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <x-table class="mb-4 sm:rounded-sm">
                         <x-slot name="head">
-                            <x-table.heading sortable> Nama Tempat </x-table.heading>
-                            <x-table.heading sortable> Kaedah Pelupusan </x-table.heading>
-                            <x-table.heading sortable> PBT  </x-table.heading>
+                            <x-table.heading> Nama Tempat </x-table.heading>
+                            <x-table.heading> Kaedah Pelupusan </x-table.heading>
+                            <x-table.heading> PBT  </x-table.heading>
                             <x-table.heading>  </x-table.heading>
                         </x-slot>
 
@@ -102,10 +102,14 @@
                                     </x-table.cell>
 
                                     <x-table.cell>
-                                        <span style = "background-color: {{ $item->aktif_color }}"
-                                            class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
-                                            {{ $item->aktif_desc }}
-                                        </span>
+                                        @forelse ($item->pbt as $pbt)
+                                            <span style = "background-color: {{ $item->aktif_color }}"
+                                                class="flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium leading-4 capitalize">
+                                                {{ optional($pbt)->nama_pbt }}
+                                            </span>
+                                        @empty
+
+                                        @endforelse
                                     </x-table.cell>
 
                                     <x-table.cell class="text-end">

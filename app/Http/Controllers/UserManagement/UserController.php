@@ -27,12 +27,12 @@ class UserController extends Controller
     {
             $this->pbtService = $pbtService;
     }
-    
+
     public function index(Request $request)
     {
         $pbts = $this->pbtService->getPbtDropdown();
         $roles = Roles::all();
-        
+
         $users = User::query()
             ->when($request->input('name'), fn($query, $name) => $query->where('name', 'LIKE', '%'.$name.'%'))
             ->when($request->input('identity_no'), fn($query, $identity_no) => $query->where('identity_no', 'LIKE', '%'.$identity_no.'%'))
@@ -95,12 +95,12 @@ class UserController extends Controller
     {
         Validator::make($request->all(), [
             'password' => ['required'],
-        ], [], 
+        ], [],
         [
             'password' => 'Kata Laluan',
         ])->validate();
 
-        try { 
+        try {
             $reseter->reset(auth()->user(), $request->all());
             session()->flash('flash.banner', 'Kata laluan telah dikemaskini');
             session()->flash('flash.bannerStyle', 'success');

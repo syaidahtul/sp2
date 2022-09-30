@@ -16,7 +16,7 @@ class KontraktorService
             $kontraktors = Cache::get('kontraktors');
         } else {
             $kontraktors = Cache::remember('kontraktors', 360, function () {
-                return Kontraktor::whereNull('deleted_at')->select('kod', 'nama_pbt')->orderBy('nama_pbt')->get();
+                return Kontraktor::select('kod', 'nama_pbt')->orderBy('nama_pbt')->get();
             });
         }
 
@@ -58,9 +58,7 @@ class KontraktorService
     public function delete($validated)
     {
         return [
-            'nama_pbt' => $validated['nama_pbt'],
-            'deleted_by' => Auth::user()->id,
-            'deleted_at' => Carbon::now(),
+            'nama_pbt' => $validated['nama_pbt']
         ];
     }
 

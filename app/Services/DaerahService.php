@@ -14,19 +14,19 @@ class DaerahService
             $Daerahs = Cache::get('daerahs');
         } else {
             $Daerahs = Cache::remember('daerahs', 3600, function () {
-                $lol = Daerah::where('aktif', 1)->select('kod', 'nama')->orderBy('kod')->get();
+                $lol = Daerah::where('status', 'aktif')->select('code', 'description')->orderBy('code')->get();
                 return $lol;
             });
         }
 
-        return Daerah::where('aktif', 1)->select('kod', 'nama')->orderBy('kod')->get();
+        return Daerah::where('status', 'aktif')->select('code', 'description')->orderBy('code')->get();
     }
 
-    public function filterRows($kod, $nama, $aktif)
+    public function filterRows($code, $description, $aktif)
     {
         $rows = Daerah::query()
-            ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
-            ->when($nama, fn($query, $nama) => $query->where('nama', 'LIKE', '%'.$nama.'%'))
+            ->when($code, fn($query, $code) => $query->where('code', 'LIKE', '%'.$code.'%'))
+            ->when($description, fn($query, $description) => $query->where('description', 'LIKE', '%'.$description.'%'))
             ->when($aktif, fn($query, $aktif) => $query->where('aktif', $aktif))
             ->paginate(25)->withQueryString();
 
@@ -40,14 +40,14 @@ class DaerahService
 
     public function update($validated)
     {
-        Daerah::where('kod', $validated['kod'])->update([
-            'nama' => $validated['nama'],
+        Daerah::where('code', $validated['code'])->update([
+            'description' => $validated['description'],
             'aktif' => $validated['status']
         ]);
     }
 
-    public function getDaerah($kod)
+    public function getDaerah($code)
     {
-        return Daerah::where('kod', $kod)->first();
+        return Daerah::where('code', $code)->first();
     }
 }

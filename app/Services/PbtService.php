@@ -15,7 +15,7 @@ class PbtService
             $pbts = Cache::get('pbts');
         } else {
             $pbts = Cache::remember('pbts', 3600, function () {
-                $lol = Pbt::notKktp()->whereNull('deleted_at')->select('kod', 'nama_pbt')->orderBy('nama_pbt')->get();
+                $lol = Pbt::notKktp()->select('kod', 'nama_pbt')->orderBy('nama_pbt')->get();
                 return $lol;
             });
         }
@@ -29,7 +29,6 @@ class PbtService
             ->notKKTP()
             ->when($kod, fn($query, $kod) => $query->where('kod', 'LIKE', '%'.$kod.'%'))
             ->when($nama, fn($query, $nama) => $query->where('nama_pbt', 'LIKE', '%'.$nama.'%'))
-            ->when($aktif, fn($query) => $query->whereNotNull('deleted_at'), fn($query) => $query->whereNull('deleted_at'))
             ->paginate(25)->withQueryString();
 
         return $rows;

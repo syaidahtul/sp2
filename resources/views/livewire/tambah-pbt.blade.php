@@ -34,9 +34,9 @@
     </x-table>
 
     <div class="flex items-center justify-end pt-3 text-right bg-transparent sm:px-6 lg:px-0 ">
-        <x-button.button-link type=bordered class="p-2" href="#" wire:click.prevent="addPbt">
+        <x-button.button-link-secondary type=bordered class="p-2" href="#" wire:click.prevent="addPbt">
             <span class="self-center mx-2">{{ __('Tambah PBT') }} </span>
-        </x-button.button-link>
+        </x-button.button-link-secondary>
     </div>
 
 </div>
